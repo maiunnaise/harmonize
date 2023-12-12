@@ -36,3 +36,42 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background-color: #2E2E2E;
+}
+
+* {
+  color: white;
+  font-family: Lexend;  
+}
+
+input {
+  color: rgb(255, 255, 255);
+  background-color: #474747;
+  padding: 8px;
+  border-radius: 30px;
+  border: 0;
+  margin-inline: 1em;
+}
+
+img {
+  width: 5em;
+  float: left;
+  margin: 0.5em;
+}
+
+.greyText {
+  color: #B0B0B0;
+  font-size: medium;
+}
+
+.instrumentText{
+  font-weight: bold;
+  display: inline;
+  margin-right: 6px;
+  border: #845583 solid 1px;
+  border-radius: 30px;
+  padding-inline: 1em;
+  padding-bottom: 2px;
+}
