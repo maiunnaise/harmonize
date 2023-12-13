@@ -4,6 +4,7 @@ import './index.css';
 import Login from './pages/Login';
 import Menu from './components/Menu';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import FindTeachersPage from'./pages/findTeacher.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,6 +12,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/findTeacher" element={<FindTeachersPage />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

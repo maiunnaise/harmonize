@@ -1,0 +1,13 @@
+#HistoryButton {
+    color: rgb(255, 255, 255);
+    font-size: large;
+    background-color: #393939;
+    padding: 1em;
+    padding-inline: 4em;
+    border-radius: 30px;
+    border: 1px solid #666666;
+    margin: 1em;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

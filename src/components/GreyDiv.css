@@ -1,0 +1,26 @@
+.GreyDiv {
+    margin-inline: 1.5em;
+    background-color: #3D3D3D;
+    border-radius: 30px;
+    padding-bottom: 1em;
+    font-family: Lexend, Bold; 
+}
+
+.GreyDiv h2{
+    font-size: large;
+    padding-top: 0.75em;
+    margin-left: 1em;
+}
+
+.GreyDiv .textDesc {
+    margin-inline: 1em;
+    font-size: small;
+}
+
+.GreyDiv div{
+    margin-inline: 1em;
+}
+
+#teacherName h2{
+    padding-top: 1.5em;
+}
