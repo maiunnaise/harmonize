@@ -19,7 +19,7 @@ function Login() {
           <input type="password" name="password" />
         </label>
         <p>Mot de passe oublié ?</p>
-        <Link to="/test">
+        <Link to="/findTeacher">
           <input type="submit" value="Connexion" />
         </Link>
         <p>Créer un compte</p>

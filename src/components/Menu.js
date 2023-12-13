@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 function Menu() {
   return (
     <nav>
-      <div className="FindTeach">
+      <div className="Teach">
       <Link to="/findTeacher">
-            <img src="/logo/icons/search.png" className="findTeacher" alt="logo findTeacher" />
+            <img src="/logo/icons/search.png" className="Teachimg" alt="logo findTeacher" />
         </Link>
       </div>
       <div className="Menu">

@@ -2,10 +2,13 @@ header{
     width:100vw;
     height: fit-content;
     border-bottom: 2px solid #272727;
+    background-color:#2e2e2e;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1em;
+    position: fixed;
+    top: 0;
 }
 
 .logo{

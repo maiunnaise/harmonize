@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import './findTeacher.css';
 import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import HistoryButton from '../components/HistoryButton.js';
@@ -36,7 +36,7 @@ function SearchTeachers(){
 
 function FindTeachersDiv({teachers}){
     return (
-        <div>
+        <div className='content'>
             <GreyDiv content={<SearchTeachers />}/>
             {teachers.map((teacher, index) => {
                 return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} />}/>;
@@ -54,5 +54,7 @@ const teachers =
 ;
 
 export default function FindTeachersPage(){
-    return <FindTeachersDiv teachers={teachers} />;
+    return (
+    <FindTeachersDiv teachers={teachers} />
+    );
 };

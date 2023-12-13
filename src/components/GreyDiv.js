@@ -3,7 +3,7 @@ import "./GreyDiv.css";
 
 const GreyDiv  = ({content}) => {
     return (
-      <div class="GreyDiv">
+      <div className="GreyDiv">
         {content}
       </div>
     );
