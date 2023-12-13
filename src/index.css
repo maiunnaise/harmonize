@@ -28,4 +28,5 @@ code {
   top:10vh;
   position: relative;
   overflow: scroll;
+  padding-top: 1em;
 }

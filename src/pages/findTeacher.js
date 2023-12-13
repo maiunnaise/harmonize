@@ -36,7 +36,7 @@ function SearchTeachers(){
 
 function FindTeachersDiv({teachers}){
     return (
-        <div className='content'>
+        <div className='content TeacherSearch'>
             <GreyDiv content={<SearchTeachers />}/>
             {teachers.map((teacher, index) => {
                 return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} />}/>;

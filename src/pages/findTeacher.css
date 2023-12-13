@@ -27,3 +27,9 @@
   padding-inline: 1em;
   padding-bottom: 2px;
 }
+
+.TeacherSearch{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
