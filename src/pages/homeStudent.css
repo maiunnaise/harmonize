@@ -1,0 +1,12 @@
+.SeanceDesc{
+    padding-top: 1em;
+}
+
+.CourseName, .CourseTeach{
+    padding-left: 0.7em;
+    padding: 0.5em 0.7em 0.5em 0.7em;
+}
+
+.courseContent{
+    padding : 0.7em;
+}

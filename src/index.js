@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Login from './pages/Login';
-import Menu from './components/Menu';
-import Header from './components/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FindTeachersPage from'./pages/findTeacher.js';
 import Layout from './components/layout.js';
+import HomeStudent from './pages/homeStudent.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="" element={<Layout />}>
           <Route path="findTeacher" element={<FindTeachersPage />}/>
+          <Route path="home" element={<HomeStudent />}/>
         </Route>
           
         <Route path="/login" element={<Login />} />
