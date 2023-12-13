@@ -1,0 +1,35 @@
+.Menu{
+    background-color: #3D3D3D;
+    width: 100vw;
+    height: 10vh;
+    position: fixed;
+    bottom: 0;
+    border-radius: 1.5em 1.5em 0 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.Menu img{
+    height: 4.5vh;
+    width: auto;
+}
+
+.FindTeach{
+    position: fixed;
+    bottom: 13vh;
+    background-color: #845483;
+    width: 7vh;
+    height: 7vh;
+    border-radius: 50%;
+    right: 2.5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.FindTeach img{
+    height: 4vh;
+    width: auto;
+    transform: rotate(90deg);
+}

@@ -1,13 +1,15 @@
 import './Login.css';
+import { Link } from 'react-router-dom';
 
 function Login() {
   return (
     <div className="Login">
-      <header className="header">
+      <div className="header">
         <img src="/logo/logo_harmonize.png" className="Login-logo" alt="logo" />
-      </header>
+      </div>
 
       <form>
+        <h1>Connexion</h1>
         <label>
           Adresse mail
           <input type="text" name="username" />
@@ -17,7 +19,9 @@ function Login() {
           <input type="password" name="password" />
         </label>
         <p>Mot de passe oublié ?</p>
-        <input type="submit" value="Connexion" />
+        <Link to="/test">
+          <input type="submit" value="Connexion" />
+        </Link>
         <p>Créer un compte</p>
       </form>
     </div>

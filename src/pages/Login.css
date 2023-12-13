@@ -1,11 +1,11 @@
-header{
+.header{
     width:100vw;
     height: fit-content;
     text-align: center;
     padding-top: 5vh;
 }
 
-header > img{
+.header > img{
     width:auto;
     height: 7vh;
     display: inline-block;
@@ -27,6 +27,11 @@ form{
     display: flex;
     flex-direction: column;
     gap: 0.5em;
+}
+
+form > h1{
+    align-self: center;
+    padding-bottom: 0.5em;
 }
 
 label{
