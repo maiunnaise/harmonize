@@ -7,7 +7,7 @@ import HistoryButton from '../components/HistoryButton.js';
 function TeachersDesc({teacher}){
     return (
         <div>
-            <img src={teacher.image} alt='${teacher.firstname} ${teacher.lastname}'/>
+            <img className="findTeacherImg"src={teacher.image} alt='${teacher.firstname} ${teacher.lastname}'/>
             <div>
                 <div id="teacherName">
                     <h2>{teacher.firstname} {teacher.lastname} <span className="greyText"> · {teacher.location} </span></h2>
@@ -26,7 +26,7 @@ function TeachersDesc({teacher}){
 
 function SearchTeachers(){
     return (
-        <div className="div1">
+        <div className="divSearchTeacher">
             <h2>Trouver un enseignant</h2>
             <PurpleButton buttonText="Autour de moi" />
             <input type="text" placeholder="Rechercher..."/>

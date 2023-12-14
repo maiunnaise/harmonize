@@ -1,0 +1,47 @@
+.userPicName {
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+.userPic{
+    margin-right: 1em;
+    width: 8em;
+}
+
+.userDetails{
+    margin-top: 1em;
+    padding-inline: 1em;
+    padding-bottom: 1em;
+}
+
+.userDetails h2 {
+    margin-bottom: 0.5em;
+    font-size: medium;
+    margin-left: 1em;
+    padding-top: 1em;
+}
+
+.userDetails hr {
+    margin-top: 1em;
+    height: 1px;
+    background-color: #939393;
+    border: none;
+}
+
+.userDetails .userInstruments{
+    margin-left: 0.5em;
+    font-size: small;
+}
+
+.userDetails .userEmail{
+    margin-left: 1em; 
+    margin-top: 0.5em;
+    font-size: small;            
+}
+
+.userModifBtn {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}

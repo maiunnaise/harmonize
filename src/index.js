@@ -6,6 +6,8 @@ import Menu from './components/Menu';
 import Header from './components/Header';
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FindTeachersPage from'./pages/findTeacher.js';
+import Inbox from './pages/Inbox.js';
+import User from './pages/User.js';
 import Layout from './components/layout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -15,8 +17,11 @@ root.render(
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="findTeacher" element={<FindTeachersPage />}/>
-        </Route>
+          <Route path="inbox" element={<Inbox />}/>
           
+        </Route>
+        <Route path="/user" element={<User />}/>
+        
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
