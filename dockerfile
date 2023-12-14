@@ -1,10 +1,12 @@
-FROM alpine:latest
+FROM debian:bullseye-slim
 
 WORKDIR /app
 
 COPY package*.json ./
 
-RUN apk add --update nodejs npm   
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y nodejs \
+    npm                         
 RUN npm install
 
 COPY . .
