@@ -24,7 +24,7 @@
   font-size: small;
 }
 
-.GreyDiv div{
+.GreyDiv > div{
   margin-inline: 0.5em;
 }
 
