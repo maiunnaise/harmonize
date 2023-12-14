@@ -7,7 +7,7 @@ function Course({course}){
         <div className='courseContent'>
             <h2 className='CourseName'>{course.name} <span style={{color:"#B0B0B0"}}>- {course.difficulty}</span></h2>
             <PurpleDiv content={<Seance seance= {course.nextClass}/>}/>
-            {course.teacher.gender =="male" ? <p className='CourseTeach'>M. {course.teacher.name}</p> : <p className='CourseTeach'>Mme. {course.teacher.name}</p>}
+            {course.teacher.gender =="male" ? <p className='CourseTeach'>M.   {course.teacher.name}</p> : <p className='CourseTeach'>Mme. {course.teacher.name}</p>}
         </div>
     );
 }
