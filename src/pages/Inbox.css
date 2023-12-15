@@ -16,7 +16,7 @@
 }
 
 .inboxText {
-    padding-top: 1em;
+    padding-top: 1.5em;
 }
 
 #searchInbox {
@@ -34,16 +34,18 @@
 }
 
 .GreyDiv .inboxContact{
-    padding-bottom: 0.5em;
+    font-size: small;
 }
 .inboxContact h2 {
-    font-size: large;
+    font-size: medium;
 }
 
 .inboxProfilePic{
     margin: 0.5em;
     width: 4em;
     float: left;
+    margin-left: 1em;
+    margin-top: 1em;
 }
 
 .unread{
