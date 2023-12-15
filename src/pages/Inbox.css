@@ -11,7 +11,7 @@
     display: inline-block;
 }
 
-.textLastMsg {
+.inboxText > p {
     font-size: small;
 }
 
@@ -22,6 +22,7 @@
 #searchInbox {
     margin-bottom: 1em;
     margin-left: 2em;
+    
 }
 
 #searchInbox h2 {
@@ -30,7 +31,12 @@
 }
 
 #searchInbox input{
-    width: 80%;   
+    width: 80%;
+    background-color: #474747;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 1em;   
 }
 
 .GreyDiv .inboxContact{
@@ -40,7 +46,7 @@
     font-size: medium;
 }
 
-.inboxProfilePic{
+.inboxContact img{
     margin: 0.5em;
     width: 4em;
     float: left;

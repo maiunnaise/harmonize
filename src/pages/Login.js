@@ -8,7 +8,7 @@ function Login() {
         <img src="/logo/logo_harmonize.png" className="Login-logo" alt="logo" />
       </div>
 
-      <form>
+      <form id="loginForm">
         <h1>Connexion</h1>
         <label>
           Adresse mail

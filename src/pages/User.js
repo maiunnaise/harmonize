@@ -10,8 +10,8 @@ function UserInfo({user}){
         <div className="content">
             <SimpleHeader />
             <div className='userPicName'>
-                <img className="userPic" src="../logo192.png" alt="profile"/>
-                <div className="userName">
+                <img src="../logo192.png" alt="profile"/>
+                <div>
                     <h2>{user.firstname}<br/> {user.lastname}</h2>
                 </div>
             </div>

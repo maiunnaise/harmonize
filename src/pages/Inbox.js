@@ -31,15 +31,13 @@ function getTimeSinceMessage(message){
 
 function Contact({user}){
     let lastMessage = user.messages[user.messages.length-1];
-    console.log(lastMessage);
-    console.log(getTimeSinceMessage(lastMessage));
     return (
         <Link to={`/message/${user.id}`} className='inboxLink'>
             <div className="inboxContact">
-                <img className="inboxProfilePic" src="../logo192.png" alt="contact"/>
+                <img src="../logo192.png" alt="contact"/>
                 <div className="inboxText">
                     <h2 >{user.firstname} {user.lastname}</h2>
-                    <p className="textLastMsg">
+                    <p>
                         <span className="lastMessage">{lastMessage.content}</span> · {getTimeSinceMessage(lastMessage)}
                     </p>
                 </div>

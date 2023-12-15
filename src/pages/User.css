@@ -4,7 +4,7 @@
     align-items: center; /* align vertical */
 }
 
-.userPic{
+.userPicName img{
     margin-right: 1em;
     width: 8em;
 }
