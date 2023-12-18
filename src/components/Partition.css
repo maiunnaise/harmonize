@@ -1,0 +1,32 @@
+.partition{
+    background-color: #474747;
+    display: flex;
+    flex-direction: row;
+    border-radius: 35px;
+    position: relative;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.partition > img{
+    width: 4vw;
+    height: 4vw;
+}
+
+.partitionDesc > p:nth-of-type(2){
+    font-size: 0.7em;
+    font-weight: lighter;
+}
+
+.partitionDesc{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.partition > p:nth-child(2){
+    font-weight: bold;
+}

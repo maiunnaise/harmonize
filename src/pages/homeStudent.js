@@ -36,7 +36,7 @@ function Actvity({activity}){
                 <p>{activity.name}</p>
                 <p>pour le {activity.dueAt}</p>
             </div>
-            <Link to='/activity' className='courseActivityButton'>
+            <Link to={`/activity/${activity.id}`} className='courseActivityButton'> {/* //faire passer l'id de l'activité */}
                 <button>Voir</button>
             </Link>
         </div>
@@ -53,10 +53,10 @@ const courses = [
         },
         exercices:[
             {
-                name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo"
+                id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo"
             },
             {
-                name:"Jouer partition 2", dueAt:"14/12/2023", status:"done"
+                id:1, name:"Jouer partition 2", dueAt:"14/12/2023", status:"done"
             }
         ]
     },
@@ -69,10 +69,10 @@ const courses = [
         },
         exercices:[
             {
-                name:"Jouer partition 3", dueAt:"14/12/2023", status:"toDo"
+                id:2, name:"Jouer partition 3", dueAt:"14/12/2023", status:"toDo"
             },
             {
-                name:"Jouer partition 4", dueAt:"14/12/2023", status:"done"
+                id:3, name:"Jouer partition 4", dueAt:"14/12/2023", status:"done"
             }
         ]
     }
