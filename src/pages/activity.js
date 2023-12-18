@@ -23,6 +23,7 @@ const activities ={
 function Activity(){
 
     let { id } = useParams();
+    //ça sert à rien maintenant mais c'est pour récup et appeler l'api
 
     return(
         <>

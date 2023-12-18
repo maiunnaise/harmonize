@@ -30,3 +30,7 @@ code {
   overflow: scroll;
   padding-top: 1em;
 }
+
+a{
+  text-decoration: none;
+}
