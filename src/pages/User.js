@@ -3,6 +3,7 @@ import './User.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import PurpleButton from '../components/PurpleButton.js';
+import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
 
 function UserInfo({user}){
@@ -20,7 +21,7 @@ function UserInfo({user}){
                     <h2>Instruments</h2>
                     <div className='userInstruments'>
                         {user.instruments.map((instrument, index) => {
-                            return <p key={index} className="instrumentText">{instrument}</p>;
+                            return <InstrumentText key={index} index={index} text={instrument}/>;
                         })}
                     </div>
                     <hr></hr>

@@ -5,7 +5,7 @@ function SimpleHeader() {
   const navigate = useNavigate();
   return (
     <header className='simpleHeader'>
-      <img className="backArrow" src="/logo/icons/back-arrow.png" onClick={() => navigate(-1)}></img>
+      <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate(-1)}></img>
     </header>
   );
 }

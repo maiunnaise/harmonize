@@ -8,6 +8,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FindTeachersPage from'./pages/findTeacher.js';
 import Inbox from './pages/Inbox.js';
 import User from './pages/User.js';
+import EditUser from './pages/editUser.js';
+import SearchPage from './pages/SearchPage.js';
 import Layout from './components/layout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,9 +20,10 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route path="findTeacher" element={<FindTeachersPage />}/>
           <Route path="inbox" element={<Inbox />}/>
-          
+          <Route path="search" element={<SearchPage />}/>
         </Route>
         <Route path="/user" element={<User />}/>
+        <Route path="/user/edit" element={<EditUser />}/>
         
         <Route path="/login" element={<Login />} />
       </Routes>

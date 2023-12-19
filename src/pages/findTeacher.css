@@ -35,13 +35,3 @@
   color: #B0B0B0;
   font-size: medium;
 }
-
-.instrumentText{
-  font-weight: bold;
-  display: inline;
-  margin-right: 6px;
-  border: #845583 solid 1px;
-  border-radius: 30px;
-  padding-inline: 1em;
-  padding-bottom: 2px;
-}

@@ -3,7 +3,7 @@ import "./PurpleButton.css";
 
 const PurpleButton  = ({ onClick, buttonText }) => {
     return (
-      <button onClick={onClick}> {buttonText} </button>
+      <button type="button"  onClick={onClick}> {buttonText} </button>
     );
 }
 
