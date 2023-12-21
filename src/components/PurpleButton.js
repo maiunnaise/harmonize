@@ -1,9 +1,9 @@
 import React from "react"; 
 import "./PurpleButton.css";
 
-const PurpleButton  = ({ onClick, buttonText }) => {
+const PurpleButton  = ({ onClick, buttonText, id }) => {
     return (
-      <button type="button"  onClick={onClick}> {buttonText} </button>
+      <button type="button" id={id} onClick={onClick}> {buttonText} </button>
     );
 }
 
