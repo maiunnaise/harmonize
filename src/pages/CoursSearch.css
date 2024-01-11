@@ -40,18 +40,23 @@
 }
 
 .CoursSearch #categoryFilter {
-    margin-top: 1em;
+    margin-top: 0.5em;
     margin-left: 0.5em;
 }
 
 .CoursSearch #categoryFilter button{
+    padding: 6px;
+    padding-inline: 1em;
+    border-radius: 30px;
     margin-right: 0.5em;
     margin-left: 0;
+    margin-top: 0.5em;
     background-color: #393939;
-    box-shadow: inset 0 0 0 1px #845583;
+    border: #845583 1px solid;
 }
 
-.CoursSearch #categoryFilter .active {
+.CoursSearch > #categoryFilter > .active {
     box-shadow: inset 0 0 0 0px #845583;
     background-color: #845583;
 }
+

@@ -38,7 +38,7 @@ function Contact({user}){
                 <div className="inboxText">
                     <h2 >{user.firstname} {user.lastname}</h2>
                     <p>
-                        <span className="lastMessage">{lastMessage.content}</span> · {getTimeSinceMessage(lastMessage)}
+                        <span className="lastMessage">{lastMessage.content}</span> <span>· {getTimeSinceMessage(lastMessage)}</span>
                     </p>
                 </div>
             </div>

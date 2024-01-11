@@ -75,6 +75,7 @@
 .SearchPage .GreyDiv h2{
     font-size: 1.2em;
     padding-top: 0.5em;
+    margin-bottom: 0.25em;
 }
 
 .SearchPage .GreyDiv p{
@@ -85,4 +86,5 @@
     width: 100%;
     border-radius: 15px;
     margin-top: 0.5em;
+    margin-bottom: 0.25em;
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CoursSearch.css';
-import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import HistoryButton from '../components/HistoryButton.js';
 import SearchBar from '../components/SearchBar.js';
@@ -60,12 +59,11 @@ function Search(){
             <SearchBar onSearch={handleSearch} />
             <div id='categoryFilter'>
                 {allCategories.map((category, index) => (
-                <PurpleButton
+                <button
                     key={index}
                     id={category}
-                    buttonText={category}
                     onClick={() => handleCategoryFilter(category)}
-                />
+                >{category}</button>
                 ))}
             </div>
             {filteredData.map((cours, index) => (

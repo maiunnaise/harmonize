@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './SearchPage.css';
-import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import HistoryButton from '../components/HistoryButton.js';
 

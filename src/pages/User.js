@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './User.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
-import PurpleButton from '../components/PurpleButton.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
 
@@ -31,7 +30,7 @@ function UserInfo({user}){
             }/>
             <div className="userModifBtn">
                 <Link to="./edit">
-                    <PurpleButton buttonText="Modifier informations"/>
+                    <button>Modifier informations</button>
                 </Link>
             </div>
         </div>

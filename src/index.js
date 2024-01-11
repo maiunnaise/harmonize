@@ -12,6 +12,7 @@ import EditUser from './pages/editUser.js';
 import SearchPage from './pages/SearchPage.js';
 import CoursSearch from './pages/CoursSearch.js';
 import CoursPage from './pages/CoursPage.js';
+import ExercicesSearch from './pages/ExercicesSearch.js';
 import Layout from './components/layout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -24,6 +25,7 @@ root.render(
           <Route path="inbox" element={<Inbox />}/>
           <Route path="search" element={<SearchPage />}/>
           <Route path="cours" element={<CoursSearch />}/>
+          <Route path="exercices" element={<ExercicesSearch />}/>
         </Route>
         <Route path="/user" element={<User />}/>
         <Route path="/user/edit" element={<EditUser />}/>

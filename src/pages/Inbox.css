@@ -1,10 +1,16 @@
 .lastMessage {
     display: inline-block;
-    width: 50%;
+    width: 90%;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }   
+
+.inboxText span:last-child {
+    align-self: flex-end;
+    width: 4em;
+    margin-right: 0.5em;
+}
 
 .inboxLastMsg {
     padding-inline: 2em;
@@ -13,10 +19,12 @@
 
 .inboxText > p {
     font-size: small;
+    display: flex;
 }
 
 .inboxText {
     padding-top: 1.5em;
+    
 }
 
 #searchInbox {

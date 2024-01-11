@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './findTeacher.css';
-import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import HistoryButton from '../components/HistoryButton.js';
 import SearchBar from '../components/SearchBar.js';
@@ -20,7 +19,7 @@ function TeachersDesc({teacher}){
                 </div>
             </div>
             <p className="textDesc">{teacher.description}</p>
-            <PurpleButton buttonText="Envoyer une demande" />
+            <button>Envoyer une demande</button>
         </div>
     )
 }
@@ -43,7 +42,7 @@ function FindTeachersDiv({teachers}){
             <GreyDiv content={
                 <div className="divSearchTeacher">
                     <h2>Trouver un enseignant</h2>
-                    <PurpleButton buttonText="Autour de moi" />
+                    <button>Autour de moi</button>
                     <SearchBar onSearch={handleSearch}/>
                 </div>
             }/>

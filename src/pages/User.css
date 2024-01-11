@@ -4,6 +4,15 @@
     align-items: center; /* align vertical */
 }
 
+.userModifBtn button {
+    padding: 6px;
+    padding-inline: 1em;
+    border-radius: 30px;
+    border: 0;
+    background-color: #845583;
+}
+
+
 .userPicName img{
     margin-right: 1em;
     width: 8em;
