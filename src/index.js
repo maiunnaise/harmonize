@@ -13,6 +13,7 @@ import SearchPage from './pages/SearchPage.js';
 import CoursSearch from './pages/CoursSearch.js';
 import CoursPage from './pages/CoursPage.js';
 import ExercicesSearch from './pages/ExercicesSearch.js';
+import TeacherHome from './pages/TeacherHome.js';
 import Layout from './components/layout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +27,7 @@ root.render(
           <Route path="search" element={<SearchPage />}/>
           <Route path="cours" element={<CoursSearch />}/>
           <Route path="exercices" element={<ExercicesSearch />}/>
+          <Route path="home" element={<TeacherHome />}/>
         </Route>
         <Route path="/user" element={<User />}/>
         <Route path="/user/edit" element={<EditUser />}/>

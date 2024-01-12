@@ -50,7 +50,6 @@ function DisplayLevels(){
 function levelCompletion({ exercice }){
     let niveaux = exercice.niveaux;
     let exoDiv = document.getElementById(exercice.id);
-    console.log(exoDiv);
     let lvlParentDiv = null;
     if(exoDiv != null){
         lvlParentDiv = exoDiv.querySelector('.niveaux > div');
@@ -58,7 +57,6 @@ function levelCompletion({ exercice }){
     for (let i = 0; i < niveaux.length; i++) {
         if(lvlParentDiv != null){
             let lvl = lvlParentDiv.querySelector(`[id="lvl${niveaux[i].id}from${exercice.id}"]`);
-            console.log(niveaux[i], exercice.id, lvl);
             if (niveaux[i].completed) {
                 if (lvl != null) {
                     lvl.classList.remove("notCompleted");
@@ -78,13 +76,12 @@ function levelCompletion({ exercice }){
 function NiveauBar({ exercice }) {
     let niveaux = exercice.niveaux;
 
-    //Assure que les élements sont bien chargés en attendant 10ms (pas très propre mais ça marche)
-    setTimeout(() => {    
+    //Assure que les élements sont bien chargés 
+    useEffect(() => {
         levelCompletion({ exercice });
         showFirstLevels();
         DisplayLevels();
-        console.log("111111");
-    }, 10);
+    });
     
     return (
         <div>
