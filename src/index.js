@@ -14,6 +14,7 @@ import CoursSearch from './pages/CoursSearch.js';
 import CoursPage from './pages/CoursPage.js';
 import ExercicesSearch from './pages/ExercicesSearch.js';
 import TeacherHome from './pages/TeacherHome.js';
+import TeacherLessons from './pages/TeacherLessons.js';
 import Layout from './components/layout.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -33,6 +34,7 @@ root.render(
         <Route path="/user/edit" element={<EditUser />}/>
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/teacherLessons/:lessonId" element={<TeacherLessons/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

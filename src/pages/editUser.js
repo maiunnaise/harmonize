@@ -59,14 +59,13 @@ function EditUserForm({user, instruments}) {
     };
 
 
-    const removeInstrument = () => {
+    const removeInstrument = (event) => {
         // event.stopPropagation();
         // event.preventDefault();
         
         // let instrument = document.querySelector('#instrumentsList').querySelector(`[id="${index}"]`);
         // console.log(instrument, index);
         // instrument.remove();
-        console.log("aaa");
         //     let removeBtn = document.getElementsByClassName('deleteBtn');
 
         // console.log(removeBtn, removeBtn[1]);
@@ -76,6 +75,9 @@ function EditUserForm({user, instruments}) {
         //         console.log(this.id);
         //     });
         // }
+
+        event.stopPropagation();
+        console.log('Button clicked!');
 
     }
 
@@ -92,7 +94,7 @@ function EditUserForm({user, instruments}) {
                 <GreyDiv content={
                     <div>
                         <form onSubmit={handleSubmit} id="editUserForm">
-                            <label>Instruments :
+                            <div>Instruments :</div>
                             <div className='userInstruments'>
                                 <div id="instrumentsList">
                                     {user.instruments.map((instrument, index) => {
@@ -104,23 +106,24 @@ function EditUserForm({user, instruments}) {
                                     })}
                                 </div>
                                 <button onClick={addInstrument}> + </button>
-                                <div id='overlay' style={{
-                                        display: isActive ? 'block' : 'none',
-                                        }}>
-                                    <div id='popup'>
-                                        <div id='close'>&#10006;</div>
-                                        <h2>Instruments</h2>
-                                        <div id="instruments">
-                                            {instruments.map((instrument, index) => {
-                                                return <div key={index} id={index}>
-                                                    <InstrumentText key={index} text={instrument.name} />
-                                                </div>
-                                            })}
-                                        </div>
+                            </div>
+                          
+                            <div id='overlay' style={{
+                                    display: isActive ? 'block' : 'none',
+                                    }}>
+                                <div id='popup'>
+                                    <div id='close'>&#10006;</div>
+                                    <h2>Instruments</h2>
+                                    <div id="instruments">
+                                        {instruments.map((instrument, index) => {
+                                            return <div key={index} id={index}>
+                                                <InstrumentText key={index} text={instrument.name} />
+                                            </div>
+                                        })}
                                     </div>
                                 </div>
                             </div>
-                            </label>
+                          
                             <hr></hr>
                             <label>Adresse mail :
                             <input 
@@ -146,8 +149,8 @@ function EditUserForm({user, instruments}) {
 let user = {
     firstname: "John",
     lastname: "Doe",
-    email: "adadasdad",
-    instruments: ["Piano","Guitare"],
+    email: "adadas@mail.com",
+    instruments: ["Piaeeeeno","Guitare"],
 }
 
 let instruments = [

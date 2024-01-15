@@ -6,7 +6,7 @@ import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 
 
-function Home(){
+function Home({lessons, students}){
     const [filteredData, setFilteredData] = useState(students);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -22,7 +22,6 @@ function Home(){
     //Ajoute une border si exercice terminé à voir
     useEffect(() => {
         let lessons = document.querySelectorAll('.GreyDiv');
-        console.log(lessons);
         for (let i = 0; i < lessons.length; i++) {
             let finished = lessons[i].querySelectorAll('.finished');
             if (finished.length != 0){
@@ -74,6 +73,7 @@ function Home(){
                 if(lesson == undefined){
                     return(null);
                 }
+
                 return(
                     <Link key={index} to={`/teacherLessons/${lesson.id}`}>
                         <GreyDiv
@@ -161,7 +161,7 @@ let lessons = [
     studentId: 4,
     title: "Piano débutant", 
     desc: "Apprendre les notes de musique",
-    date: "2021-04-15 15:00:00",
+    date: "2021-08-15 12:00:00",
     exercices: [
         {id: 1,
         title: "Exercice 1",
@@ -180,17 +180,39 @@ let lessons = [
         },
     ],
     },
-    {id: 2, 
+    {id: 3, 
     studentId: 3,
     title: "Piano débutant", 
     desc: "Apprendre les notes de musique",
-    date: "2021-04-15 15:00:00",
+    date: "2021-04-15 16:00:00",
     exercices: null,
     },
 ]
 
+function sortStudents(students, lessons){
+    
+    lessons = lessons.sort(function(a, b){
+        let dateA = new Date(a.date).getTime();
+        let dateB = new Date(b.date).getTime();
+        if (dateA > dateB) {
+            return -1;
+        }
+    });
+
+    var studentsOrder = [];
+
+    lessons.forEach(lesson => {
+        let student = students.filter(student => student.id === lesson.studentId )[0];
+        studentsOrder.push(student);
+    });
+
+    return studentsOrder;
+}
+console.log(students, sortStudents(students, lessons) );
+students = sortStudents(students, lessons);
+
 export default function TeacherHome(){
     return (
-    <Home />
+    <Home lessons={lessons} students={students}/>
     );
 };
