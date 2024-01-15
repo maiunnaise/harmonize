@@ -1,14 +1,18 @@
-.GreyDiv {
+.TeacherHome .GreyDiv {
     margin-top: 1em;
 }
 
-body {
+body .TeacherHome{
     font-size: 0.8em;
 }
 
 .TeacherHome h1 {
     margin-left: 1em;
     margin-bottom: 0.25em;
+}
+
+.TeacherHome a {
+    text-decoration:none;
 }
 
 .TeacherHome input {

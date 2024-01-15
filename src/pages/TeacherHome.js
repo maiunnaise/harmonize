@@ -6,53 +6,34 @@ import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 
 
-function levelCompletion({ exercice }){
-    let niveaux = exercice.niveaux;
-    let exoDiv = document.getElementById(exercice.id);
-    console.log(exoDiv);
-    let lvlParentDiv = null;
-    if(exoDiv != null){
-        lvlParentDiv = exoDiv.querySelector('.niveaux > div');
-    }
-    for (let i = 0; i < niveaux.length; i++) {
-        if(lvlParentDiv != null){
-            let lvl = lvlParentDiv.querySelector(`[id="lvl${niveaux[i].id}from${exercice.id}"]`);
-            console.log(niveaux[i], exercice.id, lvl);
-            if (niveaux[i].completed) {
-                if (lvl != null) {
-                    lvl.classList.remove("notCompleted");
-                    lvl.classList.add("completed");
-                }
-            } else {
-                if (lvl != null) {
-                    lvl.classList.remove("completed");
-                    lvl.classList.add("notCompleted");
-                }
-            }
-        }
-    };
-};
-
 function Home(){
     const [filteredData, setFilteredData] = useState(students);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleSearch = (searchTerm) => {
+        setSearchTerm(searchTerm);
         const filteredResults = students.filter((item) =>
-          item.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.category.toLowerCase().includes(searchTerm.toLowerCase())
+          item.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.lastName.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredData(filteredResults);
-        
     };
 
-    // const StudentsList = () => {
-    //     {filteredData.map((exercices, index) => (
-    //         <div key={index}>
-    //             <StudentDiv exercice={exercices}/>
-    //         </div>
-           
-    //     ))}
-    // };
+    //Ajoute une border si exercice terminé à voir
+    useEffect(() => {
+        let lessons = document.querySelectorAll('.GreyDiv');
+        console.log(lessons);
+        for (let i = 0; i < lessons.length; i++) {
+            let finished = lessons[i].querySelectorAll('.finished');
+            if (finished.length != 0){
+                lessons[i].classList.add('toReview');
+            }
+            else {
+                lessons[i].classList.remove('toReview');
+            }
+        }
+    }, [searchTerm]);
+
 
     function getLessonsByStudentId(id) {
         return lessons.filter(lesson => lesson.studentId === id)[0];
@@ -72,29 +53,17 @@ function Home(){
         let exos = document.querySelectorAll('.exercices > div');
         for (let i = 0; i < exos.length; i++) {
             if(!exos[i].childNodes[0]){
-                console.log(exos[i]);
                 exoDiv[i].style.display = "none";
             }
         }
     }
 
-    //Ajoute une border si exercice terminé à voir
-    function toReviewBorder(){
-        let lessons = document.querySelectorAll('.GreyDiv');
-        for (let i = 0; i < lessons.length; i++) {
-            let finished = lessons[i].querySelectorAll('.finished');
-            console.log(finished);
-            if (finished.length != 0){
-                lessons[i].classList.add('toReview');
-            }
-        }
-    }
-
+    // ToReviewBorder();
+    
     //Après le rendu
     useEffect(() => {
         clearExercices();
-        toReviewBorder();
-    });
+    }, []);
 
     return (
         <div className="content TeacherHome">
@@ -106,55 +75,56 @@ function Home(){
                     return(null);
                 }
                 return(
-                    <GreyDiv
-                        key={index}
-                        content={
-                        <div id={student.id}>
-                            <div className='lessonHeader'>
-                                <img src={student.img} alt={`${student.firstName} ${student.lastName}`}/>
-                                <div>
-                                    <h2>{`${student.firstName} ${student.lastName}`}</h2>
-                                    <h2 className="greyText"> {lesson.title}</h2>
-                                </div>   
-                            </div>
-                            <p>{lesson.desc}</p>
-                            <div className='nextLesson'>
-                                <p>Prochain cours :</p>
-                                <div>{formatDate(new Date(lesson.date))}</div>
-                            </div>
-                            <div className='exercices'>
-                                <p>Exercices</p>
-                                <div>
-                                {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
-                                    <span key={index} className={`${exercice.state}`}></span>
-                                )) : null}
+                    <Link key={index} to={`/teacherLessons/${lesson.id}`}>
+                        <GreyDiv
+                            key={index}
+                            content={
+                            <div id={student.id}>
+                                <div className='lessonHeader'>
+                                    <img src={student.img} alt={`${student.firstName} ${student.lastName}`}/>
+                                    <div>
+                                        <h2>{`${student.firstName} ${student.lastName}`}</h2>
+                                        <h2 className="greyText"> {lesson.title}</h2>
+                                    </div>   
+                                </div>
+                                <p>{lesson.desc}</p>
+                                <div className='nextLesson'>
+                                    <p>Prochain cours :</p>
+                                    <div>{formatDate(new Date(lesson.date))}</div>
+                                </div>
+                                <div className='exercices'>
+                                    <p>Exercices</p>
+                                    <div>
+                                        {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
+                                            <span key={index} className={`${exercice.state}`}></span>
+                                        )) : null}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        }
-                    />  
+                            }
+                        /> 
+                    </Link> 
                 )
             })}
-        </div>
-        
+        </div> 
     )
 }
 
 let students = [
     {id: 5, 
     img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Notes", 
-    lastName: "Solfège",
+    firstName: "Meejez", 
+    lastName: "Eztzert",
     },
     {id: 4, 
     img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Notes", 
-    lastName: "Solfège",
+    firstName: "Drtud", 
+    lastName: "Ttttt",
     },
     {id: 3, 
     img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Notes", 
-    lastName: "Solfège",
+    firstName: "Xbcxvb", 
+    lastName: "Wertzert",
     },
 ]
 
