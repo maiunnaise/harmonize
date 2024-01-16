@@ -2,6 +2,7 @@ import './library.css';
 import Partition from '../components/Partition';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
+import GreyDiv from '../components/GreyDiv';
 
 const partitions =[
     {
@@ -15,7 +16,7 @@ const partitions =[
     }
 ];
 
-function Libform(){
+export function Libform(){
     useEffect(() => {
         let list = document.querySelectorAll("select");
         list = Array.from(list);
@@ -185,17 +186,32 @@ function Libform(){
     )
 }
 
+function AddPart(){
+    return(
+        <>
+            <img src="/logo/icons/add_purple.png" alt="add"/>
+            <p>Ajouter une partition</p>
+        </>
+    )
 
-export default function Library() {
+}
+
+
+export function Library() {
     return (
     <div className="content">
         <h1>Ma bibliothèque</h1>
         <Libform/>
         {partitions.map((partition) => {
             return (
-                <Link to={`/play/${partition.id}`}>
-            <Partition partition={partition} style="fav"/></Link>
+            <Link to={`/play/${partition.id}`}>
+                <Partition partition={partition} style="fav"/>
+            </Link>
             );
         })}
-    </div>)
+        <Link to="/addPartition" className='addPart'>
+            <GreyDiv content={<AddPart/>}/>
+        </Link>
+    </div>
+    )
 }

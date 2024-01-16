@@ -40,3 +40,31 @@
 .filters > .selectedFilter > option{
     color: white;
 }
+
+.addPart{
+    top: 73vh;
+    position: absolute;
+    left:1vw;
+}
+
+.addPart > .GreyDiv{
+    width: fit-content;
+    display: flex;
+    margin: 0;
+    padding-left:0em;
+    padding-right: 1em;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+
+}
+
+.addPart > .GreyDiv > img{
+    width : 8vw;
+    height: 8vw;
+}
+
+.addPart > .GreyDiv > p{
+    height: fit-content;
+}
+
