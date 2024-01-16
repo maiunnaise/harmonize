@@ -13,13 +13,13 @@ export default function CheckLogin(){
             navigate("/login");
         }
         else {
-            if(location.pathname.includes("/home")|| location.pathname === "/" || location.pathname.includes("Lessons")){
+            if(location.pathname.includes("/home")|| location.pathname === "/" || location.pathname.includes("Lessons") || location.pathname.includes("editLesson")){
                 let decodedToken = decodeToken(token);
                 if(decodedToken.roles.includes('ROLE_STUDENT') && decodedToken != null){
                     navigate("../student/home",{replace: true});
                 }
                 else if (decodedToken.roles.includes('ROLE_TEACHER') && decodedToken != null){
-                    if(location.pathname.includes("Lessons")){
+                    if(location.pathname.includes("Lessons") || location.pathname.includes("editLesson")){
                         navigate(location.pathname);
                     }
                     else{

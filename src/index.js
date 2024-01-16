@@ -48,7 +48,7 @@ root.render(
         <Route path="/activity/:id" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history" element={<History/>}/>
-        <Route path="/editLesson/:lessonId" element={<EditLesson/>} />
+        <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
       </Routes>
     </BrowserRouter>
 );
