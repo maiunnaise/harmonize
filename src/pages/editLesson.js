@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './TeacherLessons.css';
+import './editLesson.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
@@ -21,12 +21,26 @@ function Lesson(lessonId){
         }
     });
 
-    function formatDate(date) {
-        return (
-            date.getDate() + 
-            "/" + ('0'+(date.getMonth()+1)).slice(-2) + 
-            " - " + date.getHours() + "h" + ('0'+(date.getMinutes())).slice(-2)
-        )
+    const removeExercice = (event, id) => {
+        // event.stopPropagation();
+        // event.preventDefault();
+        
+        // let instrument = document.querySelector('#instrumentsList').querySelector(`[id="${index}"]`);
+        // console.log(instrument, index);
+        // instrument.remove();
+        //     let removeBtn = document.getElementsByClassName('deleteBtn');
+
+        // console.log(removeBtn, removeBtn[1]);
+        // for(var i = 0; i < removeBtn.length; i++) {
+        //     console.log(removeBtn[i]);
+        //     removeBtn[i].addEventListener('click', function() {
+        //         console.log(this.id);
+        //     });
+        // }
+
+        event.stopPropagation();
+        console.log('Button clicked with id:', id);
+
     }
 
     return (
@@ -34,59 +48,62 @@ function Lesson(lessonId){
         <SimpleHeader/>
   
         <div className="simpleContent">
-            <div className="lessonStudentPicName">
+            <div className="editLessonPicName">
                 <img src="../logo192.png" alt="profile"/>
                 <div>
                     <h2>{student.firstName}<br/> {student.lastName}</h2>
                     <p>{lesson.title}</p>
                 </div>
             </div>
-            <GreyDiv content={
-                <div className="lessonStudentDetails">
-                    <h2>Instruments</h2>
-                    <div className="lessonStudentInstruments">
-                        {student.instruments.map((instrument, index) => {
-                            return <InstrumentText key={index} index={index} text={instrument}/>;
-                        })}
-                    </div>
-                    <hr></hr>
-                    <p>{lesson.desc}</p>
-                    <div className='nextLesson'>
-                        <p>Prochain cours :</p>
-                        <div>{formatDate(new Date(lesson.date))}</div>
-                    </div>
-                    <div className="exercices">
-                        {lesson.exercices && lesson.exercices.length > 0 ? 
-                            <h3>Exercices</h3> 
-                        : null}
-                        {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
-                            <div>
+            <form>
+                <GreyDiv content={
+                    
+                    <div className="editLessonDetails">
+                        <h2>Instruments</h2>
+                        <div className="editLessonInstruments">
+                            {student.instruments.map((instrument, index) => {
+                                return <InstrumentText key={index} index={index} text={instrument}/>;
+                            })}
+                        </div>
+                        <hr></hr>
+                        <textarea rows="4">{lesson.desc}</textarea>
+                        <div className='nextLesson'>
+                            <p>Prochain <br></br>cours :</p>
+                            <input type="datetime-local"></input>
+                        </div>
+                        <div className="exercices">
+                            {lesson.exercices && lesson.exercices.length > 0 ? 
+                                <h3>Exercices</h3> 
+                            : null}
+                            {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
                                 <div>
                                     <div>
-                                        <span key={index} className={`${exercice.state}`}></span>
-                                        <p>{exercice.desc}</p>
+                                        <div>
+                                            <span key={index} className={`${exercice.state}`}></span>
+                                            <p>{exercice.desc}</p>
+                                        </div>
+                                        <div>
+                                            <Link to={`../exercices/${exercice.id}`} ><button type="button" className={`${exercice.state}Btn`}>Voir</button></Link>
+                                            <button type="button" onClick={(event) => removeExercice(event, exercice.id)}>x</button>
+                                        </div>
                                     </div>
-                                    <Link to={`../exercices/${exercice.id}`} ><button className={`${exercice.state}Btn`}>Voir</button></Link>
+                                    <hr></hr>
                                 </div>
-                                <hr></hr>
-                            </div>
-                        )) : null}
+                            )) : null}
+                        </div>
+                        <div className='buttons'>
+                            <button>Ajouter un exercice</button>
+                            <button>Supprimer le cours</button>
+                        </div>
                     </div>
-                    <div className='buttons'>
-                            <Link to={`/editLesson/${lesson.id}`}>
-                                <button>Modifier le cours</button>
-                            </Link>
-                        <Link to={`/message/${student.id}`} className='inboxLink'>
-                            <button>Message</button>
-                        </Link>
-                    </div>
+                    
+                }/>
+                <div className="validateBtn">
+                    <Link to={`/teacherLessons/${lesson.id}`}>
+                        <button type="submit">Valider</button>
+                    </Link>
                 </div>
-            }/>
-            <div className="lessonStudentHistoryBtn">
-                <Link to={`/history/${student.id}`}>
-                    <button>Historique</button>
-                </Link>
-            </div>
+            </form>
         </div>
         </>
     )
@@ -175,7 +192,7 @@ let lessons = [
 ]
 
 
-export default function TeacherLessons(){
+export default function EditLesson(){
     return (
         <Lesson lessonId={useParams().lessonId} />
     );

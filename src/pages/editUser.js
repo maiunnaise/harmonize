@@ -59,7 +59,7 @@ function EditUserForm({user, instruments}) {
     };
 
 
-    const removeInstrument = (event) => {
+    const removeInstrument = (event, name) => {
         // event.stopPropagation();
         // event.preventDefault();
         
@@ -77,13 +77,13 @@ function EditUserForm({user, instruments}) {
         // }
 
         event.stopPropagation();
-        console.log('Button clicked!');
+        console.log('Button clicked with name:', name);
 
     }
 
 
     return (
-        <div className="content simpleContent">
+        <div className="simpleContent">
             <div id="editUser">
                 <div className='userPicName'>
                     <img className="userPic" src="../logo192.png" alt="profile"/>
@@ -101,7 +101,7 @@ function EditUserForm({user, instruments}) {
                                         return (
                                         <div key={index} id={index}> 
                                             <InstrumentText key={index} text={instrument} />
-                                            <button id={index} type="button" onClick={removeInstrument} className='deleteBtn'>x</button>
+                                            <button id={index} type="button" onClick={(event) => removeInstrument(event, instrument)} className='deleteBtn'>x</button>
                                         </div>)
                                     })}
                                 </div>
@@ -116,7 +116,7 @@ function EditUserForm({user, instruments}) {
                                     <h2>Instruments</h2>
                                     <div id="instruments">
                                         {instruments.map((instrument, index) => {
-                                            return <div key={index} id={index}>
+                                            return <div key={index} id={index} >
                                                 <InstrumentText key={index} text={instrument.name} />
                                             </div>
                                         })}
