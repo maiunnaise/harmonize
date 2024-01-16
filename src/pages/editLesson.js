@@ -4,6 +4,7 @@ import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
+import CheckLogin from '../components/checkLogin.js';
 
 function Lesson(lessonId){
     let lesson, student;
@@ -193,6 +194,7 @@ let lessons = [
 
 
 export default function EditLesson(){
+    CheckLogin();
     return (
         <Lesson lessonId={useParams().lessonId} />
     );
