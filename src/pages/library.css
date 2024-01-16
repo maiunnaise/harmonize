@@ -1,0 +1,70 @@
+.filters > select > option {
+    color: black;
+}
+
+.libform > input{
+    width: 90%;
+}
+
+.libform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:.5em;
+}
+
+.filters{
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    width: 95%;
+}
+
+.filters > select, .filters > .isFav{
+    border : white 2px solid;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 0.2em 0.5em;
+}
+
+.filters > select:focus{
+    outline: none;
+}
+
+.filters > .selectedFilter{
+    border : #845583 2px solid;
+    background-color: #845583;
+}
+
+.filters > .selectedFilter > option{
+    color: white;
+}
+
+.addPart{
+    top: 73vh;
+    position: absolute;
+    left:1vw;
+}
+
+.addPart > .GreyDiv{
+    width: fit-content;
+    display: flex;
+    margin: 0;
+    padding-left:0em;
+    padding-right: 1em;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+
+}
+
+.addPart > .GreyDiv > img{
+    width : 8vw;
+    height: 8vw;
+}
+
+.addPart > .GreyDiv > p{
+    height: fit-content;
+}
+
