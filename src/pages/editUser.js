@@ -4,9 +4,12 @@ import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
+import CheckLogin from '../components/checkLogin.js';
+
 
 
 function EditUserForm({user, instruments}) {
+    CheckLogin();
     // const [inputs, setInputs] = useState({});
     const userEmail = user.email;
     const [userData, setUser] = useState({ email: userEmail });

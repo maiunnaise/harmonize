@@ -7,6 +7,7 @@ import './activity.css';
 import HistoryButton from '../components/HistoryButton';
 import SimpleHeader from '../components/simpleHeader';
 import { Link } from 'react-router-dom';
+import CheckLogin from '../components/checkLogin';
 
 const activities ={
     id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo",
@@ -22,6 +23,7 @@ const activities ={
 
 
 function Activity(){
+    CheckLogin();
 
     let { id } = useParams();
     //ça sert à rien maintenant mais c'est pour récup et appeler l'api

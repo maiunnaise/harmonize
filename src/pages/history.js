@@ -1,6 +1,7 @@
 import {ActivityTotal} from "./activity"
 import './history.css'
 import SimpleHeader from "../components/simpleHeader"
+import CheckLogin from "../components/checkLogin"
 
 const activities =[
     {
@@ -27,6 +28,7 @@ const activities =[
 
 
 export default function History(){
+    CheckLogin();
     return(
         <div className="History simpleContent">
             <SimpleHeader/>
