@@ -1,8 +1,9 @@
 .GreyDiv {
-    margin-inline: 1.5em;
+    margin-inline: 1em;
     background-color: #3D3D3D;
     border-radius: 30px;
     padding-bottom: 1em;
     font-family: Lexend, Bold; 
-    margin-bottom: 0.75em;
+    margin-bottom: 1em;
 }
+

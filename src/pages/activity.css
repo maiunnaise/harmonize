@@ -1,0 +1,38 @@
+.activityDesc{
+    padding: 0.8rem; /*rem pour eviter le décalage avec la font-size de h2 */
+    margin-top: 0.5em;
+    padding-top: 1rem;
+}
+
+
+.activityDesc > *:not(.partition, button){
+    padding-left:0.5rem;
+}
+
+.activityDesc > h2{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.activityDesc > p:nth-of-type(2){
+    font-size: small;
+}
+
+.activityDesc > button{
+    font-weight: bold;
+    padding: 0.5em 1.5em;
+    margin-top: 1em;
+    margin-inline: 0.5em;
+}
+
+.Activity > .GreyDiv{
+    padding-bottom: 0.5em;
+}
+
+.ActTeach{
+    padding-left: 1.2em;
+}
+
+/* .Activity > h1{
+    margin : 0.8em;
+} */
