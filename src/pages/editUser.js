@@ -83,7 +83,7 @@ function EditUserForm({user, instruments}) {
 
 
     return (
-        <div className="content">
+        <div className="content simpleContent">
             <div id="editUser">
                 <div className='userPicName'>
                     <img className="userPic" src="../logo192.png" alt="profile"/>

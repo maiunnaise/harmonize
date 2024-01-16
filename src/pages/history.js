@@ -1,5 +1,6 @@
 import {ActivityTotal} from "./activity"
 import './history.css'
+import SimpleHeader from "../components/simpleHeader"
 
 const activities =[
     {
@@ -27,7 +28,8 @@ const activities =[
 
 export default function History(){
     return(
-        <div className="content History">
+        <div className="History simpleContent">
+            <SimpleHeader/>
             <h1>Historique d'activités</h1>
             {activities.map((activity,i) => {
                 return (

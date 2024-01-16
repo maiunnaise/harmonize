@@ -11,7 +11,7 @@ function Cours(){
     let cours = coursData.filter(e => e.id === Number(coursId))[0];
 
     return (
-        <div className="content">
+        <div className="simpleContent">
             <SimpleHeader />
             <div id="CoursPage">
                 <h2>{cours.titre} <span className="greyText"> · {cours.category} </span></h2>

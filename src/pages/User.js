@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 function UserInfo({user}){
     return (
-        <div className="content">
+        <div className="content simpleContent">
             <SimpleHeader />
             <div className='userPicName'>
                 <img src="../logo192.png" alt="profile"/>

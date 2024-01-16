@@ -30,8 +30,10 @@ function Lesson(lessonId){
     }
 
     return (
-        <div className="content">
-            <SimpleHeader />
+        <>
+        <SimpleHeader/>
+  
+        <div className="simpleContent">
             <div className="lessonStudentPicName">
                 <img src="../logo192.png" alt="profile"/>
                 <div>
@@ -84,6 +86,7 @@ function Lesson(lessonId){
                 </Link>
             </div>
         </div>
+        </>
     )
 }
 

@@ -4,8 +4,8 @@ import Menu from '../components/Menu';
 import Partition from '../components/Partition';
 import GreyDiv from '../components/GreyDiv';
 import './activity.css';
-import PurpleButton from '../components/PurpleButton';
 import HistoryButton from '../components/HistoryButton';
+import SimpleHeader from '../components/simpleHeader';
 
 const activities ={
     id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo",
@@ -29,6 +29,7 @@ function Activity(){
         <>
         <Menu/>
         <div className="content Activity">
+            <SimpleHeader/>
             <h1>Exercice</h1>
             <ActivityTotal activity={activities}/>
             <HistoryButton buttonText="Historique d'activités"/>
@@ -46,7 +47,7 @@ function ActivityDesc({activity}){
             <p>pour le {activity.dueAt}</p>
             <Partition partition={activity.partition}/>
             <p>{activity.description}</p>
-            <PurpleButton buttonText="Jouer"/>
+            <button>Jouer</button>
         </div>
     )
 }
