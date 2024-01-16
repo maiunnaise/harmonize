@@ -34,14 +34,14 @@
     padding-bottom: 0.5em;
 }
 
-label{
+.loginForm label{
     display: flex;
     flex-direction: column;
     gap:0.3em;
     font-weight: bold;
 }
 
-input{
+.loginForm input{
     background-color: #474747;
     border: none;
     padding: 0.5em 1em;
@@ -71,6 +71,7 @@ input{
     align-self: flex-end;
     text-decoration: underline;
 }
+
 
 .loginForm > p:last-of-type{
     align-self: center;

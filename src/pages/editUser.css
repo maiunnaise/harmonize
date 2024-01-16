@@ -1,0 +1,171 @@
+
+#editUser > h1{
+    align-self: center;
+    padding-bottom: 0.5em;
+}
+
+#editUser .GreyDiv {
+    padding-inline: 1em;
+    padding-right: 0;
+}
+
+#editUser button {
+    padding: 6px;
+    padding-inline: 0.7em;
+    border-radius: 30px;
+    border: 1px rgb(148, 148, 148) solid;
+    padding-top: 0;
+    padding-bottom: 0.2em;
+    margin-left: 0;
+}
+
+#editUserForm .userInstruments > button {
+    background-color: #845583;
+    padding-inline: 1em;
+    border: 0;
+    width: 3em;
+    min-height: 2em;
+}
+
+#editUserForm{
+    margin-top: 1em;
+    padding-bottom: 1em;
+}
+
+#editUserForm label{
+    display: flex;
+    flex-direction: column;
+    gap:0.3em;
+    font-weight: bold;
+    padding-top: 1em;
+    margin-left: 1em;
+}
+
+#editUserForm .userInstruments{
+    margin-left: -0.75em;
+    margin-top: 0.25em;
+    font-size: small;
+}
+
+#editUserForm .userInstruments > div{
+    display: flex;
+    flex-direction: column;
+}
+
+#editUserForm .userInstruments > div > div{
+    margin-bottom: 0.5em;
+}
+.userInstruments p {
+    margin-right: 0.3em;
+}
+
+#editUser #editUserForm > label > button {
+    background-color: #845583;
+    border: 0;
+    width: 3em;
+    margin-left: -0.75em;
+    margin-top: 0.25em;
+}
+
+
+
+
+#editUser input:not([type="submit"]){
+    background-color: #474747;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 0.8em;
+    margin-left: -1em;
+    width: 80%;
+}
+
+#editUser input[type="submit"]{
+    background-color: #845583;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 1em;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.userValidateBtn {
+    display: flex;
+    justify-content: center;
+    font-size: small;
+    margin-top: -1em;
+}
+
+#editUserForm hr {
+    margin-top: 0.75em;
+    height: 1px;
+    background-color: #939393;
+    border: none;
+}
+
+.deleteBtn {
+    background-color: #3D3D3D;
+    border: 1px solid #939393;
+    padding-inline: 0;
+}
+
+#overlay {
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background:rgba(0, 0, 0, 0.8);
+    z-index:9999;
+}
+#close {
+    position:absolute;
+    top:-40px;
+    right:-5px;
+    z-index:99;
+    width:25px;
+    height:25px;
+    cursor:pointer;
+    color: #fff;
+    display: inline-block;
+}
+#popup {
+    position:absolute;
+    width:50%;
+    height:50%;
+    top:25%;
+    left:25%;
+    text-align:center;
+    border-radius: 10px;
+    background: #3D3D3D;
+    box-shadow: 0px 0px 10px 0px black;
+}
+#popup h2 {
+    font-size:1em;
+    height: 2.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    border-bottom: #474747 1px solid;
+}
+
+#popup > #instruments {
+    margin-top: 0.5em;
+    width: 80%;
+    display: inline-block;
+}
+
+#popup > #instruments > div {
+    margin-bottom: 1.5em;
+    padding-bottom: 0.5em;
+}
+
+#popup > #instruments > div > p {
+    padding: 0.5em;
+    padding-inline: 2em;
+}
+
+

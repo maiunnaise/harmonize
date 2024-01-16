@@ -1,0 +1,183 @@
+.content {
+    height: 90vh;
+}
+
+.lessonStudentPicName {
+    display: flex;
+    justify-content: center; /* align horizontal */
+    align-items: center; /* align vertical */
+}
+
+.lessonStudentPicName p {
+    color: #cccccc;
+}
+
+.lessonStudentDetails button, .lessonStudentModifBtn button, .lessonStudentHistoryBtn button{
+    padding: 6px;
+    padding-inline: 1em;
+    border-radius: 30px;
+    border: 0;
+    background-color: #845583;
+}
+
+.lessonStudentDetails .exercices .reviewedBtn{
+    background-color: rgb(0,0,0,0);
+    border: #B5B5B5 1px solid;
+}
+
+.lessonStudentDetails .exercices .toDoBtn{
+    opacity: 0;
+    pointer-events: none;
+    cursor: default;
+}
+
+
+.lessonStudentPicName img{
+    margin-right: 1em;
+    width: 8em;
+}
+
+.lessonStudentDetails{
+    margin-top: 1em;
+    padding-inline: 1em;
+    padding-bottom: 0.5em;
+    font-size: 0.8em;
+}
+
+.lessonStudentDetails h2 {
+    margin-bottom: 0.5em;
+    font-size: medium;
+    margin-left: 1em;
+    padding-top: 1em;
+}
+
+.lessonStudentDetails > hr {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    height: 1px;
+    background-color: #4A4A4A;
+    border: none;
+}
+
+.lessonStudentDetails .lessonStudentInstruments{
+    margin-left: 0.5em;
+    font-size: small;
+}
+
+.lessonStudentDetails .nextLesson {
+    margin-top: 1em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+}
+
+.lessonStudentDetails .nextLesson p {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+}
+
+.lessonStudentDetails .nextLesson div {
+    border: 1px solid #845583;
+    border-radius: 30px;
+    padding: 0.5em;
+}
+
+.lessonStudentDetails .exercices span{
+    height: 1em;
+    min-width: 1em;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 1.5em;
+    margin-top: 0.75em;
+    margin-right: 1em;
+}
+
+.lessonStudentDetails .exercices .reviewed {
+    background-color: #409048;
+}
+
+.lessonStudentDetails .exercices .finished {
+    background-color: #FFA800;
+}
+
+.lessonStudentDetails .exercices .toDo {
+    background-color: #CC3535;
+}
+
+.lessonStudentDetails .exercices {
+    background-color: #474747;
+    border-radius: 30px;
+    margin-top: 1em;
+}
+
+.lessonStudentDetails .exercices h3 {
+    margin-left: 2em;
+    padding-top: 0.5em;
+}
+
+.lessonStudentDetails .exercices p {
+    margin-top: 0.5em;
+}
+
+.lessonStudentDetails .exercices > div > div {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 95%;
+}
+
+.lessonStudentDetails .exercices > div > div > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.lessonStudentDetails .exercices hr {
+    width: 90%;
+    margin-inline: auto;
+    height: 1px;
+    background-color: #505050;
+    border: none;
+}
+
+.lessonStudentDetails .exercices a {
+    display: flex;
+    justify-content: end;
+    text-decoration: none;
+}
+
+.lessonStudentDetails .buttons  {
+    display: flex;
+    flex-direction: column;
+}
+
+.lessonStudentDetails .buttons button {
+    margin-top: 1em;
+    width: 100%;
+}
+
+.lessonStudentDetails .buttons > button {
+    border: #9F9F9F 1px solid;
+    background-color: rgb(0,0,0,0);
+}
+
+.lessonStudentHistoryBtn a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    margin-inline: auto;
+}
+
+.lessonStudentHistoryBtn button{
+    width: 80%;
+    justify-content: center;
+    border: #9F9F9F 1px solid;
+    background-color: #393939;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1.5em;
+}
+
+

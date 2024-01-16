@@ -1,0 +1,165 @@
+
+.hidden {
+    display: none;
+}
+
+.ExercicesSearch button {
+    padding: 6px;
+    padding-inline: 1em;
+    border-radius: 30px;
+    border: 0;
+}
+
+.ExercicesSearch{
+    padding-inline: 1em;
+}
+
+.ExercicesSearch a {
+    text-decoration: none;
+    color: black;
+}
+
+.ExercicesSearch > h2 {
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+    margin-left: 0.5em;
+}
+
+.ExercicesSearch .GreyDiv {
+    margin-top: 0.75em;
+    margin-inline: 0;
+    padding-inline: 1.5em;
+    padding-bottom: 0;
+}
+
+.ExercicesSearch .GreyDiv > div > div {
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   gap: 1em;
+}
+
+.ExercicesSearch .GreyDiv > div > div > button{
+    height: 2.5em;
+    min-width: 2.5em;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    padding-top: 0.1em;
+    padding-inline: 0;
+    background-color: #474747;
+    border: rgb(230, 230, 230) solid 1px;
+}
+
+.ExercicesSearch .arrow {
+    border: solid rgb(255, 255, 255);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.ExercicesSearch .GreyDiv h2{
+    font-size: 1.2em;
+    padding-top: 0.75em;
+    margin-bottom: 0.5em;
+}
+
+.ExercicesSearch .GreyDiv p{
+    font-size: 0.7em;
+}
+
+.ExercicesSearch .GreyDiv .greyText {
+    white-space: nowrap;
+}
+
+.ExercicesSearch .GreyDiv .niveaux > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.ExercicesSearch .GreyDiv .niveaux > div > div{
+    /* display: flex; */
+    flex-direction: column;
+    background-color: #474747;
+    border-radius: 10px 20px 20px 10px;
+    margin-bottom: 1em;
+    height: 4em;
+    width: 100%;
+    position:relative;
+}
+
+.ExercicesSearch .GreyDiv .niveaux > div > div > div{
+    display: flex;
+    flex-direction: row;
+}
+
+
+.ExercicesSearch .GreyDiv .niveaux div > button{
+    display: inline-block;
+    margin-right: 1em;
+    margin-left: 0.5em;
+    width: 7em;
+    border: 0;
+    background-color: #845583;
+}
+
+.ExercicesSearch .GreyDiv .niveaux div button a{
+    color: white;
+}
+
+.exerciceDesc {
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ExercicesSearch #categoryFilter {
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+.ExercicesSearch #categoryFilter button{
+    margin-right: 0.5em;
+    margin-top: 0.5em;
+    background-color: #393939;
+    box-shadow: inset 0 0 0 1px #845583;
+}
+
+.ExercicesSearch #categoryFilter .active {
+    box-shadow: inset 0 0 0 0px #845583;
+    background-color: #845583;
+}
+
+.ExercicesSearch  .niveaux h3 {
+    font-size: 1em;
+    margin-left: 1em;
+    margin-top: 0.50em;
+}
+
+.ExercicesSearch  .niveaux p {
+    margin-left: 1.5em;
+    margin-top: 0.5em;
+}
+
+.niveaux > div > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0.5em;
+    /* background-color: #3498db;  */
+    border-radius: 20px 0px 0px 20px ;
+}
+
+.completed::before {
+    background-color: #409048; 
+}
+
+.notCompleted::before {
+    background-color: #CC3535
+}

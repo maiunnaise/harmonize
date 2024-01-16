@@ -1,0 +1,101 @@
+.TeacherHome .GreyDiv {
+    margin-top: 1em;
+}
+
+body .TeacherHome{
+    font-size: 0.8em;
+}
+
+.TeacherHome h1 {
+    margin-left: 1em;
+    margin-bottom: 0.25em;
+}
+
+.TeacherHome a {
+    text-decoration:none;
+}
+
+.TeacherHome input {
+    margin-left: 2em;
+}
+
+.toReview {
+    border: 2px solid #845583;
+}
+
+.TeacherHome .GreyDiv img {
+    width: 5em;
+    border-radius: 50%;
+    margin: 1em;
+}
+
+.TeacherHome .GreyDiv > div > .lessonHeader {
+    display: flex;
+    flex-direction: row;
+}
+
+.TeacherHome .GreyDiv > div > .lessonHeader > div {
+    margin-top: 2em;
+}
+
+.TeacherHome .GreyDiv p {
+    margin-left: 1em;
+}
+
+.TeacherHome .nextLesson {
+    margin-top: 1em;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+}
+
+.TeacherHome .nextLesson p {
+    margin-top: 0.5em;
+    margin-right: 0.5em;
+}
+
+.TeacherHome .nextLesson div {
+    border: 1px solid #845583;
+    border-radius: 30px;
+    padding: 0.5em;
+}
+
+.TeacherHome .exercices {
+    display: inline-flex;
+    flex-direction: row;
+    margin-top: 1em;
+    margin-left: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-right: 1em;
+    background-color: #474747;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.TeacherHome .exercices p{
+    margin-left: 1em;
+}
+
+.TeacherHome .exercices span{
+    height: 1em;
+    width: 1em;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 1em;
+    margin-top: 0.2em;
+}
+
+.TeacherHome .exercices .reviewed {
+    background-color: #409048;
+}
+
+.TeacherHome .exercices .finished {
+    background-color: #FFA800;
+}
+
+.TeacherHome .exercices .toDo {
+    background-color: #CC3535;
+}
+

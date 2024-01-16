@@ -1,0 +1,73 @@
+.lastMessage {
+    display: inline-block;
+    width: 90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}   
+
+.inboxText span:last-child {
+    align-self: flex-end;
+    width: 4em;
+    margin-right: 0.5em;
+}
+
+.inboxLastMsg {
+    padding-inline: 2em;
+    display: inline-block;
+}
+
+.inboxText > p {
+    font-size: small;
+    display: flex;
+}
+
+.inboxText {
+    padding-top: 1.5em;
+    
+}
+
+#searchInbox {
+    margin-bottom: 1em;
+    margin-left: 2em;
+    
+}
+
+#searchInbox h2 {
+    margin-bottom: 0.5em;
+    font-size: large;
+}
+
+#searchInbox input{
+    width: 80%;
+    background-color: #474747;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 1em;   
+}
+
+.GreyDiv .inboxContact{
+    font-size: small;
+}
+.inboxContact h2 {
+    font-size: medium;
+}
+
+.inboxContact img{
+    margin: 0.5em;
+    width: 4em;
+    float: left;
+    margin-left: 1em;
+    margin-top: 1em;
+}
+
+.unread{
+    border: 4px solid #845583;
+    border-radius: 30px;
+    font-weight: bold;
+}
+
+.inboxLink{
+    text-decoration: none;
+}

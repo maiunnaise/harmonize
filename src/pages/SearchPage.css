@@ -1,0 +1,90 @@
+.SearchPage{
+    padding-inline: 1em;
+}
+
+.SearchPage a {
+    text-decoration: none;
+    color: black;
+}
+
+.SearchPage > h2 {
+    font-size: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+    margin-left: 0.5em;
+}
+
+.SearchPage #toolsDiv {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: repeat(2, 1fr); 
+}
+
+.SearchPage #toolsDiv  div{
+    padding: 1em;
+    margin: 0.3em;
+    font-size: small;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between
+}
+
+.SearchPage #toolsDiv > div > p{
+    font-size: 1em;
+    padding-bottom: 2em;
+    margin-top: -0.25em;
+}
+
+.SearchPage #toolsDiv  div > img{
+    width: 3em;
+    height: 3em;
+    margin-top: 1em;
+    opacity: 0.7;
+}
+
+.SearchPage #toolsDiv #partitionDiv > img{
+    width: 4em;
+    scale: 1.2;
+    margin-top: 1em;
+    opacity: 0.7;
+}
+
+.SearchPage #partitionDiv {
+    background-color: #9348C1;
+}
+
+.SearchPage #metronomeDiv {
+    background-color: #CC8925;
+}
+
+.SearchPage #accordeurDiv {
+    background-color: #C24231;
+}
+
+.SearchPage #rythmBoxDiv {
+    background-color: #4080AF;
+}
+
+.SearchPage .GreyDiv {
+    margin-top: 0.75em;
+    margin-inline: 0;
+    padding-inline: 1.5em;
+    padding-bottom: 0.5em;
+}
+
+.SearchPage .GreyDiv h2{
+    font-size: 1.2em;
+    padding-top: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.SearchPage .GreyDiv p{
+    font-size: 0.7em;
+}
+
+#SearchPageCours > img, #SearchPageExercices > img {
+    width: 100%;
+    border-radius: 15px;
+    margin-top: 0.5em;
+    margin-bottom: 0.25em;
+}

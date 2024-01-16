@@ -1,0 +1,11 @@
+.instrumentText{
+  font-weight: bold;
+  font-size: small;
+  display: inline;
+  margin-right: 6px;
+  background-color: #845583;
+  border-radius: 30px;
+  padding-inline: 1em;
+  padding-bottom: 4px;
+  padding-top: 2px;
+}

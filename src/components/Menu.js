@@ -22,7 +22,7 @@ function Menu() {
         <Link to="/library">
             <img src="/logo/icons/open-book.png" className="library" alt="logo library" />
         </Link>
-        <Link to="/message">
+        <Link to="/inbox">
             <img src="/logo/icons/speech-bubble.png" className="message" alt="logo message" />
         </Link>
       </div>

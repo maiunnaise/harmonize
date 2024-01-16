@@ -1,9 +1,9 @@
 import React from "react"; 
 import "./GreyDiv.css";
 
-const GreyDiv  = ({content}) => {
+const GreyDiv  = ({content, className}) => {
     return (
-      <div className="GreyDiv">
+      <div className={`GreyDiv ${className}`}>
         {content}
       </div>
     );
