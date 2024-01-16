@@ -1,10 +1,12 @@
-
+import SimpleHeader from "../components/simpleHeader"
+import "./notFound.css"
 
 export default function NotFound(){
     return (
-        <div>
+        <div className="simpleContent notFound">
+            <SimpleHeader/>
             <h1>404</h1>
-            <p>Page not found</p>
+            <p>Page introuvable :(</p>
         </div>
     )
 }
