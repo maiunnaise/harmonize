@@ -20,6 +20,7 @@ import History from './pages/history.js';
 import {Library} from './pages/library.js';
 import PartitionReader from './pages/partitionReader.js';
 import AddPartition from './pages/addPartition.js';
+import EditLesson from './pages/editLesson.js'; 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -47,6 +48,7 @@ root.render(
         <Route path="/activity/:id" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history" element={<History/>}/>
+        <Route path="/editLesson/:lessonId" element={<EditLesson/>} />
       </Routes>
     </BrowserRouter>
 );

@@ -9,7 +9,7 @@ import CheckLogin from '../components/checkLogin.js';
 function UserInfo({user}){
     CheckLogin();
     return (
-        <div className="content simpleContent">
+        <div className="simpleContent">
             <SimpleHeader />
             <div className='userPicName'>
                 <img src="../logo192.png" alt="profile"/>

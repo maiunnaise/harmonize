@@ -32,7 +32,7 @@
     padding-bottom: 1em;
 }
 
-#editUserForm label{
+#editUserForm:first-child{
     display: flex;
     flex-direction: column;
     gap:0.3em;
@@ -42,9 +42,8 @@
 }
 
 #editUserForm .userInstruments{
-    margin-left: -0.75em;
-    margin-top: 0.25em;
     font-size: small;
+    margin-top: 0.5em;
 }
 
 #editUserForm .userInstruments > div{
@@ -77,6 +76,7 @@
     border-radius: 50px;
     font-size: 0.8em;
     margin-left: -1em;
+    margin-top: 0.5em;
     width: 80%;
 }
 
@@ -101,10 +101,12 @@
 }
 
 #editUserForm hr {
-    margin-top: 0.75em;
+    margin-top: 0.25em;
+    margin-bottom: 0.25em;
     height: 1px;
-    background-color: #939393;
+    background-color: #4A4A4A;
     border: none;
+    width: 90%;
 }
 
 .deleteBtn {
@@ -113,7 +115,7 @@
     padding-inline: 0;
 }
 
-#overlay {
+#editUser #overlay {
     position:absolute;
     top:0;
     right:0;
@@ -122,10 +124,11 @@
     background:rgba(0, 0, 0, 0.8);
     z-index:9999;
 }
-#close {
+
+#editUser #popup #close {
     position:absolute;
-    top:-40px;
-    right:-5px;
+    right:0.5em;
+    top:0.5em;
     z-index:99;
     width:25px;
     height:25px;
@@ -133,7 +136,8 @@
     color: #fff;
     display: inline-block;
 }
-#popup {
+
+#editUser #popup {
     position:absolute;
     width:50%;
     height:50%;
@@ -143,7 +147,15 @@
     border-radius: 10px;
     background: #3D3D3D;
     box-shadow: 0px 0px 10px 0px black;
+    overflow: scroll;
 }
+
+/* #popup > div:first-child {
+    position : sticky;
+    top: 0;
+    z-index: 1;
+} */
+
 #popup h2 {
     font-size:1em;
     height: 2.5em;
