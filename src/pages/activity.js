@@ -6,6 +6,7 @@ import GreyDiv from '../components/GreyDiv';
 import './activity.css';
 import HistoryButton from '../components/HistoryButton';
 import SimpleHeader from '../components/simpleHeader';
+import { Link } from 'react-router-dom';
 
 const activities ={
     id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo",
@@ -14,7 +15,7 @@ const activities ={
         name:"Dupont", gender:"male"
     },
     partition: {
-        name : "Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart"
+        id:"0", name : "Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart"
     }
 }
 
@@ -47,7 +48,9 @@ function ActivityDesc({activity}){
             <p>pour le {activity.dueAt}</p>
             <Partition partition={activity.partition}/>
             <p>{activity.description}</p>
+            <Link to={`/play/${activity.partition.id}`}>
             <button>Jouer</button>
+            </Link>
         </div>
     )
 }

@@ -54,6 +54,9 @@
     height: 100%;
     font-weight: bold;
     margin-inline: 0;
+    background-color:#845583;
+    border-radius: 15px;
+    border:0;
 }
 
 .redAct{
