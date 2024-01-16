@@ -56,7 +56,7 @@ export default function PartitionReader() {
     return (
       <>
         <SimpleHeader />
-        <div className="simpleContent">
+        <div className="simpleContent partReader">
             <h1>Lecteur de partition</h1>
             <div id="partitionReader">
             </div>

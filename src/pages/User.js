@@ -8,6 +8,10 @@ import CheckLogin from '../components/checkLogin.js';
 
 function UserInfo({user}){
     CheckLogin();
+
+    function logout(){
+        localStorage.removeItem("token");
+    }
     return (
         <div className="simpleContent">
             <SimpleHeader />
@@ -33,6 +37,9 @@ function UserInfo({user}){
             <div className="userModifBtn">
                 <Link to="./edit">
                     <button>Modifier informations</button>
+                </Link>
+                <Link to="/login">
+                <button className='logout' onClick={logout}>Déconnexion</button>
                 </Link>
             </div>
         </div>

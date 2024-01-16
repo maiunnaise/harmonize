@@ -10,6 +10,7 @@
     border-radius: 30px;
     border: 0;
     background-color: #845583;
+    font-weight: bold;
 }
 
 
@@ -50,7 +51,24 @@
 }
 
 .userModifBtn {
+    position: relative;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
     margin-top: 1em;
+    flex-direction: column;
+    align-items: center;
+    gap:0.5em;
+    width: fit-content;
+}
+
+.userModifBtn > a{
+    width: 100%;
+}
+
+.userModifBtn .logout {
+    width: 100%;
+    border: 1px solid #c92a2a;
+    background-color: transparent;
+    color: #c92a2a;
 }

@@ -6,24 +6,52 @@
   border: 0;
   margin-inline: 1em;
 }
-.divSearchTeacher h2 {
+.divSearchTeacher > h2 {
   font-size: medium;
-  padding-top: 0.75em;
+  /* padding-top: 0.75em; */
   margin-left: 1em;
   margin-bottom: 0.5em;
+}
+.divSearchTeacher {
+  display: flex;
+  flex-direction: column;
+}
+
+.searchBtns {
+  position: relative;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+
+.searchBtns > button, .searchTeacher > .GreyDiv > div > button {
+  background-color: #845483;
+  border:0;
+  border-radius: 30px;
+  padding: 0.5em 1em;
+  font-weight: bold;
+}
+
+.searchTeacher > .GreyDiv > div > button{
+  margin-top: 1em;
+}
+
+.searchTeacher > .GreyDiv{
+  padding:1em;
 }
 
 .findTeacherImg {
   width: 5em;
   float: left;
-  margin-top: 0.5em;
+  /* margin-top: 0.5em; */
   margin-right: 0.5em;
 }
 
 #teacherName h2{
-  padding-top: 1.5em;
+  /* padding-top: 1em; */
   font-size: medium;
   margin-left: 1em;
+  margin-bottom: 0.2em;
 }
 
 .textDesc {
@@ -34,4 +62,8 @@
 .greyText {
   color: #B0B0B0;
   font-size: medium;
+}
+
+.instrumentsTeach{
+  margin-bottom: 0.7em;
 }
