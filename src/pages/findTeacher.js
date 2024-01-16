@@ -12,7 +12,7 @@ function TeachersDesc({teacher}){
                 <div id="teacherName">
                     <h2>{teacher.firstname} {teacher.lastname} <span className="greyText"> · {teacher.location} </span></h2>
                 </div>
-                <div>
+                <div className='instrumentsTeach'>
                     {teacher.instruments.map((instrument, index) => {
                         return <p key={index} className="instrumentText">{instrument}</p>;
                     })}
@@ -38,12 +38,14 @@ function FindTeachersDiv({teachers}){
     };
 
     return (
-        <div className='content'>
+        <div className='content searchTeacher'>
             <GreyDiv content={
                 <div className="divSearchTeacher">
                     <h2>Trouver un enseignant</h2>
-                    <button>Autour de moi</button>
-                    <SearchBar onSearch={handleSearch}/>
+                    <div className="searchBtns">  
+                        <button>Autour de moi</button>
+                        <SearchBar onSearch={handleSearch}/>
+                    </div>
                 </div>
             }/>
             {filteredData.map((teacher, index) => {

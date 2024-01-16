@@ -31,7 +31,7 @@ function Activity(){
     return(
         <>
         <Menu/>
-        <div className="content Activity">
+        <div className="simpleContent Activity">
             <SimpleHeader/>
             <h1>Exercice</h1>
             <ActivityTotal activity={activities}/>

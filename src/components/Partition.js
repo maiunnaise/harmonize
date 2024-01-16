@@ -14,6 +14,16 @@ export default function Partition({partition, style}){
 
         e.preventDefault();
     }
+
+    function addLib(e){
+        if(e.target.src.includes("add")){
+            e.target.src = "/logo/icons/check.png";
+        }
+        else{
+            e.target.src = "/logo/icons/add.png";
+        };
+        e.preventDefault();
+    }
     return(
         <div className={partition.isFav ? 'partition fav' : 'partition'} id={partition.id}>
             <div className='partitionDesc'>
@@ -25,7 +35,7 @@ export default function Partition({partition, style}){
                 <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
                 : style == "fav" && partition.isFav? (
                     <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
-                : <img src="/logo/icons/add.png" alt="add"/>}
+                : <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>}
         </div>
     )
 }
