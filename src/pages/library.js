@@ -3,22 +3,25 @@ import Partition from '../components/Partition';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
+import { getAPI } from '../components/fetchAPI';
+import { useState } from 'react';
 
-const partitions =[
-    {
-        id:0, name:"Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart", isFav : true
-    },
-    {
-        id:1, name:"Partition 2", difficulty : "Avancé", style :"Classique", instrument : "Piano", auteur : "Teest", isFav : true
-    },
-    {
-        id:2, name:"Partition 3e", difficulty : "Intermédiaire", style :"Jazz", instrument : "Flûte", auteur : "Hello", isFav : false
-    }
-];
+// const partitions =[
+//     {
+//         id:0, name:"Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart", isFav : true
+//     },
+//     {
+//         id:1, name:"Partition 2", difficulty : "Avancé", style :"Classique", instrument : "Piano", auteur : "Teest", isFav : true
+//     },
+//     {
+//         id:2, name:"Partition 3e", difficulty : "Intermédiaire", style :"Jazz", instrument : "Flûte", auteur : "Hello", isFav : false
+//     }
+// ];
 
-export function Libform(){
+export function Libform(partitions){
     useEffect(() => {
         let list = document.querySelectorAll("select");
+        partitions = Array.from(partitions);
         list = Array.from(list);
         list.map((select) => {
             partitions.map((partition) => {
@@ -198,13 +201,25 @@ function AddPart(){
 
 
 export function Library() {
+
+    const [partitions, setPartitions] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('vault-sheets', setPartitions);
+        };
+
+        fetchData();
+    }, []);
+
+    console.log(partitions);
+
     return (
     <div className="content">
         <h1>Ma bibliothèque</h1>
-        <Libform/>
+        <Libform partitions={partitions}/>
         {partitions.map((partition) => {
             return (
-            <Link to={`/play/${partition.id}`}>
+            <Link to={`/play/${partition.Sheet.id}`}>
                 <Partition partition={partition} style="fav"/>
             </Link>
             );
