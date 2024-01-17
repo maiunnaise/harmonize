@@ -41,9 +41,9 @@ export default function Partition({partition, style}){
         <div className={partition.isFavorite ? 'partition fav' : 'partition'} id={partition.id}>
             <div className='partitionDesc'>
                 <p>{partition.Sheet.title}</p>
-                {/* <p>{partition.difficulty} - {partition.style} - {partition.instrument}</p> */}
+                <p>{partition.Sheet.difficulty} - {partition.Sheet.style} - {partition.Sheet.Instrument.Name}</p>
             </div>
-            {/* <p>{partition.auteur}</p> */}
+            <p>{partition.Sheet.author}</p>
             {style == "fav" && !partition.isFavorite ? (
                 <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
                 : style == "fav" && partition.isFavorite? (

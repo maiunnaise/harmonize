@@ -72,3 +72,11 @@
     height: fit-content;
 }
 
+.noPart{
+    width: 95%;
+    text-align: center;
+    margin : 0 auto;
+    padding-top: 5vh;
+    font-weight: bold;
+}
+
