@@ -1,7 +1,8 @@
 import './Menu.css';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 function Menu() {
+
   return (
     <nav>
       <div className="Teach">
@@ -20,7 +21,7 @@ function Menu() {
             <img src="/logo/icons/compass-circular-tool.png" className="search" alt="logo search" />
         </Link>
         <Link to="/library">
-            <img src="/logo/icons/open-book.png" className="library" alt="logo library" />
+            <img src="/logo/icons/open-book.png" className="library" alt="logo library"/>
         </Link>
         <Link to="/inbox">
             <img src="/logo/icons/speech-bubble.png" className="message" alt="logo message" />
