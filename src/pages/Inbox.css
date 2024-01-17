@@ -1,3 +1,7 @@
+.msgDiv {
+    margin-bottom: 0.5em;
+}
+
 .lastMessage {
     display: inline-block;
     width: 90%;
@@ -27,18 +31,13 @@
     
 }
 
-#searchInbox {
+.searchInbox {
     margin-bottom: 1em;
-    margin-left: 2em;
-    
+    margin-left: 1em;
+    margin-top: 1em;
 }
 
-#searchInbox h2 {
-    margin-bottom: 0.5em;
-    font-size: large;
-}
-
-#searchInbox input{
+.searchInbox input{
     width: 80%;
     background-color: #474747;
     border: none;

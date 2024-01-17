@@ -2,15 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './Inbox.css';
 import GreyDiv from '../components/GreyDiv.js';
 import { Link } from 'react-router-dom';
+import SearchBar from '../components/SearchBar.js';
 
-function SearchInbox(){
-    return (
-        <div id="searchInbox">
-            <h2>Boîte de réception</h2>
-            <input type="text" placeholder="Rechercher..."/>
-        </div>
-    )
-}
 
 function getTimeSinceMessage(message){
     let time = (new Date() - new Date(message.date))/1000;
@@ -47,15 +40,27 @@ function Contact({user}){
 }
 
 function InboxDiv({users}){
+    const [filteredData, setFilteredData] = useState(data);
+
+    const handleSearch = (searchTerm) => {
+        const filteredResults = data.filter((item) =>
+          item.firstname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.lastname.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredData(filteredResults);
+    };
+
     return (
         <div className='content'>
-            <SearchInbox />    
-            {users.map((user, index) => {
+            <div className="searchInbox">
+                <SearchBar onSearch={handleSearch} />
+            </div>
+            {filteredData.map((user, index) => {
                 if(user.messages[user.messages.length-1].unread){
-                    return <GreyDiv className="unread" key={index} content={<Contact user={user}/>}/>;
+                    return <GreyDiv className="unread msgDiv" key={index} content={<Contact user={user}/>}/>;
                 }
                 else{
-                    return <GreyDiv key={index} content={<Contact user={user}/>}/>;
+                    return <GreyDiv className="msgDiv" key={index} content={<Contact user={user}/>}/>;
                 }
             })}
         </div>
@@ -64,9 +69,9 @@ function InboxDiv({users}){
 
 let data =
 [
-    {id: "1",firstname: "Apple", lastname: "Araerpple", messages: [{date: '2023/10/09 12:00', unread : true, content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}]},
+    {id: "1",firstname: "Raple", lastname: "JKrpple", messages: [{date: '2023/10/09 12:00', unread : true, content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}]},
     {id: "2",firstname: "Apple", lastname: "Arpple", messages: [{date: '2023/12/13 20:00', unread : false, content: "Lorem ipsum dolor sit amet"}]},
-    {id: "3",firstname: "Apple", lastname: "Araerppeeee", messages: [{date: 1621861200000, unread : false, content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}]},
+    {id: "3",firstname: "Bcple", lastname: "UUUerppeeee", messages: [{date: 1621861200000, unread : false, content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}]},
 ]
 
 data = data.sort(function(a, b){
