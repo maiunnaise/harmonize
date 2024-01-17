@@ -4,10 +4,16 @@ import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
+import CheckLogin from '../components/checkLogin.js';
 
 function UserInfo({user}){
+    CheckLogin();
+
+    function logout(){
+        localStorage.removeItem("token");
+    }
     return (
-        <div className="content simpleContent">
+        <div className="simpleContent">
             <SimpleHeader />
             <div className='userPicName'>
                 <img src="../logo192.png" alt="profile"/>
@@ -31,6 +37,9 @@ function UserInfo({user}){
             <div className="userModifBtn">
                 <Link to="./edit">
                     <button>Modifier informations</button>
+                </Link>
+                <Link to="/login">
+                <button className='logout' onClick={logout}>Déconnexion</button>
                 </Link>
             </div>
         </div>

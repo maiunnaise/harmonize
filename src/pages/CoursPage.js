@@ -3,8 +3,10 @@ import './CoursPage.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import { useSearchParams, useParams } from 'react-router-dom'
+import CheckLogin from '../components/checkLogin.js';
 
 function Cours(){
+    CheckLogin();
     const [queryParameters] = useSearchParams()
     const {coursId} = useParams();
     //Donne le cours dont l'id est coursId

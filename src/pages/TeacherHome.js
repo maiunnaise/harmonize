@@ -4,6 +4,7 @@ import './TeacherHome.css';
 // import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
+import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 
 
 function Home({lessons, students}){
@@ -208,10 +209,18 @@ function sortStudents(students, lessons){
 
     return studentsOrder;
 }
-console.log(students, sortStudents(students, lessons) );
+// console.log(students, sortStudents(students, lessons) );
 students = sortStudents(students, lessons);
 
 export default function TeacherHome(){
+    // const [data, setData] = useState([]);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         await putAPI('seances/12',6,{"startAt": "2023-13-29T15:00:00Z","endAt": "2023-13-20T16:00:00Z"});
+    //     };
+
+    //     fetchData();
+    // }, []);
     return (
     <Home lessons={lessons} students={students}/>
     );

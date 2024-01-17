@@ -21,39 +21,43 @@ import {Library} from './pages/library.js';
 import PartitionReader from './pages/partitionReader.js';
 import AddPartition from './pages/addPartition.js';
 import Messages from './pages/Messages.js';
+import EditLesson from './pages/editLesson.js'; 
+import NotFound from './pages/notFound.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
     <BrowserRouter>
       <Routes>
 
-        <Route path="" element={<Layout />}>
+        <Route path="/" element={<Layout />}>
           <Route path="findTeacher" element={<FindTeachersPage />}/>
           <Route path="inbox" element={<Inbox />}/>
           <Route path="search" element={<SearchPage />}/>
           <Route path="cours" element={<CoursSearch />}/>
           <Route path="exercices" element={<ExercicesSearch />}/>
-          <Route path="homeTeacher" element={<TeacherHome />}/>
-          <Route path="home" element={<HomeStudent/>}/>
+          <Route path="teacher/home" element={<TeacherHome />}/>
+          <Route path="student/home" element={<HomeStudent/>}/>
           <Route path="library" element={<Library/>}/>
           <Route path="addPartition" element={<AddPartition/>}/>
-          <Route path="/" element={<HomeStudent />}/>
+          <Route path="home" element={<Layout />}/>
         </Route>
         <Route path="/user" element={<User />}/>
         <Route path="/user/edit" element={<EditUser />}/>
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />
-        <Route path="/teacherLessons/:lessonId" element={<TeacherLessons/>} />
+        <Route path="teacher/teacherLessons/:lessonId" element={<TeacherLessons/>} />
         <Route path="/activity/:id" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/message/:id" element={<Messages />} />
+        <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
+
+        {/* /!\ à laisser en dernier /!\*/}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 
