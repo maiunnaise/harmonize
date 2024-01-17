@@ -16,7 +16,8 @@ function Login() {
   }, [navigate, isLoggedIn]);
 
   function getToken() {
-
+    let loginBtn = document.querySelector('.loginBtn');
+    let errorLogin = document.querySelector('.errorLogin');
     let username = document.querySelector('input[name="username"]').value;
     let password = document.querySelector('input[name="password"]').value;
     const requestOptions = {
@@ -28,10 +29,16 @@ function Login() {
       })
     };
 
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = 'Connexion en cours...';
+
     fetch('http://127.0.0.1:8741/api/login-check', requestOptions)
       .then(response => response.json())
       .then(data => {
         if(data.code === 401){
+          loginBtn.disabled = false;
+          loginBtn.innerHTML = 'Connexion';
+          errorLogin.style.display = 'block';
           return setisLoggedIn(false);
         }
         else{
@@ -58,9 +65,10 @@ function Login() {
           Mot de passe
           <input type="password" name="password" />
         </label>
+        <p className='errorLogin'>Adresse mail ou mot de passe erroné</p>
         <p>Mot de passe oublié ?</p>
         {/* <Link to="/home"> */}
-          <button value="Connexion" onClick={getToken}>Connexion</button>
+          <button value="Connexion" onClick={getToken} className='loginBtn'>Connexion</button>
         {/* </Link> */}
         <p>Créer un compte</p>
       </div>

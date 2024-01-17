@@ -67,9 +67,17 @@
     align-items: center;
 }
 
-.loginForm > p:first-of-type{
+.loginForm > p:nth-of-type(2){
     align-self: flex-end;
     text-decoration: underline;
+}
+
+.loginForm > .errorLogin{
+    color: #C92A2A;
+    display: none;
+    position: relative;
+    margin:0 auto;
+    font-weight: bold;
 }
 
 
