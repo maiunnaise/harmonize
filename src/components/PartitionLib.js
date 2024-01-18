@@ -1,13 +1,17 @@
 import './Partition.css';
 import { useEffect, useState } from "react";
-import {putAPI} from '../components/fetchAPI';
+import {putAPI, deleteAPI} from '../components/fetchAPI';
 
 export default function Partition({partition, style}){
     const [partitions] = useState([]);
 
 
-    const fetchData = async (idSheet, body) => {
+    const putData = async (idSheet, body) => {
         await putAPI(`vault-sheets/${idSheet}`,body);
+    };
+
+    const deleteData = async (idSheet) => {
+        await deleteAPI(`vault-sheets/${idSheet}`);
     };
 
 
@@ -15,12 +19,12 @@ export default function Partition({partition, style}){
         if(e.target.src.includes("colored")){
             e.target.src = "/logo/icons/star.png";
             e.target.parentElement.classList.toggle("fav");
-            fetchData(e.target.parentElement.id, {isFavorite: false});
+            putData(e.target.parentElement.id, {isFavorite: false});
         }
         else{
             e.target.src = "/logo/icons/star_colored.png";
             e.target.parentElement.classList.toggle("fav");
-            fetchData(e.target.parentElement.id, {isFavorite: true});
+            putData(e.target.parentElement.id, {isFavorite: true});
         }
 
         e.preventDefault();
@@ -36,6 +40,12 @@ export default function Partition({partition, style}){
         e.preventDefault();
     }
 
+    function deleteLib(e){
+        deleteData(e.target.parentElement.parentElement.id);
+        e.target.parentElement.parentElement.remove();
+        e.preventDefault();
+    }
+
     console.log(partitions);
     return(
         <div className={partition.isFavorite ? 'partition fav' : 'partition'} id={partition.id}>
@@ -44,11 +54,16 @@ export default function Partition({partition, style}){
                 <p>{partition.Sheet.difficulty} - {partition.Sheet.style} - {partition.Sheet.Instrument.Name}</p>
             </div>
             <p>{partition.Sheet.author}</p>
-            {style == "fav" && !partition.isFavorite ? (
-                <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
-                : style == "fav" && partition.isFavorite? (
-                    <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
-                : <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>}
+            <div className='libIcons'>
+                {style == "fav" && !partition.isFavorite ? (
+                    <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
+                    : style == "fav" && partition.isFavorite? (
+                        <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
+                    : <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>
+                }
+                <img src="/logo/icons/trash-bin.png" alt="delete" onClick={deleteLib}/>
+            </div>
+            
         </div>
     )
 }

@@ -1,51 +1,38 @@
 import './Partition.css';
 import { useEffect, useState } from "react";
-import {putAPI} from '../components/fetchAPI';
+import {getAPI, postAPI} from '../components/fetchAPI';
 
 export default function Partition({partition}){
 
-    // const [partition, setPartition] = useState([]);
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         if (activity && activity.Sheet){
-    //             console.log(activity.Sheet.id);
-    //             await getAPI(`sheets/${activity.Sheet.id}`, setPartition);
-    //         }
+    const [addPartition, setAddPartition] = useState([]);
+    const [vaultSheets, setVaultSheets] = useState([]);
+    const postPart = async (body) => {
+        await postAPI(`vault-sheets`,setAddPartition,body);
+    };
 
-    //         await getAPI(`sheets/${activity.Sheet.id}`, setPartition);
-            
-    //     };
+    useEffect(() => {
+        const fetchVault = async () => {
+            await getAPI(`vault-sheets`,setVaultSheets);
+        };
 
-    //     fetchData();
-    // }, []);
+        fetchVault();
+    }, []);
 
-
-    // function addFav(e){
-    //     if(e.target.src.includes("colored")){
-    //         e.target.src = "/logo/icons/star.png";
-    //         e.target.parentElement.classList.toggle("fav");
-    //         fetchData(e.target.parentElement.id, {isFavorite: false});
-    //     }
-    //     else{
-    //         e.target.src = "/logo/icons/star_colored.png";
-    //         e.target.parentElement.classList.toggle("fav");
-    //         fetchData(e.target.parentElement.id, {isFavorite: true});
-    //     }
-
-    //     e.preventDefault();
-    // }
+    let isInVault = false;
+    vaultSheets.map((vaultSheet) => {
+        if(vaultSheet.Sheet.id == partition.id){
+            isInVault = true;
+        }
+    });
 
     function addLib(e){
         if(e.target.src.includes("add")){
             e.target.src = "/logo/icons/check.png";
+            postPart({idSheet: e.target.parentElement.parentElement.id});
         }
-        else{
-            e.target.src = "/logo/icons/add.png";
-        };
         e.preventDefault();
     }
 
-    // console.log(partitions);
     return(
         <div id={partition.id} className='partition'>
             <div className='partitionDesc'>
@@ -53,7 +40,14 @@ export default function Partition({partition}){
                 <p>{partition.difficulty} - {partition.style} - {partition.Instrument.Name}</p>
             </div>
             <p>{partition.author}</p>
-            <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>
+            <div className='libIcons'>
+                {isInVault ? (
+                    <img src="/logo/icons/check.png" alt="inVault"/>) 
+                    : (
+                    <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>)
+                }
+                
+            </div>
         </div>
     )
 }
