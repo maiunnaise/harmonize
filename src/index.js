@@ -47,7 +47,7 @@ root.render(
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />
         <Route path="teacher/teacherLessons/:lessonId" element={<TeacherLessons/>} />
-        <Route path="/activity/:id" element={<Activity/>}/>
+        <Route path="/activity/:idCourse/:idAct" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/login" element={<Login />} />

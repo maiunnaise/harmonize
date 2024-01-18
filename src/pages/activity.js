@@ -1,6 +1,5 @@
 import React from 'react';
 import { useParams } from "react-router-dom";
-import Menu from '../components/Menu';
 import Partition from '../components/Partition';
 import GreyDiv from '../components/GreyDiv';
 import './activity.css';
@@ -8,59 +7,76 @@ import HistoryButton from '../components/HistoryButton';
 import SimpleHeader from '../components/simpleHeader';
 import { Link } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin';
-
-const activities ={
-    id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo",
-    description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ero",
-    teacher :{
-        name:"Dupont", gender:"male"
-    },
-    partition: {
-        id:"0", name : "Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart"
-    }
-}
-
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { getAPI } from '../components/fetchAPI';
 
 
 function Activity(){
     CheckLogin();
+    let { idCourse, idAct } = useParams();
 
-    let { id } = useParams();
-    //ça sert à rien maintenant mais c'est pour récup et appeler l'api
+    const [activities, setActivities] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI(`cours/${idCourse}/activities/${idAct}`, setActivities);
+
+        };
+
+        fetchData();
+    }, []);
 
     return(
         <>
         <div className="simpleContent Activity">
             <SimpleHeader/>
             <h1>Exercice</h1>
-            <ActivityTotal activity={activities}/>
+            {activities!=[] ? <ActivityTotal activity={activities}/> : <p>Chargement...</p>}
             <HistoryButton buttonText="Historique d'activités"/>
         </div>
         </>
-        
+
 
     )
 }
 
 function ActivityDesc({activity}){
+
+    const [partition, setPartition] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            if (activity && activity.Sheet ){
+                await getAPI(`sheets/${activity.Sheet.id}`, setPartition);
+            }
+            
+        };
+
+        fetchData();
+    }, [activity]);
+
     return(
         <div className="activityDesc">
-            <h2>{activity.name}</h2>
-            <p>pour le {activity.dueAt}</p>
-            <Partition partition={activity.partition}/>
-            <p>{activity.description}</p>
-            <Link to={`/play/${activity.partition.id}`}>
-            <button>Jouer</button>
-            </Link>
+            <h2>{activity.title}</h2>
+            {/* <p>pour le {activity.dueAt}</p> */}
+            {partition && partition.id ?
+                <Partition partition={partition}/>
+            : null}
+            <p>{activity.content}</p>
+            {activity.Sheet && activity.Sheet.id ?
+                <Link to={`/play/${activity.Sheet.id}`}>
+                    <button>Jouer</button>
+                </Link>
+            : null}
         </div>
     )
 }
 
 function ActivityTotal({activity}){
+    
     return(
         <>
         <GreyDiv content={<ActivityDesc activity={activity}/>}/>
-        {activity.teacher.gender =="male" ? <p className='ActTeach'>De M.   {activity.teacher.name}</p> : <p className='ActTeach'>De Mme. {activity.teacher.name}</p>}
+        {/* {activity.teacher.gender =="male" ? <p className='ActTeach'>De M.   {activity.teacher.name}</p> : <p className='ActTeach'>De Mme. {activity.teacher.name}</p>} */}
         </>
     )
 }

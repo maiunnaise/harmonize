@@ -3,82 +3,103 @@ import PurpleDiv from '../components/PurpleDiv';
 import GreyDiv from '../components/GreyDiv';
 import { Link } from 'react-router-dom';
 import HistoryButton from '../components/HistoryButton';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import { getAPI } from '../components/fetchAPI';
+
+function getNextClass(seances){
+    let today = Date.now();
+    seances = Array.from(seances);
+    let nextClass;
+    seances.map((seance) => {
+        let startAt = Date.parse(seance.startAt);
+        let endAt = Date.parse(seance.endAt);
+
+        if (today < startAt && today < endAt){
+            return nextClass = seance;
+        }
+    });
+    return nextClass;
+}
+
+function formatDate(date, param){
+    let format;
+    if(param == "date"){
+        format = new Date(date);
+        format = format.toLocaleDateString('fr-FR', { month: 'numeric', day: 'numeric', year: 'numeric'});
+    }
+    else if(param == "time"){
+        format = date.split("T")[1];
+        let matchFormat = format.match(/^(\d{2}:\d{2})/);
+        format = matchFormat ? matchFormat[1] : null;
+    }
+    
+
+    return format;
+};
 
 function Course({course}){
+
+    let nextClass = getNextClass(course.seances);
     return (
         <div className='courseContent'>
-            <h2 className='CourseName coursePadding'>{course.name} <span style={{color:"#B0B0B0"}}>- {course.difficulty}</span></h2>
-            <PurpleDiv content={<Seance seance= {course.nextClass}/>}/>
-            {course.teacher.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.teacher.name}</p> : <p className='CourseTeach coursePadding'>Mme. {course.teacher.name}</p>}
+            <h2 className='CourseName coursePadding'>{course.Instrument.Name} <span style={{color:"#B0B0B0"}}>- {course.difficulty}</span></h2>
+            <PurpleDiv content={<Seance seance= {nextClass}/>}/>
+            {course.Teacher.User.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.Teacher.User.nom}</p> : <p className='CourseTeach coursePadding'>Mme. {course.Teacher.User.nom}</p>}
             <h3 className='CourseActivities coursePadding'>Activités</h3>
-            {course.exercices.map((exercice) => {
-                return <Actvity activity={exercice}/>;
+            {nextClass.activities.map((exercice) => {
+                let dueAt = formatDate(nextClass.startAt, 'date');
+                return <Actvity activity={exercice} dueAt={dueAt} course={course.id}/>;
             })}
         </div>
     );
 }
 
 function Seance({seance}){
+    let date = new Date(seance.startAt);
+    date = date.toLocaleDateString('fr-FR', {weekday: 'long', month: 'long', day: 'numeric'});
+    date = date.replace(/^(.)/, (match) => match.toUpperCase());
+
+    
+    let startAt = formatDate(seance.startAt, 'time');
+
+    let endAt = formatDate(seance.endAt, 'time');
     return (
         <div className='Seance'>
-            <h2>{seance.date}</h2>
-            <p>{seance.startedAt} - {seance.endedAt}</p>
+            <h2>{date}</h2>
+            <p>{startAt} - {endAt}</p>
             <p className='SeanceDesc'>{seance.description}</p>
         </div>
     );
 }
 
-function Actvity({activity}){
+function Actvity({activity, dueAt, course}){
+
     return(
         <div className='courseActivity'>
-            <div className={activity.status =="toDo" ? "redAct": "greenAct"}></div>
+            <div className={activity.status =="toDo" ? "redAct": activity.status=="finished" ? "greenAct" :activity.status== "review"? "orangeAct" : null}></div>
             <div className='courseActivityLine'>
-                <p>{activity.name}</p>
-                <p>pour le {activity.dueAt}</p>
+                <p>{activity.title}</p>
+                <p>pour le {dueAt}</p>
             </div>
-            <Link to={`/activity/${activity.id}`} className='courseActivityButton'> {/* //faire passer l'id de l'activité */}
+            <Link to={`/activity/${course}/${activity.id}`} className='courseActivityButton'> {/* //faire passer l'id de l'activité */}
                 <button>Voir</button>
             </Link>
         </div>
     )
 }
 
-const courses = [
-    {name:"Guitare", difficulty:"Débutant", 
-        teacher:{
-            name:"Dupont", gender:"male"
-        },
-        nextClass:{
-            date:"13-12-2023", startedAt :"9h30", endedAt:"11h30", description :"Travail sur le solfège lalalala"
-        },
-        exercices:[
-            {
-                id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo"
-            },
-            {
-                id:1, name:"Jouer partition 2", dueAt:"14/12/2023", status:"done"
-            }
-        ]
-    },
-    {name:"Basse", difficulty:"Débutant", 
-        teacher:{
-            name:"Patate", gender:"female"
-        },
-        nextClass:{
-            date:"13-12-2023", startedAt :"9h30", endedAt:"11h30", description :"Travail sur le solfège lalalala"
-        },
-        exercices:[
-            {
-                id:2, name:"Jouer partition 3", dueAt:"14/12/2023", status:"toDo"
-            },
-            {
-                id:3, name:"Jouer partition 4", dueAt:"14/12/2023", status:"done"
-            }
-        ]
-    }
-];
 
 export default function HomeStudent(){
+    const [courses, setCourses] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('cours', setCourses);
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className="homeStudent content">
             {courses.map((course) => {

@@ -13,7 +13,7 @@ export default function PartitionReader() {
     useEffect(() => {
         container = document.getElementById("partitionReader");
         embed = new Embed(container,{
-          score: "65819d88ddd3ea4b0e6c45a0",
+          score: "65a8eedd3b7e5a69ff829517",
           embedParams:{
             appId: "65819d1caf8624704c5475eb",
             mode: "edit",
@@ -22,7 +22,7 @@ export default function PartitionReader() {
             branding: false,
             controlsPrint: false,
             themePrimary: "#845583",
-            sharingKey : "2724fa2b851f2792927f33a586afe6cdae7a5935dabc8893a912d8af7d0ee6fc7a17f7e7487b79e8a9b840015eefb738678887c73dddc3d48bcda60ab2d8688b"
+            sharingKey : "0b2ebb6dfdef38d198563d648ceabfa01e60b71782bcabfa8e081309bfd4ba9f0e56cbbe1d102127e268084ea9fe168a8183768683e7ed76f4b74efa5611fa9e"
           }
         });
     }, []);

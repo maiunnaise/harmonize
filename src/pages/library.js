@@ -1,5 +1,5 @@
 import './library.css';
-import Partition from '../components/Partition';
+import Partition from '../components/PartitionLib';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
