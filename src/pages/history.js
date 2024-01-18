@@ -2,37 +2,29 @@ import {ActivityTotal} from "./activity"
 import './history.css'
 import SimpleHeader from "../components/simpleHeader"
 import CheckLogin from "../components/checkLogin"
-
-const activities =[
-    {
-        id:0, name:"Jouer partition 1", dueAt:"14/12/2023", status:"toDo",
-        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ero",
-        teacher :{
-            name:"Dupont", gender:"male"
-        },
-        partition: {
-            name : "Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart"
-        }
-    },
-    {
-        id:1, name:"Jouer partition 2", dueAt:"14/12/2023", status:"toDo",
-        description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ero",
-        teacher :{
-            name:"Patate", gender:"female"
-        },
-        partition: {
-            name : "Partition tripleS", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart"
-        }
-    }
-]
+import { useParams } from "react-router-dom"
+import { useEffect, useState } from "react"
+import { getAPI } from "../components/fetchAPI"
 
 
 export default function History(){
     CheckLogin();
+
+    let { idCourse } = useParams();
+
+    const [activities, setActivities] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI(`cours/${idCourse}/activities`, setActivities);
+
+        };
+
+        fetchData();
+    }, []);
     return(
         <div className="History simpleContent">
             <SimpleHeader/>
-            <h1>Historique d'activités</h1>
+            <h1>Historique d'activités pour ce cours</h1>
             {activities.map((activity,i) => {
                 return (
                 <>

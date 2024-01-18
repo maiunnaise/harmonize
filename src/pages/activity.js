@@ -32,7 +32,7 @@ function Activity(){
             <SimpleHeader/>
             <h1>Exercice</h1>
             {activities!=[] ? <ActivityTotal activity={activities}/> : <p>Chargement...</p>}
-            <HistoryButton buttonText="Historique d'activités"/>
+            <HistoryButton buttonText="Historique d'activités" idCourse={idCourse}/>
         </div>
         </>
 
