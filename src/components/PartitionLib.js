@@ -19,12 +19,12 @@ export default function Partition({partition, style}){
         if(e.target.src.includes("colored")){
             e.target.src = "/logo/icons/star.png";
             e.target.parentElement.classList.toggle("fav");
-            putData(e.target.parentElement.id, {isFavorite: false});
+            putData(e.target.parentElement.parentElement.id, {isFavorite: false});
         }
         else{
             e.target.src = "/logo/icons/star_colored.png";
             e.target.parentElement.classList.toggle("fav");
-            putData(e.target.parentElement.id, {isFavorite: true});
+            putData(e.target.parentElement.parentElement.id, {isFavorite: true});
         }
 
         e.preventDefault();

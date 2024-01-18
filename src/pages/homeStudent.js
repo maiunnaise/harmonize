@@ -2,7 +2,6 @@ import './homeStudent.css';
 import PurpleDiv from '../components/PurpleDiv';
 import GreyDiv from '../components/GreyDiv';
 import { Link } from 'react-router-dom';
-import HistoryButton from '../components/HistoryButton';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { getAPI } from '../components/fetchAPI';
@@ -105,8 +104,6 @@ export default function HomeStudent(){
             {courses.map((course) => {
                 return <GreyDiv content={<Course course={course} />}/>;
             })}
-
-            <HistoryButton buttonText={"Historique d'activités"}/>
         </div>
     );
 }

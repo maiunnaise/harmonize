@@ -51,7 +51,6 @@ function FindTeachersDiv({teachers}){
             {filteredData.map((teacher, index) => {
                 return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} />}/>;
             })}
-            <HistoryButton buttonText="Historique d'activités" />
         </div>
     )
 }
