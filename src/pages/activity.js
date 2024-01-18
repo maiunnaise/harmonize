@@ -45,7 +45,7 @@ function ActivityDesc({activity}){
     const [partition, setPartition] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
-            if (activity && activity.Sheet ){
+            if (activity && activity.Sheet!=null ){
                 await getAPI(`sheets/${activity.Sheet.id}`, setPartition);
             }
             
@@ -62,7 +62,7 @@ function ActivityDesc({activity}){
                 <Partition partition={partition}/>
             : null}
             <p>{activity.content}</p>
-            {activity.Sheet && activity.Sheet.id ?
+            {activity.Sheet && activity.Sheet!=null ?
                 <Link to={`/play/${activity.Sheet.id}`}>
                     <button>Jouer</button>
                 </Link>

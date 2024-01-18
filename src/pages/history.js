@@ -5,7 +5,6 @@ import CheckLogin from "../components/checkLogin"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getAPI } from "../components/fetchAPI"
-import { act } from "react-dom/test-utils"
 
 
 export default function History(){
@@ -27,9 +26,7 @@ export default function History(){
             <SimpleHeader/>
             <h1>Historique d'activités pour ce cours</h1>
             {activities.map((activity,i) => {
-                if(activity.status != "finished"){
-                    return (<p className="noHistory">Pas d'historique disponible</p>)
-                }else{
+                if (activity.status == "finished"){
                     return (
                         <>
                             <ActivityTotal activity={activity}/>
@@ -37,7 +34,6 @@ export default function History(){
                         </>
                     );
                 }
-                
             })}
         </div>
     )
