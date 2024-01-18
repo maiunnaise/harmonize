@@ -32,7 +32,7 @@ function Login() {
     loginBtn.disabled = true;
     loginBtn.innerHTML = 'Connexion en cours...';
 
-    fetch('http://127.0.0.1:8741/api/login-check', requestOptions)
+    fetch('https://harmonize.mael-mouquet.fr/api/login-check', requestOptions)
       .then(response => response.json())
       .then(data => {
         if(data.code === 401){

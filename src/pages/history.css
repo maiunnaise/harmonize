@@ -2,7 +2,10 @@
     border: 1px solid #474747;
     margin: 1em;
 }
-/* 
-.History > h1{
-    margin : 0.8em;
-} */
+
+.noHistory{
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    top:10vh;
+}
