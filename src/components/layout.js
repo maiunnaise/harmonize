@@ -13,6 +13,7 @@ function Layout() {
 
     function coloredIcons(location){
         let icon;
+        let icons;
 
         if(location.includes("home")){
             icon = document.querySelector(".Menu .home");
@@ -30,17 +31,26 @@ function Layout() {
             icon = document.querySelector(".Menu .message");
             icon.src = "/logo/icons/speech-bubble-colored.png";
         }
+        else{
+            icons = document.querySelectorAll(`.Menu img:not(.Teachimg)`);
 
-        let icons = document.querySelectorAll(`.Menu img:not(.Teachimg, .${icon.className})`);
+            icons = Array.from(icons);
+            icons.map(icon => {
+                icon.src = icon.src.replace("-colored", "");
+            })
+            return;
+        }
+
+        icons = document.querySelectorAll(`.Menu img:not(.Teachimg, .${icon.className})`);
 
         icons = Array.from(icons);
         icons.map(icon => {
-        icon.src = icon.src.replace("-colored", "");
+            icon.src = icon.src.replace("-colored", "");
         })
     }
 
     useEffect(() => {
-        if(location.pathname.includes("home") || location.pathname == "/library" || location.pathname == "/addPartition" || location.pathname == "/search" || location.pathname == "/inbox"  || location.pathname === "/cours" || location.pathname === "/exercices"){
+        if(location.pathname.includes("home") || location.pathname == "/library" || location.pathname == "/addPartition" || location.pathname == "/search" || location.pathname == "/inbox"  || location.pathname === "/cours" || location.pathname === "/exercices" || location.pathname === "/findTeacher"){
             coloredIcons(location.pathname);
         }
     }, [location]);
@@ -48,7 +58,6 @@ function Layout() {
     return (
         <div className="Container">
         <Header />
-        {/* mettre fonction qui verif token et role */}
         <Outlet />
         <Menu />
         </div>
