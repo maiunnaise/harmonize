@@ -67,10 +67,10 @@ function Login() {
         </label>
         <p className='errorLogin'>Adresse mail ou mot de passe erroné</p>
         <p>Mot de passe oublié ?</p>
-        {/* <Link to="/home"> */}
-          <button value="Connexion" onClick={getToken} className='loginBtn'>Connexion</button>
-        {/* </Link> */}
-        <p>Créer un compte</p>
+        <button value="Connexion" onClick={getToken} className='loginBtn'>Connexion</button>
+        <Link to="/register">
+          <p className='register'>Créer un compte</p>
+        </Link>
       </div>
     </div>
   );

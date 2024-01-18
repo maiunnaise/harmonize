@@ -18,7 +18,7 @@
     gap: 5em;
 }
 
-.loginForm{
+.loginForm, .registerForm{
     background-color: #3D3D3D;
     width: 90vw;
     height: fit-content;
@@ -81,8 +81,8 @@
 }
 
 
-.loginForm > p:last-of-type{
-    align-self: center;
+.loginForm .register{
+    text-align: center;
     text-decoration: underline;
     padding-top: .5em;
 }

@@ -1,0 +1,62 @@
+.registerForm{
+    position: relative;
+    margin:0 auto;
+}
+
+.registerForm input{
+    background-color: #474747;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+}
+
+.registerForm label{
+    display: flex;
+    flex-direction: column;
+    gap:0.3em;
+    font-weight: bold;
+}
+
+.inlineForm > label{
+    width: 45%;
+}
+
+.inlineForm{
+    display: flex;
+    justify-content: space-between;
+}
+
+.details select{
+    background-color: #474747;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+}
+
+.registerBtn{
+    background-color: #845583;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 1em;
+    width: 100%;
+    align-self: center;
+}
+
+.registerForm label p > span, .error{
+    color: #C92A2A;
+    font-weight: bold;
+}
+
+.error{
+    display: none;
+    position: relative;
+    margin:0 auto;
+    text-align: center;
+}
+
+.registerForm .userCity{
+    display: none;
+}
