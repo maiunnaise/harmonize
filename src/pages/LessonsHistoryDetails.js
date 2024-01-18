@@ -13,7 +13,6 @@ function Lesson(lessonId){
     lessons.map((l, index) => {
         console.log(l.id, lessonId.lessonId);
         if(l.id == lessonId.lessonId){
-            console.log("aaa");
             lesson = l;
         }
     });
@@ -74,21 +73,8 @@ function Lesson(lessonId){
                             </div>
                         )) : null}
                     </div>
-                    <div className='buttons'>
-                            <Link to={`/editLesson/${lesson.id}`}>
-                                <button>Modifier le cours</button>
-                            </Link>
-                        <Link to={`/message/${student.id}`} className='inboxLink'>
-                            <button>Message</button>
-                        </Link>
-                    </div>
                 </div>
             }/>
-            <div className="lessonStudentHistoryBtn">
-                <Link to={`../teacher/LessonsHistory/${student.id}`}>
-                    <button>Historique</button>
-                </Link>
-            </div>
         </div>
         </>
     )
@@ -177,7 +163,7 @@ let lessons = [
 ]
 
 
-export default function TeacherLessons(){
+export default function LessonsHistoryDetails(){
     return (
         <Lesson lessonId={useParams().lessonId} />
     );
