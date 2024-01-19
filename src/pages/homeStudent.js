@@ -101,7 +101,7 @@ export default function HomeStudent(){
 
     return (
         <div className="homeStudent content">
-            {courses.map((course) => {
+            {courses.length ==0 ? <p className='emptyCourse'>Pas de cours disponible</p> : courses.map((course) => {
                 return <GreyDiv content={<Course course={course} />}/>;
             })}
         </div>
