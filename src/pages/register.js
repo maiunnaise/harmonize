@@ -1,39 +1,9 @@
 import SimpleHeader from "../components/simpleHeader"
 import "./register.css"
+import { useEffect, useState } from "react";
+import { getAPI } from "../components/fetchAPI";
+import { useNavigate } from "react-router-dom";
 
-
-// function checkData() {
-//     let valid;
-//     let datas = document.querySelectorAll('input, select');
-//     let error = document.querySelector('.error');
-//     let role = document.querySelector('select[name="role"]').value;
-//     datas.forEach(data => {
-//         if (data.name === "city" && data.value ==="" && role === "student") {
-//             error.style.display = 'none';
-//         }
-//         else if (data.value === "") {
-//             error.style.display = 'block';
-//             console.log(valid);
-//             return valid = false;
-//         }
-//         else {
-//             error.style.display = 'none';
-//         }
-//         if (data.name === 'email') {
-//             if (!isValidEmail(data.value)) {
-//                 error.style.display = 'block';
-//                 console.log(valid);
-//                 return valid = false;
-//             }
-//             else {
-//                 error.style.display = 'none';
-//             }
-//         }
-//         console.log(valid);
-//         return valid = true;
-//     });
-
-// }
 
 function displayCity(e) {
     if (e.target.value === 'teacher') {
@@ -51,6 +21,7 @@ function isValidEmail(email) {
 }
 
 export default function Register() {
+    const [validData, setValidData] = useState();
 
     function checkData() {
         const datas = document.querySelectorAll('input, select');
@@ -75,15 +46,24 @@ export default function Register() {
         }
     
         error.style.display = isValid ? 'none' : 'block';
-        return isValid;
-    }
-    
-    
-
-    function isValidData(){
-        console.log(checkData());
+        setValidData(isValid);
     }
 
+
+    const [partitions, setPartitions] = useState([]);
+    const navigate = useNavigate();
+    useEffect(() => {
+        console.log(validData);
+        const fetchData = async () => {
+            await getAPI('vault-sheets', setPartitions);
+            navigate('/login');
+        };
+    
+        if (validData) {
+            fetchData();
+        }
+    }, [validData]);
+    
 
     return (
         <div className="simpleContent">
@@ -131,7 +111,7 @@ export default function Register() {
                     <input type="text" name="city" />
                 </label>
                 <p className="error">Veuillez renseigner tous les champs correctement</p>
-                <button className="registerBtn" onClick={isValidData}>Créer un compte</button>
+                <button className="registerBtn" onClick={checkData}>Créer un compte</button>
             </div>
         </div>
     )
