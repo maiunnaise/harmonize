@@ -5,13 +5,10 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import {getAPI} from '../components/fetchAPI.js';
 
 function Lesson(lessonId){
     CheckLogin();
     let lesson, student;
-
-
     console.log(lessonId.lessonId);
     lessons.map((l, index) => {
         console.log(l.id, lessonId.lessonId);
@@ -70,27 +67,14 @@ function Lesson(lessonId){
                                         <span key={index} className={`${exercice.state}`}></span>
                                         <p>{exercice.desc}</p>
                                     </div>
-                                    <Link to={`../exercices/${lesson.id}/${exercice.id}`} ><button className={`${exercice.state}Btn`}>Voir</button></Link>
+                                    <Link to={`../exercices/${exercice.id}`} ><button className={`${exercice.state}Btn`}>Voir</button></Link>
                                 </div>
                                 <hr></hr>
                             </div>
                         )) : null}
                     </div>
-                    <div className='buttons'>
-                            <Link to={`../teacher/editLesson/${lesson.id}`}>
-                                <button>Modifier le cours</button>
-                            </Link>
-                        <Link to={`/message/${student.id}`} className='inboxLink'>
-                            <button>Message</button>
-                        </Link>
-                    </div>
                 </div>
             }/>
-            <div className="lessonStudentHistoryBtn">
-                <Link to={`../teacher/LessonsHistory/${student.id}`}>
-                    <button>Historique</button>
-                </Link>
-            </div>
         </div>
         </>
     )
@@ -179,7 +163,7 @@ let lessons = [
 ]
 
 
-export default function TeacherLessons(){
+export default function LessonsHistoryDetails(){
     return (
         <Lesson lessonId={useParams().lessonId} />
     );
