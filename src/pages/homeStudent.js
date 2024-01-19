@@ -92,27 +92,33 @@ function Actvity({activity, dueAt, course}){
 
 export default function HomeStudent(){
     const [courses, setCourses] = useState([]);
-    const [instrumentUser, setInstrumentUser] = useState([]);
+    const [instrumentUser, setInstrumentUser] = useState(['test']);
     const [instrument, setInstrument] = useState([]);
+    
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('cours', setCourses);
             await getAPI('user-instruments', setInstrumentUser);
         };
+
+
+        fetchData();
+
+    }, []);
+
+    useEffect(() => {
         const fetchInstruments = async () => {
             await getAPI('instruments', setInstrument);
         };
-
-        fetchData();
+        console.log(instrumentUser);
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';
             fetchInstruments();
         }
+        
+    }, [instrumentUser]);
 
-    }, []);
-
-    console.log(instrument);
 
     return (
         <div className="homeStudent content">

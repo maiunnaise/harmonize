@@ -1,5 +1,3 @@
-import { getAPI } from "./fetchAPI";
-import { useState } from 'react';
 import './emptyInstruments.css';
 
 export default function EmptyInstruments({instrument}) {
@@ -20,18 +18,17 @@ export default function EmptyInstruments({instrument}) {
         for (const instrument of instruments) {
             instrumentsId.push(instrument.id);
         }
+        console.log(instrumentsId);
         const requestOptions = {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(instrumentsId)
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            body: JSON.stringify({"instrumentList":instrumentsId})
         };
-        console.log(requestOptions.body);
-        // fetch('https://harmonize.mael-mouquet.fr/api/user-instruments', requestOptions)
-        // .then(response => response.json())
-        // .then(data => {
-        //     closePopUp();
-        // });
-        closePopUp();
+        fetch('https://harmonize.mael-mouquet.fr/api/user-instruments', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            closePopUp();
+        });
     }
 
     return(
