@@ -1,19 +1,8 @@
 import SimpleHeader from "../components/simpleHeader"
 import "./register.css"
 import { useEffect, useState } from "react";
-import { getAPI } from "../components/fetchAPI";
+import { postAPI } from "../components/fetchAPI";
 import { useNavigate } from "react-router-dom";
-
-
-function displayCity(e) {
-    if (e.target.value === 'teacher') {
-        document.querySelector('.userCity').style.display = 'flex';
-    }
-    else {
-        document.querySelector('.userCity').style.display = 'none';
-    }
-
-}
 
 
 function isValidEmail(email) {
@@ -26,16 +15,17 @@ export default function Register() {
     function checkData() {
         const datas = document.querySelectorAll('input, select');
         const error = document.querySelector('.error');
-        const role = document.querySelector('select[name="role"]').value;
+        // const role = document.querySelector('select[name="role"]').value;
         let isValid = true;
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: {}
+        };
     
         for (const data of datas) {
             const { name, value } = data;
-    
-            if (name === "city" && value === "" && role === "student") {
-                continue; // Skip this iteration
-            }
-    
+        
             if (value === "") {
                 isValid = false;
                 break; 
@@ -43,29 +33,36 @@ export default function Register() {
                 isValid = false;
                 break; 
             }
+            else{
+                requestOptions.body[name] = value;
+
+            }
         }
     
         error.style.display = isValid ? 'none' : 'block';
         // setValidData(isValid);
         if(isValid){
-            fetchData();
+            requestOptions.body = JSON.stringify(requestOptions.body);
+            fetchData(requestOptions);
         }
     }
 
 
-    const [partitions, setPartitions] = useState([]);
     const navigate = useNavigate();
-    // useEffect(() => {
-        // console.log(validData);
-        const fetchData = async () => {
-            await getAPI('vault-sheets', setPartitions);
-            navigate('/login');
-        };
-    
-        // if (validData) {
-        //     fetchData();
-        // }
-    // }, []);
+    const fetchData = async (requestOptions) => {
+        await fetch('https://harmonize.mael-mouquet.fr/api/register', requestOptions)
+        .then(response => response.json())
+        .catch((error) => {
+            return; 
+        })
+        .then(data => {
+            console.log(data);
+
+            navigate('/login', { state: { fromRegisterPage: true } });
+                
+        })
+            
+    };
     
 
     return (
@@ -76,11 +73,11 @@ export default function Register() {
                 <div className="inlineForm userNames">
                     <label>
                         <p>Nom <span>*</span></p>
-                        <input type="text" name="name" />
+                        <input type="text" name="nom" />
                     </label>
                     <label>
                         <p>Prénom <span>*</span></p>
-                        <input type="text" name="firstname" />
+                        <input type="text" name="prenom" />
                     </label>
                 </div>
                 <label>
@@ -94,7 +91,7 @@ export default function Register() {
                 <div className="inlineForm details">
                     <label>
                         <p>Votre rôle <span>*</span></p>
-                        <select name="role" onChange={displayCity}>
+                        <select name="role">
                             <option value="">Votre rôle</option>
                             <option value="student">Élève</option>
                             <option value="teacher">Professeur</option>
@@ -109,10 +106,6 @@ export default function Register() {
                         </select>
                     </label>
                 </div>
-                <label className="userCity">
-                    <p>Ville <span>*</span></p>
-                    <input type="text" name="city" />
-                </label>
                 <p className="error">Veuillez renseigner tous les champs correctement</p>
                 <button className="registerBtn" onClick={checkData}>Créer un compte</button>
             </div>

@@ -1,11 +1,23 @@
 import './Login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 
 function Login() {
   const navigate = useNavigate();
   const [isLoggedIn, setisLoggedIn] = useState(false);
+
+  const {state} = useLocation();
+
+  
+  useEffect(() => {
+    const {fromRegisterPage}= state || {};
+    if(fromRegisterPage){
+      let overlay = document.querySelector('.overlay');
+      overlay.style.display = 'block';
+    }
+  });
+  
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -49,11 +61,25 @@ function Login() {
     );
   }
 
+  function closePopUp(){
+    let overlay = document.querySelector('.overlay');
+    overlay.style.display = 'none';
+  }
+
   return (
     <div className="Login">
       <div className="header">
         <img src="/logo/logo_harmonize.png" className="Login-logo" alt="logo" />
       </div>
+
+      <div className='overlay'>
+        <div className='popUpRegister'>
+          <p className='closePopUp' onClick={closePopUp}>X</p>
+          <h3>Compte créé avec succès !</h3>
+          <p>Vous pouvez vous connecter</p>
+        </div>
+      </div>
+      
 
       <div className='loginForm'>
         <h1>Connexion</h1>

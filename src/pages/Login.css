@@ -86,3 +86,39 @@
     text-decoration: underline;
     padding-top: .5em;
 }
+
+.popUpRegister{
+    position: absolute;
+    z-index:1 ;
+    background-color: #474747;
+    width: 70vw;
+    padding: 1em 1.5em;
+    border-radius: 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.popUpRegister > .closePopUp{
+    position: relative;
+    padding: 0.5em;
+    padding-bottom: 0.5em;
+    width: fit-content;
+    align-self: flex-end;
+    font-weight: bold;;
+}
+
+.Login .overlay{
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background:rgba(0, 0, 0, 0.8);
+    z-index:9999;
+    display: none;
+}
