@@ -4,23 +4,47 @@ import './CoursSearch.css';
 import GreyDiv from '../components/GreyDiv.js';
 import HistoryButton from '../components/HistoryButton.js';
 import SearchBar from '../components/SearchBar.js';
+import {getAPI} from '../components/fetchAPI.js';
 
-const allCategories = ['Solfège', 'Piano', 'Guitare', 'Batterie'];
+
 
 function Search(){
+
+    const [data, setData] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('cours-app?offset=5&limit=3', setData);
+        };
+
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        if (data.length > 0) {
+            setFilteredData(data);
+        }
+    }, [data]);
+
+    const cours =[];
+
+    data.map((coursData) => {
+        cours.push(coursData);
+    });
+    console.log(cours);
+
     const [filteredData, setFilteredData] = useState(cours);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
-
+    
     const handleSearch = (searchTerm, category) => {
         const filteredResults = cours.filter((item) =>
-          item.titre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.category.toLowerCase().includes(searchTerm.toLowerCase())
+          item.Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.Instrument.Name.toLowerCase().includes(searchTerm.toLowerCase())
         );
       
         const filteredByCategory = selectedCategory === 'All'
             ? filteredResults
-            : filteredResults.filter(item => item.category === selectedCategory);
+            : filteredResults.filter(item => item.Instrument.Name === selectedCategory);
       
         //Combine les deux filtres
         // const combinedFilteredData = category === undefined
@@ -34,11 +58,11 @@ function Search(){
         handleSearch('',category);
     }, [selectedCategory]);
     
-    const handleCategoryFilter = (category) => {
-        setSelectedCategory(category);
-        let selectedBtn = document.getElementById(category);
-        for (let i = 0; i < allCategories.length; i++) {
-            let btn = document.getElementById(allCategories[i]);
+    const handleCategoryFilter = (cours) => {
+        setSelectedCategory(cours.Instrument.Name);
+        let selectedBtn = document.getElementById(cours.Instrument.Name);
+        for (let i = 0; i < cours.length; i++) {
+            let btn = document.getElementById(cours.Instrument.Name[i]);
             if (btn !== selectedBtn) {
                 btn.classList.remove('active');
             }
@@ -58,12 +82,12 @@ function Search(){
         <div className="content CoursSearch">
             <SearchBar onSearch={handleSearch} />
             <div id='categoryFilter'>
-                {allCategories.map((category, index) => (
+                {cours.map((c, index) => (
                 <button
                     key={index}
-                    id={category}
-                    onClick={() => handleCategoryFilter(category)}
-                >{category}</button>
+                    id={c.Instrument.Name}
+                    onClick={() => handleCategoryFilter(c)}
+                >{c.Instrument.Name}</button>
                 ))}
             </div>
             {filteredData.map((cours, index) => (
@@ -71,9 +95,9 @@ function Search(){
                 <GreyDiv
                     content={
                     <div>
-                        <h2>{cours.titre} <span className="greyText"> · {cours.category} </span></h2>
+                        <h2>{cours.Title} <span className="greyText"> · {cours.Instrument.Name} </span></h2>
                         <p>{cours.desc}</p>
-                        <img src={cours.img} alt="cours illustration" />
+                        <img src="/img/cours-image.jpg" alt="cours illustration" />
                     </div>
                     }
                 />
@@ -82,13 +106,6 @@ function Search(){
         </div>
     )
 }
-
-let cours = [{id: 5, titre: "Les notes", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-category: "Solfège", img: "/img/cours-image.jpg"},
-{id: 3, titre: "Les accords", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-category: "Solfège", img: "/img/cours-image.jpg"},
-{id: 2, titre: "Les notes", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-category: "Piano", img: "/img/cours-image.jpg"}]
 
 export default function CoursSearch(){
     return (

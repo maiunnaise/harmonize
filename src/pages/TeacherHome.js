@@ -57,8 +57,6 @@ function Home({lessons, students}){
             }
         }
     }
-
-    // ToReviewBorder();
     
     //Après le rendu
     useEffect(() => {
@@ -76,7 +74,7 @@ function Home({lessons, students}){
                 }
 
                 return(
-                    <Link key={index} to={`/teacherLessons/${lesson.id}`}>
+                    <Link key={index} to={`../teacher/teacherLessons/${lesson.id}`}>
                         <GreyDiv
                             key={index}
                             content={
