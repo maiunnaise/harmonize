@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { getAPI } from '../components/fetchAPI';
+import EmptyInstruments from '../components/emptyInstruments';
 
 function getNextClass(seances){
     let today = Date.now();
@@ -91,17 +92,38 @@ function Actvity({activity, dueAt, course}){
 
 export default function HomeStudent(){
     const [courses, setCourses] = useState([]);
+    const [instrumentUser, setInstrumentUser] = useState(['test']);
+    const [instrument, setInstrument] = useState([]);
+    
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('cours', setCourses);
+            await getAPI('user-instruments', setInstrumentUser);
         };
 
+
         fetchData();
+
     }, []);
+
+    useEffect(() => {
+        const fetchInstruments = async () => {
+            await getAPI('instruments', setInstrument);
+        };
+        console.log(instrumentUser);
+        if(instrumentUser.length == 0){
+            let overlay = document.querySelector('.overlay');
+            overlay.style.display = 'block';
+            fetchInstruments();
+        }
+        
+    }, [instrumentUser]);
+
 
     return (
         <div className="homeStudent content">
-            {courses.map((course) => {
+            <EmptyInstruments instrument={instrument}/>
+            {courses.length ==0 ? <p className='emptyCourse'>Pas de cours disponible</p> : courses.map((course) => {
                 return <GreyDiv content={<Course course={course} />}/>;
             })}
         </div>

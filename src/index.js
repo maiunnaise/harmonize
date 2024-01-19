@@ -23,6 +23,7 @@ import AddPartition from './pages/addPartition.js';
 import Messages from './pages/Messages.js';
 import EditLesson from './pages/editLesson.js'; 
 import NotFound from './pages/notFound.js';
+import Register from './pages/register.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -51,6 +52,7 @@ root.render(
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history/:idCourse" element={<History/>}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/message/:id" element={<Messages />} />
         <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
 
