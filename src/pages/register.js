@@ -46,23 +46,26 @@ export default function Register() {
         }
     
         error.style.display = isValid ? 'none' : 'block';
-        setValidData(isValid);
+        // setValidData(isValid);
+        if(isValid){
+            fetchData();
+        }
     }
 
 
     const [partitions, setPartitions] = useState([]);
     const navigate = useNavigate();
-    useEffect(() => {
-        console.log(validData);
+    // useEffect(() => {
+        // console.log(validData);
         const fetchData = async () => {
             await getAPI('vault-sheets', setPartitions);
             navigate('/login');
         };
     
-        if (validData) {
-            fetchData();
-        }
-    }, [validData]);
+        // if (validData) {
+        //     fetchData();
+        // }
+    // }, []);
     
 
     return (
