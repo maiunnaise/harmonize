@@ -1,0 +1,31 @@
+
+.instrumentList{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    padding: 0.5em;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+.instrumentList > div{
+  border : 1px solid white;
+  padding: 0.2em 0.5em;
+  border-radius: 50px;
+}
+
+.instrumentList >.selectedInstrument{
+  background-color: #845583;
+  border-color: #845583;
+}
+
+.addInstrument{
+    background-color: #845583;
+    border: none;
+    padding: 0.5em 1em;
+    border-radius: 50px;
+    font-size: 1em;
+    font-weight: bold;
+    width: 100%;
+    align-self: center;
+}
