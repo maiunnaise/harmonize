@@ -1,30 +1,28 @@
 import './library.css';
-import Partition from '../components/Partition';
+import Partition from '../components/PartitionLib';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
+import { getAPI } from '../components/fetchAPI';
+import { useState } from 'react';
 
-const partitions =[
-    {
-        id:0, name:"Partition tartampion", difficulty : "Débutant", style :"Jazz", instrument : "Basse", auteur : "Mozart", isFav : true
-    },
-    {
-        id:1, name:"Partition 2", difficulty : "Avancé", style :"Classique", instrument : "Piano", auteur : "Teest", isFav : true
-    },
-    {
-        id:2, name:"Partition 3e", difficulty : "Intermédiaire", style :"Jazz", instrument : "Flûte", auteur : "Hello", isFav : false
-    }
-];
 
-export function Libform(){
+export function Libform({partitions}){
     useEffect(() => {
         let list = document.querySelectorAll("select");
+        partitions = Array.from(partitions);
         list = Array.from(list);
         list.map((select) => {
             partitions.map((partition) => {
-                if (select.id in partition){
-                    if (!select.innerHTML.includes(partition[select.id])){
-                        select.innerHTML += `<option value="${partition[select.id]}">${partition[select.id]}</option>`
+                if (select.id in partition.Sheet){
+                    if (!select.innerHTML.includes(partition.Sheet[select.id])){
+                        if(select.id == "Instrument"){
+                            select.innerHTML += `<option value="${partition.Sheet[select.id].Name}">${partition.Sheet[select.id].Name}</option>`
+                        }
+                        else{
+                            select.innerHTML += `<option value="${partition.Sheet[select.id]}">${partition.Sheet[select.id]}</option>`
+                        }
+                        
                     }
                 }
             })
@@ -171,10 +169,10 @@ export function Libform(){
                 <select name="style" id="style" onChange={handleChange}>
                     <option value="">Styles</option>
                 </select>
-                <select name="instrument" id="instrument" onChange={handleChange}>
+                <select name="instrument" id="Instrument" onChange={handleChange}>
                     <option value="">Instruments</option>
                 </select>
-                <select name="auteur" id="auteur" onChange={handleChange}>
+                <select name="auteur" id="author" onChange={handleChange}>
                     <option value="">Auteurs</option>
                 </select>
                 <select name="difficulty" id="difficulty" onChange={handleChange}>
@@ -198,13 +196,25 @@ function AddPart(){
 
 
 export function Library() {
+
+    const [partitions, setPartitions] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('vault-sheets', setPartitions);
+        };
+
+        fetchData();
+    }, []);
+
     return (
     <div className="content">
         <h1>Ma bibliothèque</h1>
-        <Libform/>
-        {partitions.map((partition) => {
+        <Libform partitions={partitions}/>
+        {partitions.length == 0 ? <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p> 
+        :
+        partitions.map((partition) => {
             return (
-            <Link to={`/play/${partition.id}`}>
+            <Link to={`/play/${partition.Sheet.id}`}>
                 <Partition partition={partition} style="fav"/>
             </Link>
             );

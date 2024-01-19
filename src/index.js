@@ -25,6 +25,7 @@ import EditLesson from './pages/editLesson.js';
 import NotFound from './pages/notFound.js';
 import LessonsHistory from './pages/LessonsHistory.js';
 import LessonsHistoryDetails from './pages/LessonsHistoryDetails.js';
+import Register from './pages/register.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -49,10 +50,11 @@ root.render(
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />
         <Route path="teacher/teacherLessons/:lessonId" element={<TeacherLessons/>} />
-        <Route path="/activity/:id" element={<Activity/>}/>
+        <Route path="/activity/:idCourse/:idAct" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
-        <Route path="/history" element={<History/>}/>
+        <Route path="/history/:idCourse" element={<History/>}/>
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/message/:id" element={<Messages />} />
         <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
         <Route path="teacher/lessonsHistory/:studentId" element={<LessonsHistory/>} />
