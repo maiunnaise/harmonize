@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { getAPI } from '../components/fetchAPI';
+import { getAPI, putAPI } from '../components/fetchAPI';
 
 
 function Activity(){
@@ -41,6 +41,7 @@ function Activity(){
 }
 
 function ActivityDesc({activity}){
+    let {idCourse} = useParams();
 
     const [partition, setPartition] = useState([]);
     useEffect(() => {
@@ -54,10 +55,26 @@ function ActivityDesc({activity}){
         fetchData();
     }, [activity]);
 
+    const setNewStatus = async () => {
+        let value = document.querySelector('input[type="checkbox"]');
+        if(value.checked){
+            await putAPI(`cours/${idCourse}/activities/${activity.id}`, {status: "finished"});
+
+        }
+        else{
+            await putAPI(`cours/${idCourse}/activities/${activity.id}`, {status: "toDo"});
+            value.checked = false; //petit bug en début d'affichage
+        }
+    }
+
     return(
         <div className="activityDesc">
             <h2>{activity.title}</h2>
             {/* <p>pour le {activity.dueAt}</p> */}
+            <label className='isFinished'>
+                Terminée ?
+                {activity.status =="finished"? <input type="checkbox" checked onChange={setNewStatus}/> : <input type="checkbox"  onChange={setNewStatus}/>}
+            </label>
             {partition && partition.id ?
                 <Partition partition={partition}/>
             : null}
