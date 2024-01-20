@@ -42,10 +42,11 @@ root.render(
           <Route path="teacher/home" element={<TeacherHome />}/>
           <Route path="student/home" element={<HomeStudent/>}/>
           <Route path="library" element={<Library/>}/>
-          <Route path="addPartition" element={<AddPartition/>}/>
+          {/* <Route path="addPartition" element={<AddPartition/>}/> */}
           <Route path="home" element={<Layout />}/>
         </Route>
         <Route path="/user" element={<User />}/>
+        <Route path="addPartition" element={<AddPartition/>}/>
         <Route path="/user/edit" element={<EditUser />}/>
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />

@@ -80,3 +80,10 @@
     font-weight: bold;
 }
 
+.libraryPart{
+    height: 70%;
+    overflow: scroll;
+    margin-top: .5em;
+    padding-bottom: 20%;
+}
+
