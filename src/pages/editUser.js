@@ -3,9 +3,9 @@ import './editUser.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, deleteAPI } from '../components/fetchAPI.js';
+import { getAPI, deleteAPI, putAPI } from '../components/fetchAPI.js';
 
 
 
@@ -26,33 +26,33 @@ function EditUserForm() {
 
     // const [inputs, setInputs] = useState({});
     const userEmail = user.email;
-    const [userData, setUserData] = useState({ email: userEmail });
-    const [error, setError] = useState(null);
+    // const [userData, setUserData] = useState({ email: userEmail });
+    // const [error, setError] = useState(null);
     const [isActive, setIsActive] = useState(false);
 
 
-    const handleChange = (event) => {
-        setUserData({
-            ...userData,
-            email: event.target.value
-        });
-    };
+    // const handleChange = (event) => {
+    //     setUserData({
+    //         ...userData,
+    //         email: event.target.value
+    //     });
+    // };
 
-    function isValidEmail(email) {
-        console.log(email);
-        return /\S+@\S+\.\S+/.test(email);
-    }
+    // function isValidEmail(email) {
+    //     console.log(email);
+    //     return /\S+@\S+\.\S+/.test(email);
+    // }
   
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        console.log(userData.email);
-        if (!isValidEmail(userData.email)) {
-            window.alert("Email non valide");
-        } else {
-            setError(null);
-            console.log(userData.email)
-        }      
-    }
+    // const handleSubmit = (event) => {
+    //     event.preventDefault();
+    //     console.log(userData.email);
+    //     if (!isValidEmail(userData.email)) {
+    //         window.alert("Email non valide");
+    //     } else {
+    //         setError(null);
+    //         console.log(userData.email)
+    //     }      
+    // }
 
     // const addInstrument = () => {
     //     setIsActive(current => !current);
@@ -120,6 +120,39 @@ function EditUserForm() {
 
     }
 
+    function submitData(){
+        let changedData = document.querySelectorAll('.changedData');
+
+        // if (!isValidEmail(changedData[0].value)) {
+        //     window.alert("Email non valide");
+        //     return;
+        // }
+        
+        let data={};
+        changedData.forEach(element => {
+            if(element.name == "gender"){
+                if(element.value.toLowerCase() == "homme" || element.value.toLowerCase() == "men"){
+                    data[element.name] = "male"
+                }
+                else if(element.value.toLowerCase() == "femme" || element.value.toLowerCase() == "woman"){
+                    data[element.name] = "female"
+                }
+                else{
+                    data[element.name] = element.value.toLowerCase()
+                }
+            }
+            else{
+                data[element.name] = element.value;
+            }
+        });
+        console.log(data);
+        putAPI('user/'+user.id, data);
+        if (user.roles && user.roles.includes("ROLE_TEACHER")) {
+            let changedDataTeacher = document.querySelector('.changedDataTeacher');
+            putAPI('teachers/'+user.teachers[0].id, {city:changedDataTeacher.value});
+        }
+    }
+
 
     return (
         <div className="simpleContent">
@@ -171,21 +204,13 @@ function EditUserForm() {
                             </div>
                           
                             <hr></hr>
-                            <label>Adresse mail
-                            <input 
-                                type="text" 
-                                name="email" 
-                                defaultValue={user.email}
-                                onChange={handleChange}
-                            />
-                            </label>
-                            <hr></hr>
                             {user.roles && user.roles.includes("ROLE_TEACHER") ? (
                             <>
                                 <label>Ville</label>
                                 <input
                                     type='text'
-                                    className="userDesc"
+                                    className="userDesc changedDataTeacher"
+                                    name='city'
                                     defaultValue={user.teachers[0] ? user.teachers[0].city : "Ville non spécifiée..."}
                                 />
                                 <hr />
@@ -193,16 +218,16 @@ function EditUserForm() {
                             ) : null}
 
                             <label>Description</label>
-                            <textarea className="userDesc" rows="5" defaultValue={user.description}></textarea>
+                            <textarea name="description"className="userDesc changedData" rows="5" defaultValue={user.description}></textarea>
 
                             <hr></hr>
                             <label>Genre</label>
-                            <input className="userDesc" defaultValue={user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}/>
+                            <input name="gender"className="userDesc changedData" defaultValue={user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}/>
                         </div>
                     </div>
                 }/>
                 <div className="userValidateBtn">
-                    <input type="submit" form="editUserForm" value="Valider"/>
+                    <input type="submit" value="Valider" onClick={submitData}/>
                 </div>
             </div>
             
