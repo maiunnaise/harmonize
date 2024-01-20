@@ -48,6 +48,7 @@ export default function Partition({partition}){
                 }
                 
             </div>
+            
         </div>
     )
 }
