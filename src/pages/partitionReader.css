@@ -2,11 +2,11 @@
     height: 80%;
 }
 
-.partReader > button{
-    background-color: #845483;
-    border:0;
-    border-radius: 30px;
-    padding: 0.5em 1em;
-    font-weight: bold;
-    margin-top: 1em;
+.partReader h2{
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.partReader span{
+    font-weight: normal;
 }
