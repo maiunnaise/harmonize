@@ -163,6 +163,7 @@ let instruments = [
 ]
 
 export default function EditUser(){
+    CheckLogin();
     return (
         <div>
             <SimpleHeader />
