@@ -32,7 +32,7 @@
     padding-bottom: 1em;
 }
 
-#editUserForm:first-child{
+#editUserForm:first-child {
     display: flex;
     flex-direction: column;
     gap:0.3em;
@@ -138,11 +138,11 @@
 }
 
 #editUser #popup {
-    position:absolute;
-    width:50%;
-    height:50%;
+    position:relative;
+    width:70%;
+    height:fit-content;
     top:25%;
-    left:25%;
+    left:15%;
     text-align:center;
     border-radius: 10px;
     background: #3D3D3D;
@@ -166,18 +166,51 @@
 
 #popup > #instruments {
     margin-top: 0.5em;
-    width: 80%;
-    display: inline-block;
-}
-
-#popup > #instruments > div {
-    margin-bottom: 1.5em;
+    width: fit-content;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: center;
+    gap:0.5em;
     padding-bottom: 0.5em;
 }
 
-#popup > #instruments > div > p {
-    padding: 0.5em;
-    padding-inline: 2em;
+#popup > #instruments > div {
+    padding-bottom: 0.5em;
+    width: fit-content;
+    height: fit-content;
 }
 
+#instruments > div > p {
+    padding: 0.5em;
+    padding-inline: 2em;
+    background-color: transparent;
+    border: white solid 1px;
+}
+
+#popup .addInstrument {
+    border: 0;
+    width: 50%;
+    margin : 1em 0;
+    padding: 0.5em 1em; 
+}
+
+#popup .selectedInstrument{
+    background-color: #845583;
+    border-color: #845583;
+}
+
+textarea.userDesc {
+    background-color: #474747;
+    padding: 0.5em;
+    width: 90%;
+    margin: 0;
+}
+
+.editUserOk{
+    color: #409048;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
 

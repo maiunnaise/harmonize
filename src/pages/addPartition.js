@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { getAPI } from '../components/fetchAPI';
 import { Link } from 'react-router-dom';
 import Partition from '../components/Partition';
+import SimpleHeader from '../components/simpleHeader';
+import CheckLogin from '../components/checkLogin';
 
 export function Addform({partitions}){
     useEffect(() => {
@@ -141,6 +143,7 @@ export function Addform({partitions}){
 }
 
 export default function AddPartition() {
+    CheckLogin();
     const [partitions, setPartitions] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
@@ -150,7 +153,8 @@ export default function AddPartition() {
         fetchData();
     }, []);
     return(
-        <div className="content">
+        <div className="simpleContent">
+            <SimpleHeader/>
             <h1>Ajouter une partition</h1>
             <Addform partitions={partitions}/>
             <div className='harmonizePart'>

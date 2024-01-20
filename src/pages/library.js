@@ -210,7 +210,7 @@ export function Library() {
     <div className="content">
         <h1>Ma bibliothèque</h1>
         <Libform partitions={partitions}/>
-        <div className='harmonizePart'>
+        <div className='libraryPart'>
         {partitions.length == 0 ? <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p> 
         :
         partitions.map((partition) => {

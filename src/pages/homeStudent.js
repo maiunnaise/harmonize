@@ -8,6 +8,7 @@ import { getAPI } from '../components/fetchAPI';
 import EmptyInstruments from '../components/emptyInstruments';
 
 function getNextClass(seances){
+
     let today = Date.now();
     seances = Array.from(seances);
     let nextClass;
@@ -16,7 +17,8 @@ function getNextClass(seances){
         let endAt = Date.parse(seance.endAt);
 
         if (today < startAt && today < endAt){
-            return nextClass = seance;
+            nextClass = seance;
+            return ;
         }
     });
     return nextClass;
@@ -44,13 +46,20 @@ function Course({course}){
     return (
         <div className='courseContent'>
             <h2 className='CourseName coursePadding'>{course.Instrument.Name} <span style={{color:"#B0B0B0"}}>- {course.difficulty}</span></h2>
-            <PurpleDiv content={<Seance seance= {nextClass}/>}/>
-            {course.Teacher.User.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.Teacher.User.nom}</p> : <p className='CourseTeach coursePadding'>Mme. {course.Teacher.User.nom}</p>}
+            <PurpleDiv content={nextClass!=undefined ?<Seance seance= {nextClass}/>:<p>Pas de prochaine séance</p>}/>
+            {course.Teacher.User.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.Teacher.User.nom}</p> :course.Teacher.User.gender =="female"? <p className='CourseTeach coursePadding'>Mme. {course.Teacher.User.nom}</p> : <p className='CourseTeach coursePadding'>{course.Teacher.User.nom}</p>}
             <h3 className='CourseActivities coursePadding'>Activités</h3>
-            {nextClass.activities.map((exercice) => {
-                let dueAt = formatDate(nextClass.startAt, 'date');
-                return <Actvity activity={exercice} dueAt={dueAt} course={course.id}/>;
-            })}
+            {nextClass != undefined && nextClass.activities.length !=0? (
+                nextClass.activities.map((exercice) => {
+                    let dueAt = formatDate(nextClass.startAt, 'date');
+                    return <Activity key={exercice.id} activity={exercice} dueAt={dueAt} course={course.id} />;
+                })
+            ):
+            (
+                <p className='emptyCourse'>Pas d'activité disponible</p>
+                ) }
+
+            
         </div>
     );
 }
@@ -73,7 +82,7 @@ function Seance({seance}){
     );
 }
 
-function Actvity({activity, dueAt, course}){
+function Activity({activity, dueAt, course}){
 
     return(
         <div className='courseActivity'>
@@ -110,7 +119,7 @@ export default function HomeStudent(){
         const fetchInstruments = async () => {
             await getAPI('instruments', setInstrument);
         };
-        console.log(instrumentUser);
+        // console.log(instrumentUser);
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';
