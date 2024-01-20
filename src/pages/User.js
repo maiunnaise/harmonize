@@ -11,7 +11,6 @@ function UserInfo(){
     CheckLogin();
     const [user, setUser] = useState([]);
     const [instruments, setInstruments] = useState([]);
-    const [teacher, setTeacher] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('user', setUser);

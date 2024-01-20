@@ -5,7 +5,7 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI } from '../components/fetchAPI.js';
+import { getAPI, deleteAPI } from '../components/fetchAPI.js';
 
 
 
@@ -13,11 +13,12 @@ function EditUserForm() {
     CheckLogin();
     const [user, setUser] = useState([]);
     const [instruments, setInstruments] = useState([]);
-    const [teacher, setTeacher] = useState([]);
+    const [allInstruments, setAllInstruments] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('user', setUser);
             await getAPI('user-instruments', setInstruments);
+            await getAPI('instruments', setAllInstruments);
         };
         fetchData();
 
@@ -28,6 +29,7 @@ function EditUserForm() {
     const [userData, setUserData] = useState({ email: userEmail });
     const [error, setError] = useState(null);
     const [isActive, setIsActive] = useState(false);
+
 
     const handleChange = (event) => {
         setUserData({
@@ -52,19 +54,43 @@ function EditUserForm() {
         }      
     }
 
-    const addInstrument = () => {
+    // const addInstrument = () => {
+    //     setIsActive(current => !current);
+    //     var instrumentsDiv = document.getElementById('instruments');
+
+    //     for (var i = 0; i < instrumentsDiv.children.length; i++) {
+    //         var instrument = instrumentsDiv.children[i];
+    //         let instrumentName = instrument.children[0].innerHTML;
+    //         instrument.addEventListener('click', function() {
+    //             console.log(instrumentName);
+    //         });
+    //     }
+
+    //     let close = document.getElementById('close');
+
+    //     if (!close.hasEventListener) {
+    //         close.addEventListener('click', function() {
+    //             setIsActive(current => !current);
+    //         });
+    //         close.hasEventListener = true; 
+    //     }
+    // };
+
+
+    function removeInstrument(e){
+        let ide = e.target.parentElement.id;
+        deleteAPI('user-instruments/'+ide);
+        e.target.parentElement.style.display = 'none';
+    }
+
+    function selectInstrument(e){
+        e.target.classList.toggle('selectedInstrument');
+    }
+
+    function popUp(){
         setIsActive(current => !current);
-        var instrumentsDiv = document.getElementById('instruments');
-
-        for (var i = 0; i < instrumentsDiv.children.length; i++) {
-            var instrument = instrumentsDiv.children[i];
-            let instrumentName = instrument.children[0].innerHTML;
-            instrument.addEventListener('click', function() {
-                console.log(instrumentName);
-            });
-        }
-
         let close = document.getElementById('close');
+        getAPI('user-instruments', setInstruments);
 
         if (!close.hasEventListener) {
             close.addEventListener('click', function() {
@@ -72,28 +98,25 @@ function EditUserForm() {
             });
             close.hasEventListener = true; 
         }
-    };
+    }
 
-
-    const removeInstrument = (event, name) => {
-        // event.stopPropagation();
-        // event.preventDefault();
-        
-        // let instrument = document.querySelector('#instrumentsList').querySelector(`[id="${index}"]`);
-        // console.log(instrument, index);
-        // instrument.remove();
-        //     let removeBtn = document.getElementsByClassName('deleteBtn');
-
-        // console.log(removeBtn, removeBtn[1]);
-        // for(var i = 0; i < removeBtn.length; i++) {
-        //     console.log(removeBtn[i]);
-        //     removeBtn[i].addEventListener('click', function() {
-        //         console.log(this.id);
-        //     });
-        // }
-
-        event.stopPropagation();
-        console.log('Button clicked with name:', name);
+    function addInstrument(){
+        let instrumentsSelected = document.querySelectorAll('.selectedInstrument');
+        let instrumentsId = [];
+        for (const instrument of instrumentsSelected) {
+            instrumentsId.push(instrument.parentElement.id);
+        }
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
+            body: JSON.stringify({"instrumentList":instrumentsId})
+        };
+        fetch('https://harmonize.mael-mouquet.fr/api/user-instruments', requestOptions)
+        .then(response => response.json())
+        .then(data => {
+            setIsActive(current => !current);
+            getAPI('user-instruments', setInstruments);
+        });
 
     }
 
@@ -109,19 +132,20 @@ function EditUserForm() {
                 </div>
                 <GreyDiv content={
                     <div>
-                        <form onSubmit={handleSubmit} id="editUserForm">
+                        <div  id="editUserForm">
                             <p>Instruments</p>
                             <div className='userInstruments'>
                                 <div id="instrumentsList">
                                     {instruments.map((instrument, index) => {
                                         return (
-                                        <div key={index} id={index}> 
+                                        <div key={index} id={instrument.id}> 
                                             <InstrumentText key={index} text={instrument.Instrument.Name} />
-                                            <button id={index} type="button" onClick={(event) => removeInstrument(event, instrument)} className='deleteBtn'>x</button>
+                                            <button id={index} type="button" onClick={removeInstrument} className='deleteBtn'>x</button>
                                         </div>)
                                     })}
                                 </div>
-                                <button onClick={addInstrument}> + </button>
+                                {/* <button onClick={addInstrument}> + </button> */}
+                                <button onClick={popUp}> + </button>
                             </div>
                           
                             <div id='overlay' style={{
@@ -130,13 +154,19 @@ function EditUserForm() {
                                 <div id='popup'>
                                     <div id='close'>&#10006;</div>
                                     <h2>Instruments</h2>
-                                    {/* <div id="instruments">
-                                        {instruments.map((instrument, index) => {
-                                            return <div key={index} id={index} >
-                                                <InstrumentText key={index} text={instrument.name} />
-                                            </div>
+                                    <div id="instruments">
+                                        {allInstruments.map((globalInstrument) => {
+                                            if (!instruments.some((instrument) => instrument.Instrument.Name === globalInstrument.Name)) {
+                                                return (
+                                                <div key={globalInstrument.id} id={globalInstrument.id} onClick={selectInstrument}>
+                                                    <InstrumentText text={globalInstrument.Name} />
+                                                </div>
+                                                );
+                                            }
+                                            return null; 
                                         })}
-                                    </div> */}
+                                    </div>
+                                    <button className='addInstrument' onClick={addInstrument}>Ajouter</button>
                                 </div>
                             </div>
                           
@@ -168,7 +198,7 @@ function EditUserForm() {
                             <hr></hr>
                             <label>Genre</label>
                             <input className="userDesc" defaultValue={user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}/>
-                        </form>
+                        </div>
                     </div>
                 }/>
                 <div className="userValidateBtn">
@@ -180,19 +210,6 @@ function EditUserForm() {
     )
 }
 
-
-let user = {
-    firstname: "John",
-    lastname: "Doe",
-    email: "adadas@mail.com",
-    instruments: ["Piaeeeeno","Guitare"],
-}
-
-let instruments = [
-    {name : "Piano"},
-    {name : "Batterie"},
-    {name : "aefaef"},
-]
 
 export default function EditUser(){
     CheckLogin();
