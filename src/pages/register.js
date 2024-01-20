@@ -103,6 +103,7 @@ export default function Register() {
                             <option value="">Genre</option>
                             <option value="male">Homme</option>
                             <option value="female">Femme</option>
+                            <option value="other">Autre</option>
                         </select>
                     </label>
                 </div>

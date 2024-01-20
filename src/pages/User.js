@@ -11,6 +11,7 @@ function UserInfo(){
     CheckLogin();
     const [user, setUser] = useState([]);
     const [instruments, setInstruments] = useState([]);
+    const [teacher, setTeacher] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('user', setUser);
@@ -19,9 +20,6 @@ function UserInfo(){
         fetchData();
 
     }, []);
-    
-    
-    console.log(user, instruments);
 
     function logout(){
         localStorage.removeItem("token");
@@ -47,11 +45,22 @@ function UserInfo(){
                     <h2>Adresse mail</h2>
                     <div className="userEmail">{user.email}</div>
                     <hr></hr>
+                    {user.roles && user.roles.includes("ROLE_TEACHER") ? (
+                        <>
+                            <h2>Ville</h2>
+                            {user.teachers ? (
+                            <div className="userDesc">{user.teachers[0].city}</div>
+                            ) : (
+                            <div className="userDesc">Ville non spécifiée</div>
+                            )}
+                            <hr />
+                        </>
+                    ) : null}
                     <h2>Description</h2>
                     <div className="userDesc">{user.description}</div>
                     <hr></hr>
                     <h2>Genre</h2>
-                    <div className="userDesc">{user.gender == "male" ?"Homme":"Femme"}</div>
+                    <div className="userDesc">{user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}</div>
                 </div>
             }/>
             <div className="userModifBtn">

@@ -32,7 +32,7 @@
     padding-bottom: 1em;
 }
 
-#editUserForm:first-child{
+#editUserForm:first-child {
     display: flex;
     flex-direction: column;
     gap:0.3em;
@@ -180,4 +180,10 @@
     padding-inline: 2em;
 }
 
+textarea.userDesc {
+    background-color: #474747;
+    padding: 0.5em;
+    width: 90%;
+    margin: 0;
+}
 

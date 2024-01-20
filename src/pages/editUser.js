@@ -5,19 +5,32 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
+import { getAPI } from '../components/fetchAPI.js';
 
 
 
-function EditUserForm({user, instruments}) {
+function EditUserForm() {
     CheckLogin();
+    const [user, setUser] = useState([]);
+    const [instruments, setInstruments] = useState([]);
+    const [teacher, setTeacher] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('user', setUser);
+            await getAPI('user-instruments', setInstruments);
+        };
+        fetchData();
+
+    }, []);
+
     // const [inputs, setInputs] = useState({});
     const userEmail = user.email;
-    const [userData, setUser] = useState({ email: userEmail });
+    const [userData, setUserData] = useState({ email: userEmail });
     const [error, setError] = useState(null);
     const [isActive, setIsActive] = useState(false);
 
     const handleChange = (event) => {
-        setUser({
+        setUserData({
             ...userData,
             email: event.target.value
         });
@@ -91,19 +104,19 @@ function EditUserForm({user, instruments}) {
                 <div className='userPicName'>
                     <img className="userPic" src="../logo192.png" alt="profile"/>
                     <div className="userName">
-                        <h2>{user.firstname}<br/> {user.lastname}</h2>
+                        <h2>{user.prenom}<br/> {user.nom}</h2>
                     </div>
                 </div>
                 <GreyDiv content={
                     <div>
                         <form onSubmit={handleSubmit} id="editUserForm">
-                            <div>Instruments :</div>
+                            <p>Instruments</p>
                             <div className='userInstruments'>
                                 <div id="instrumentsList">
-                                    {user.instruments.map((instrument, index) => {
+                                    {instruments.map((instrument, index) => {
                                         return (
                                         <div key={index} id={index}> 
-                                            <InstrumentText key={index} text={instrument} />
+                                            <InstrumentText key={index} text={instrument.Instrument.Name} />
                                             <button id={index} type="button" onClick={(event) => removeInstrument(event, instrument)} className='deleteBtn'>x</button>
                                         </div>)
                                     })}
@@ -117,25 +130,44 @@ function EditUserForm({user, instruments}) {
                                 <div id='popup'>
                                     <div id='close'>&#10006;</div>
                                     <h2>Instruments</h2>
-                                    <div id="instruments">
+                                    {/* <div id="instruments">
                                         {instruments.map((instrument, index) => {
                                             return <div key={index} id={index} >
                                                 <InstrumentText key={index} text={instrument.name} />
                                             </div>
                                         })}
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                           
                             <hr></hr>
-                            <label>Adresse mail :
+                            <label>Adresse mail
                             <input 
                                 type="text" 
                                 name="email" 
-                                value={userData.email || ""}
+                                defaultValue={user.email}
                                 onChange={handleChange}
                             />
                             </label>
+                            <hr></hr>
+                            {user.roles && user.roles.includes("ROLE_TEACHER") ? (
+                            <>
+                                <label>Ville</label>
+                                <input
+                                    type='text'
+                                    className="userDesc"
+                                    defaultValue={user.teachers[0] ? user.teachers[0].city : "Ville non spécifiée..."}
+                                />
+                                <hr />
+                            </>
+                            ) : null}
+
+                            <label>Description</label>
+                            <textarea className="userDesc" rows="5" defaultValue={user.description}></textarea>
+
+                            <hr></hr>
+                            <label>Genre</label>
+                            <input className="userDesc" defaultValue={user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}/>
                         </form>
                     </div>
                 }/>
@@ -167,7 +199,7 @@ export default function EditUser(){
     return (
         <div>
             <SimpleHeader />
-            <EditUserForm user={user} instruments={instruments} />
+            <EditUserForm />
         </div>
     );
 };

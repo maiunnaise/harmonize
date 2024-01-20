@@ -45,7 +45,7 @@ function Course({course}){
         <div className='courseContent'>
             <h2 className='CourseName coursePadding'>{course.Instrument.Name} <span style={{color:"#B0B0B0"}}>- {course.difficulty}</span></h2>
             <PurpleDiv content={<Seance seance= {nextClass}/>}/>
-            {course.Teacher.User.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.Teacher.User.nom}</p> : <p className='CourseTeach coursePadding'>Mme. {course.Teacher.User.nom}</p>}
+            {course.Teacher.User.gender =="male" ? <p className='CourseTeach coursePadding'>M.   {course.Teacher.User.nom}</p> :course.Teacher.User.gender =="female"? <p className='CourseTeach coursePadding'>Mme. {course.Teacher.User.nom}</p> : <p className='CourseTeach coursePadding'>{course.Teacher.User.nom}</p>}
             <h3 className='CourseActivities coursePadding'>Activités</h3>
             {nextClass.activities.map((exercice) => {
                 let dueAt = formatDate(nextClass.startAt, 'date');
