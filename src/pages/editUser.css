@@ -207,3 +207,10 @@ textarea.userDesc {
     margin: 0;
 }
 
+.editUserOk{
+    color: #409048;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+

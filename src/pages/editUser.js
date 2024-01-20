@@ -14,6 +14,8 @@ function EditUserForm() {
     const [user, setUser] = useState([]);
     const [instruments, setInstruments] = useState([]);
     const [allInstruments, setAllInstruments] = useState([]);
+    const navigate = useNavigate();
+    const [isOk, setIsOk] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('user', setUser);
@@ -23,6 +25,13 @@ function EditUserForm() {
         fetchData();
 
     }, []);
+
+    useEffect(() => {
+        if (isOk) {
+            setTimeout(() => {navigate('/home')}, 1500);
+            
+        }
+    }, [isOk]);
 
     // const [inputs, setInputs] = useState({});
     const userEmail = user.email;
@@ -131,7 +140,7 @@ function EditUserForm() {
         let data={};
         changedData.forEach(element => {
             if(element.name == "gender"){
-                if(element.value.toLowerCase() == "homme" || element.value.toLowerCase() == "men"){
+                if(element.value.toLowerCase() == "homme" || element.value.toLowerCase() == "man"){
                     data[element.name] = "male"
                 }
                 else if(element.value.toLowerCase() == "femme" || element.value.toLowerCase() == "woman"){
@@ -145,12 +154,13 @@ function EditUserForm() {
                 data[element.name] = element.value;
             }
         });
-        console.log(data);
         putAPI('user/'+user.id, data);
         if (user.roles && user.roles.includes("ROLE_TEACHER")) {
             let changedDataTeacher = document.querySelector('.changedDataTeacher');
             putAPI('teachers/'+user.teachers[0].id, {city:changedDataTeacher.value});
         }
+        document.querySelector('.editUserOk').style.display = 'block';
+        setIsOk(true);
     }
 
 
@@ -224,6 +234,7 @@ function EditUserForm() {
                             <label>Genre</label>
                             <input name="gender"className="userDesc changedData" defaultValue={user.gender == "male" ?"Homme":user.gender == "female" ?"Femme":user.gender}/>
                         </div>
+                        <p className='editUserOk'>Données modifiées</p>
                     </div>
                 }/>
                 <div className="userValidateBtn">
