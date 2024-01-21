@@ -23,6 +23,7 @@ import AddPartition from './pages/addPartition.js';
 import Messages from './pages/Messages.js';
 import EditLesson from './pages/editLesson.js'; 
 import NotFound from './pages/notFound.js';
+import AddLesson from './pages/addLesson.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -46,13 +47,14 @@ root.render(
         <Route path="/user/edit" element={<EditUser />}/>
         <Route path="/cours/:coursId" element={<CoursPage />}/>
         <Route path="/login" element={<Login />} />
-        <Route path="teacher/teacherLessons/:lessonId" element={<TeacherLessons/>} />
+        <Route path="teacher/teacherLessons/:coursId/:seanceId" element={<TeacherLessons/>} />
         <Route path="/activity/:id" element={<Activity/>}/>
         <Route path="/play/:id" element={<PartitionReader/>}/>
         <Route path="/history" element={<History/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/message/:id" element={<Messages />} />
-        <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
+        <Route path="teacher/editLesson/:coursId/:seanceId" element={<EditLesson/>} />
+        <Route path="teacher/teacherLessons/:studentId/" element={<AddLesson/>} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />

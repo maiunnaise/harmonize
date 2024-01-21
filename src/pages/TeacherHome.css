@@ -19,6 +19,25 @@ body .TeacherHome{
     margin-left: 2em;
 }
 
+.TeacherHome > div:first-of-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.TeacherHome > div:first-of-type > button{
+    margin-inline: 1em;
+    padding: 0.5em;
+    border-radius: 30px;
+    border: 2px solid #845583;
+    background-color: #474747;
+    font-size: 0.8em;
+}
+
+.TeacherHome > .listeEleves {
+    display: none;
+}
+
 .toReview {
     border: 2px solid #845583;
 }

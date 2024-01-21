@@ -156,7 +156,7 @@
     z-index: 1;
 } */
 
-#popup h2 {
+#editUser #popup h2 {
     font-size:1em;
     height: 2.5em;
     margin-top: 1em;
@@ -164,18 +164,18 @@
     border-bottom: #474747 1px solid;
 }
 
-#popup > #instruments {
+#editUser #popup > #instruments {
     margin-top: 0.5em;
     width: 80%;
     display: inline-block;
 }
 
-#popup > #instruments > div {
+#editUser #popup > #instruments > div {
     margin-bottom: 1.5em;
     padding-bottom: 0.5em;
 }
 
-#popup > #instruments > div > p {
+#editUser #popup > #instruments > div > p {
     padding: 0.5em;
     padding-inline: 2em;
 }

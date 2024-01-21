@@ -8,8 +8,8 @@ function getAPI(request, setState){
             'Authorization': 'Bearer ' + token,
         }
     };
-  
-    fetch(`http://127.0.0.1:8741/api/${request}`, requestOptions)
+ 
+    fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     .then(response => response.json())
     .then(data => {
         setState(data);
@@ -28,7 +28,7 @@ function deleteAPI(request){
         }
     };
   
-    fetch(`http://127.0.0.1:8741/api/${request}`, requestOptions);
+    fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions);
 
 }
 
@@ -44,7 +44,7 @@ function putAPI(request, body){
         body: JSON.stringify(body)
     };
   
-    fetch(`http://127.0.0.1:8741/api/${request}`, requestOptions);
+    fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions);
 
 }
 
@@ -60,8 +60,7 @@ async function postAPI(request, setState, body){
         },
         body: JSON.stringify(body)
     };
-
-    const response = await fetch(`http://127.0.0.1:8741/api/${request}`, requestOptions)
+    const response = await fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     const data = await response.json();
     setState(data);
 }
