@@ -61,10 +61,11 @@ async function postAPI(request, setState, body){
         body: JSON.stringify(body)
     };
 
-    const response = await fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
-    const data = await response.json();
-    console.log(data.message);
-    setState(data);
+    await fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
+    .then(response => response.json())
+    .then(data => {
+        setState(data);
+    });
 }
 
 export {getAPI, postAPI, deleteAPI, putAPI};

@@ -80,8 +80,8 @@
   gap: 0.5em;
   align-items: center;
   left:15%;
-  top: 32%;
-  height: 35%;
+  top: 30%;
+  height: 40%;
   text-align: center;
 }
 
@@ -120,4 +120,11 @@
   border: 2px solid white;
   background-color: transparent;
   margin-top: 0.2em;
+}
+
+.overlayContent .errorTeacher{
+  color: red;
+  font-size: small;
+  font-weight: bold;
+  display: none;
 }

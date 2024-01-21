@@ -3,6 +3,7 @@ import './Messages.css';
 import { Link , useNavigate, useParams } from 'react-router-dom';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 import { decodeToken } from "react-jwt";
+import CheckLogin from '../components/checkLogin.js';
 
 //Retourne le role de l'utilisateur
 function getRole(){
@@ -158,6 +159,7 @@ function MessagePage({data}){
 
 export default function Messages(){
     const coursId = useParams().id;
+    CheckLogin();
 
     const [msg, setMsg] = useState([]);
     const [cours, setCours] = useState([]);

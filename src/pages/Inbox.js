@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 import { decodeToken } from "react-jwt";
+import CheckLogin from '../components/checkLogin.js';
 
 // function getTimeSinceMessage(message){
 //     let time = (new Date() - new Date(message.date))/1000;
@@ -25,6 +26,7 @@ import { decodeToken } from "react-jwt";
 
 //Retourne le role de l'utilisateur
 function getRole(){
+
     const token = localStorage.getItem('token');
     let decodedToken = decodeToken(token);
 
@@ -109,6 +111,7 @@ function Contact({cours}){
 }
 
 function InboxDiv({users, cours}){
+
     const [filteredData, setFilteredData] = useState([]);
     useEffect(() => {
         setFilteredData(cours);
@@ -135,6 +138,7 @@ function InboxDiv({users, cours}){
 }
 
 export default function Inbox(){
+    CheckLogin();
 
     const [cours, setCours] = useState([]);
     useEffect(() => {
