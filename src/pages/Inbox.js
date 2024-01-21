@@ -62,11 +62,11 @@ function Contact({cours}){
         var lastMessage = msg[0];
         const role = getRole();
 
-        console.log();
+        console.log(cours);
 
         var contactRole = lastMessage.Sender;
         
-        if(lastMessage.unread === true && (contactRole== null || contactRole.roles[0] !== role)){
+        if(lastMessage.unread === true && cours.isPending !=false && (contactRole== null || contactRole.roles[0] !== role)){
             return (
                 <GreyDiv className="unread msgDiv" content={
                     <Link to={`/message/${cours.id}`} className='inboxLink'>
@@ -75,7 +75,7 @@ function Contact({cours}){
                             <div className="inboxText">
                                  {role === "ROLE_STUDENT" ? 
                                     <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
-                                    <h2>{cours.Student.User.prenom} {cours.Student.User.prenom}</h2>}                      
+                                    <h2>{cours.Student.User.prenom} {cours.Student.User.nom}</h2>}                      
                                 <p>
                                     <span className="lastMessage">{lastMessage.content}</span> 
                                     {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
@@ -87,24 +87,27 @@ function Contact({cours}){
             ) 
         }
         else {
-            return (
-                <GreyDiv className="msgDiv" content={
-                    <Link to={`/message/${cours.id}`} className='inboxLink'>
-                        <div className="inboxContact">
-                            <img src="../logo192.png" alt="contact"/>
-                            <div className="inboxText">
-                                 {role === "ROLE_STUDENT" ? 
-                                    <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
-                                    <h2>{cours.Student.User.prenom} {cours.Student.User.prenom}</h2>}                      
-                                <p>
-                                    <span className="lastMessage">{lastMessage.content}</span> 
-                                    {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
-                                </p>
+            if(cours.isPending != false){
+                return (
+                    <GreyDiv className="msgDiv" content={
+                        <Link to={`/message/${cours.id}`} className='inboxLink'>
+                            <div className="inboxContact">
+                                <img src="../logo192.png" alt="contact"/>
+                                <div className="inboxText">
+                                     {role === "ROLE_STUDENT" ? 
+                                        <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
+                                        <h2>{cours.Student.User.prenom} {cours.Student.User.prenom}</h2>}                      
+                                    <p>
+                                        <span className="lastMessage">{lastMessage.content}</span> 
+                                        {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                    </Link>
-                }/>
-            )
+                        </Link>
+                    }/>
+                )
+            }
+            
         
         }
     }
@@ -153,6 +156,7 @@ export default function Inbox(){
     if(cours.length > 0){
         
     };
+    console.log(cours);
 
     return (
         <InboxDiv cours={cours} />

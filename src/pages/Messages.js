@@ -79,6 +79,36 @@ function ChatBar({cours}){
 
 function MessagesDisplay({msg, contact, cours}){
     // let contact = users.find((user) => user.id == contactId);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [data, setData] = useState([]);
+    let navigate = useNavigate();
+    useEffect(() => {
+        if(isAnswered){
+            navigate("/inbox")
+        }
+    }, [isAnswered]);
+
+    function acceptRequest(){
+        console.log(cours);
+
+        const accpetCourse = async () => {
+            await putAPI("cours/"+cours.id, {"isPending": null});
+            await postAPI("cours/"+cours.id+"/messages", setData, {"content": "Votre demande a été acceptée."});
+            setIsAnswered(true);
+        };
+        accpetCourse();
+
+    }
+
+    function denyRequest(){
+        const denyCourse = async () => {
+            await postAPI("cours/"+cours.id+"/messages", setData, {"content": "Votre demande a été refusée."});
+            await putAPI("cours/"+cours.id, {"isPending": false});
+            
+            setIsAnswered(true);
+        };
+        denyCourse();
+    }
     return msg.map((message, index) => {
 
 
@@ -91,9 +121,14 @@ function MessagesDisplay({msg, contact, cours}){
 
             fetchData();
             return (
-                <div className="messageReceived" key={message.id} id={message.id}>
+                <div className={msg.length>1?"messageReceived":"request"} key={message.id} id={message.id}>
                     <img src={contact.img} alt="profile"/>
-                    <p>{message.content}</p>
+                    {msg.length >1 ? <p>{message.content}</p>: 
+                    <div>
+                        {message.content}
+                        <p onClick={acceptRequest}>Accepter</p>
+                        <p onClick={denyRequest}>Refuser</p>
+                    </div>}
                 </div>
             );
         }
