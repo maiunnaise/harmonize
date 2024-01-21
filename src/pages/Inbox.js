@@ -59,8 +59,10 @@ function Contact({cours}){
 
         var lastMessage = msg[0];
         const role = getRole();
-    
-        if(lastMessage.unread){
+
+        console.log();
+        
+        if(lastMessage.unread === true && lastMessage.Sender.roles[0] !== role){
             return (
                 <GreyDiv className="unread msgDiv" content={
                     <Link to={`/message/${cours.id}`} className='inboxLink'>

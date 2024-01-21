@@ -41,18 +41,18 @@ function ChatBar({cours}){
         input.addEventListener("keypress", function (e) {
             if (e.key === 'Enter') {
     
-                let obj = {"content": input.value};
+                let obj = {"content": input.value, "unread": true};
                 
                 console.log(obj);
     
                 const fetchData = async () => {
-                    await postAPI("cours/"+cours.id+"/messages", setData,obj);
+                    await postAPI("cours/"+cours.id+"/messages", setData, obj);
                 };
     
                 fetchData();
     
-                // Moved the second useEffect here
                 input.value = "";
+                
                 window.location.reload();
             }
          });
@@ -76,14 +76,21 @@ function ChatBar({cours}){
 };
 
 
-function MessagesDisplay({msg, contact}){
+function MessagesDisplay({msg, contact, cours}){
     // let contact = users.find((user) => user.id == contactId);
     return msg.map((message, index) => {
-        
+
+
         if(message.Sender == null ||message.Sender.id == contact.User.id ){
             console.log("Message reçu");
+            const obj = {"unread": false};
+            const fetchData = async () => {
+                await putAPI("cours/"+cours.id+"/messages/"+message.id, obj);
+            };
+
+            fetchData();
             return (
-                <div className="messageReceived" id={message.id}>
+                <div className="messageReceived" key={message.id} id={message.id}>
                     <img src={contact.img} alt="profile"/>
                     <p>{message.content}</p>
                 </div>
@@ -92,7 +99,7 @@ function MessagesDisplay({msg, contact}){
         else if ( message.Sender.id != null  && message.Sender.id != contact.User.id) {
             console.log("Message envoyé");
             return (
-                <div className="messageSended"  id={message.id}>
+                <div className="messageSended" key={message.id} id={message.id}>
                     <p>{message.content}</p>
                     <img src={contact.img} alt="profile"/> 
                 </div>
@@ -141,7 +148,7 @@ function MessagePage({data}){
         <div className="simpleContent">
             <MessagesHeader user={contact}/>
             <div className='MessagesDisplay'>
-                <MessagesDisplay msg={data.msg} contact={contact}/>
+                <MessagesDisplay msg={data.msg} contact={contact} cours={data.cours}/>
             </div>
             <ChatBar cours={data.cours}/>
         </div>
