@@ -6,6 +6,13 @@ import { getAPI, postAPI } from '../components/fetchAPI.js';
 import { Link } from 'react-router-dom';
 
 function TeachersDesc({teacher, onSendRequest}){
+    const [user, setUser] = useState({});
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI("user", setUser);
+        };
+        fetchData();
+    }, []);
     return (
         <div id={teacher.User.id}>
             <img className="findTeacherImg"src="../logo192.png" alt='${teacher.prenom} ${teacher.nom}'/>
@@ -20,7 +27,10 @@ function TeachersDesc({teacher, onSendRequest}){
                 </div>
             </div>
             <p className="textDesc">{teacher.User.description}</p>
-            <button onClick={() => onSendRequest()}>Envoyer une demande</button>
+            {user && user.roles && user.roles.includes('ROLE_STUDENT') && (
+                <button onClick={() => onSendRequest()}>Envoyer une demande</button>)
+            }
+            
         </div>
     )
 }

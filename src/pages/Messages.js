@@ -105,8 +105,7 @@ function MessagesDisplay({msg, contact, cours}){
 
     function denyRequest(){
         const denyCourse = async () => {
-            await postAPI("cours/"+cours.id+"/messages", setData, {"content": "Votre demande a été refusée."});
-            await putAPI("cours/"+cours.id, {"isPending": false});
+            await deleteAPI("cours/"+cours.id);
             
             setIsAnswered(true);
         };
