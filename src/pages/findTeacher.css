@@ -24,7 +24,7 @@
   align-items: center;
 }
 
-.searchBtns > button, .searchTeacher > .GreyDiv > div > button {
+.searchBtns  button, .searchTeacher > .GreyDiv > div > button {
   background-color: #845483;
   border:0;
   border-radius: 30px;

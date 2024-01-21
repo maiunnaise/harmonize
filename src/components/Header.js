@@ -10,7 +10,7 @@ function Header() {
       <Link to="/">
         <img src="/logo/logo_harmonize.png" className="logo" alt="logo" />
       </Link>
-      <Link to="/settings">
+      <Link to="/nextVersion">
           <img src="/logo/icons/settings.png" className="settings" alt="logo settings" />
       </Link>
     </header>

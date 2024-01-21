@@ -3,6 +3,7 @@ import './findTeacher.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI } from '../components/fetchAPI.js';
+import { Link } from 'react-router-dom';
 
 function TeachersDesc({teacher, onSendRequest}){
     return (
@@ -67,8 +68,10 @@ function FindTeachersDiv(){
             <GreyDiv content={
                 <div className="divSearchTeacher">
                     <h2>Trouver un enseignant</h2>
-                    <div className="searchBtns">  
-                        <button>Autour de moi</button>
+                    <div className="searchBtns"> 
+                        <Link to="/nextVersion"> 
+                            <button>Autour de moi</button>
+                        </Link>
                         <SearchBar onSearch={handleSearch}/>
                     </div>
                 </div>

@@ -9,25 +9,25 @@ function Search(){
         <div className="content SearchPage">
             <h2>Explorer</h2>
             <div id="toolsDiv">
-                <Link to="/partitions">
+                <Link to="/nextVersion">
                     <div id='partitionDiv'>
                         <p>Créateur de partition</p>
                         <img src="/logo/icons/sol-key.png" alt="sol key" />
                     </div>
                 </Link>
-                <Link to="/metronome">
+                <Link to="/nextVersion">
                     <div id='metronomeDiv'>
                         <p>Métronome</p>
                         <img src="/logo/icons/metronome.png" alt="metronome logo" />
                     </div>
                 </Link>
-                <Link to="/accordeur">
+                <Link to="/nextVersion">
                     <div id='accordeurDiv'>
                         <p>Accordeur</p>
                         <img src="/logo/icons/accordeur.png" alt="accordeur logo" />
                     </div>
                 </Link>
-                <Link to="/boiterythme">
+                <Link to="/nextVersion">
                     <div id='rythmBoxDiv'>
                         <p>Boîte à rythme</p>
                         <img src="/logo/icons/drum-kit.png" alt="boite a rythme logo" />
@@ -45,7 +45,7 @@ function Search(){
                     </div>
                 }/>
             </Link>
-            <Link to="/exercices">
+            <Link to="/nextVersion">
                 <GreyDiv content={
                     <div id="SearchPageExercices">
                         <h2>Exercices</h2>
