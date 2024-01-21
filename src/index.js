@@ -54,7 +54,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/message/:id" element={<Messages />} />
         <Route path="teacher/editLesson/:coursId/:seanceId" element={<EditLesson/>} />
-        <Route path="teacher/teacherLessons/:studentId/" element={<AddLesson/>} />
+        <Route path="teacher/teacherLessons/:coursId/" element={<AddLesson/>} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />

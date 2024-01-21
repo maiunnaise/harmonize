@@ -5,13 +5,12 @@ import './TeacherHome.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
-
+import CheckLogin from '../components/checkLogin.js';
 
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
     if (cours.length > 0) {
         cours.map((lesson) => {
-
             //Trie les séances par date
             lesson.seances = lesson.seances.sort(function(a, b){
                 let dateA = new Date(a.startAt).getTime();
@@ -20,11 +19,17 @@ function Home({cours, students}){
                     return -1;
                 }
             });
-            console.log(cours);
+    
         });
 
         //Trie les cours par date de la prochaine scéance
         cours = cours.sort(function(a, b){
+            if(a.seances.length == 0){
+                return 1;
+            }
+            if(b.seances.length == 0){
+                return -1;
+            }
             let dateA = new Date(a.seances[0].startAt).getTime();
             let dateB = new Date(b.seances[0].startAt).getTime();
             if (dateA > dateB) {
@@ -149,9 +154,9 @@ function Home({cours, students}){
                                                 </div>
                                                 <div className='exercices'>
                                                     <p>Exercices</p>
-                                                    <div>
+                                                    <div >
                                                         {lesson.seances[0] && lesson.seances[0].activities.length > 0 ? lesson.seances[0].activities.map((activity, index) => (
-                                                            <span key={index} className={`${activity.status}`}></span>
+                                                            <span className={`${activity.status}`}></span>
                                                         )) : null}
                                                     </div>
                                                 </div>
@@ -164,20 +169,26 @@ function Home({cours, students}){
                         })}
                     </div>
                     <div className='listeEleves'>
-                        <Link key={index} to={`../teacher/teacherLessons/${student.id}`}>
-                            <GreyDiv
-                                content={
-                                <div id={student.id}>
-                                    <div className='lessonHeader'>
-                                        <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
-                                        <div>
-                                            <h2>{`${student.prenom} ${student.nom}`}</h2>
-                                        </div>   
-                                    </div>
-                                </div>
-                                }
-                            /> 
-                        </Link>
+                        {lessons.map((lesson) => { 
+                            return(
+                                <Link  to={`../teacher/teacherLessons/${lesson.id}`}>
+                                    <GreyDiv
+                                        content={
+                                        <div id={student.id}>
+                                            <div className='lessonHeader'>
+                                                <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
+                                                <div>
+                                                    <h2>{`${student.prenom} ${student.nom}`}</h2>
+                                                    <h2 className="greyText">{`${lesson.Instrument.Name} ${lesson.difficulty}`}</h2>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                        }
+                                    /> 
+                                </Link>
+                            
+                            )
+                        })}
                     </div>
                     </>
                 )
@@ -192,15 +203,15 @@ function Home({cours, students}){
 
 
 export default function TeacherHome(){
-
     const [cours, setCours] = useState([]);
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
         const fetchData = async () => {
             await getAPI('cours', setCours);
         };
-
         fetchData();
-    }, []);
+    }, [token]);
 
     // if (cours.length === 0) {
     //     return null; // or any other loading indicator
@@ -215,9 +226,11 @@ export default function TeacherHome(){
             }
         });
     }
-
+    
     return (
-        <Home cours={cours} students={students}/>
+        cours.length > 0 && students.length > 0 ? 
+        <Home cours={cours} students={students}/> :
+        null 
     );
 
     

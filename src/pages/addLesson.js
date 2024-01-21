@@ -12,12 +12,8 @@ import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 
 
 function Lesson({data}){
-    const coursId = useParams().coursId;
     console.log(data);
-
-    const cours = data.studentCourse;
-
-    console.log(cours);
+    const cours = data.cours;
     
     const [data2,setData] = useState([]);
     const sendData = async (event) => {
@@ -30,12 +26,28 @@ function Lesson({data}){
         console.log(obj);
 
         const fetchData = async () => {
-            await postAPI("cours/"+cours.id+"/seances/", setData,obj);
+            await postAPI("cours/"+cours.id+"/seances", setData,obj);
         };
 
         fetchData();
-        // window.location.href = "/teacher/home";
+        window.location.href = "/teacher/home";
     }
+
+    const [student, setStudent] = useState([]);
+    useEffect(() => {
+        if (cours && cours.Student) {
+            const fetchData = async () => {
+                await getAPI("students/" + cours.Student.id, setStudent);
+            };
+            fetchData();
+        }
+    }, [cours]);
+
+    var userInstruments = [];
+    if(student.id != undefined){
+        userInstruments = student.User.userInstruments;
+    }
+
     if(cours.id != undefined){
         return (
             <>
@@ -54,13 +66,12 @@ function Lesson({data}){
                         
                         <div className="editLessonDetails">
                             <h2>Instruments</h2>
-                            {/* <div className="editLessonInstruments">
-                                {student.instruments.map((instrument, index) => {
-                                    return <InstrumentText key={index} index={index} text={instrument}/>;
+                            <div className="editLessonInstruments">
+                                {userInstruments.map((instrument, index) => {
+                                    return <InstrumentText key={index} index={index} text={instrument.Instrument.Name}/>;
                                 })}
-                            </div> */}
+                            </div>
                             <hr></hr>
-                            {/* <textarea rows="4" name="description"></textarea> */}
                             <div className='nextLesson'>
                                 <p>Début du cours :</p>
                                 <input type="datetime-local" name="startAt"></input>
@@ -86,52 +97,50 @@ function Lesson({data}){
 
 export default function AddLesson(){
     CheckLogin();
-    const studentId = useParams().studentId;
+    const coursId = useParams().coursId;
     const [cours, setCours] = useState([]);
     const [studentCourse, setStudentCourse] = useState(null); 
     const [seances, setSeance] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("cours", setCours);
-        };
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         await getAPI("cours", setCours);
+    //     };
 
-        fetchData();
-    }, []);
+    //     fetchData();
+    // }, []);
 
-    let data = null; 
+    // let data = null; 
 
-    if (cours.length != 0 && studentCourse.length != 0){
-        data = {studentCourse}; 
-    }
+    // if (cours.length != 0 && studentCourse.length != 0){
+    //     data = {studentCourse}; 
+    // }
 
-    useEffect(() => {
-        var studentCours= [];
-        //Récupérer le cours de l'élève à partir de son id
-        for(let i = 0; i < cours.length; i++){
-            if(cours[i].Student.User.id == studentId){
-                studentCours = cours[i];
-            }
-        }
+    // useEffect(() => {
+    //     var studentCours= [];
+    //     //Récupérer le cours de l'élève à partir de son id
+    //     for(let i = 0; i < cours.length; i++){
+    //         if(cours[i].Student.User.id == studentId){
+    //             studentCours = cours[i];
+    //         }
+    //     }
 
-        setStudentCourse(studentCours); 
+    //     setStudentCourse(studentCours); 
         
-    }, [cours]);
+    // }, [cours]);
 
     useEffect(() => {
-        if (!studentCourse) return; 
 
         const fetchData = async () => {
-            await getAPI("cours/"+studentCourse.id+"/seances", setSeance);
+            await getAPI("cours/"+coursId, setCours);
         };
 
         fetchData();
-    }, [studentCourse]); 
+    }, []); 
+    const data = {cours};
     console.log(data);
 
     return (
-        data !== null ? 
-        <Lesson data={data} /> :
-        null
+        <Lesson data={data} /> 
     );
 };

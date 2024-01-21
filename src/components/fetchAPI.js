@@ -1,6 +1,5 @@
 function getAPI(request, setState){
     let token = localStorage.getItem('token');
-
     const requestOptions = {
         method: 'GET',
         headers: { 

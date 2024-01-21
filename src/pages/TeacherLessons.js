@@ -7,6 +7,8 @@ import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 
+
+
 function Lesson({cours, seance, activities}){
     CheckLogin();
 
@@ -18,10 +20,25 @@ function Lesson({cours, seance, activities}){
         )
     }
 
-    console.log(activities);
+  
+    const [student, setStudent] = useState([]);
+    useEffect(() => {
+        if (cours && cours.Student) {
+            const fetchData = async () => {
+                await getAPI("students/" + cours.Student.id, setStudent);
+            };
+            fetchData();
+        }
+    }, [cours]);
+
+    var userInstruments = [];
+    if(student.id != undefined){
+        userInstruments = student.User.userInstruments;
+    }
+    
     if(cours.id != undefined){
         return (
-            <>
+            <>            
             <SimpleHeader/>
             
             <div className="simpleContent">
@@ -35,11 +52,11 @@ function Lesson({cours, seance, activities}){
                 <GreyDiv content={
                     <div className="lessonStudentDetails">
                         <h2>Instruments</h2>
-                        {/* <div className="lessonStudentInstruments">
-                            {student.instruments.map((instrument, index) => {
-                                return <InstrumentText key={index} index={index} text={instrument}/>;
+                        <div className="lessonStudentInstruments">
+                            {userInstruments.map((instrument, index) => {
+                                return <InstrumentText key={index} index={index} text={instrument.Instrument.Name}/>;
                             })}
-                        </div> */}
+                        </div>
                         <hr></hr>
                         <p>{seance.description}</p>
                         <div className='nextLesson'>
@@ -96,7 +113,7 @@ export default function TeacherLessons(){
         const fetchData = async () => {
             await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);
             await getAPI("cours/"+coursId, setCours);
-            await getAPI("cours/"+coursId+"/activities", setActivities);
+            await getAPI("cours/"+coursId+"/activities?limit=20", setActivities);
         };
 
         fetchData();
@@ -104,14 +121,14 @@ export default function TeacherLessons(){
     
     //Les activités de la séance
     const seanceActivities = [];
-    useEffect(() => {
-    activities.map((activity, index) => {
-        if(activity.id == seance.id){
-            seanceActivities.push(activity);
-        }
-    });
-    }, [seance]);
-    
+    if(activities.length != 0){
+        activities.map((activity, index) => {
+            if(activity.Seance.id == seance.id){
+                seanceActivities.push(activity);
+            }
+        });
+    }   
+
     return (
         cours.id !== undefined && seance.id !== undefined ?
         <Lesson  cours={cours} seance={seance} activities={seanceActivities}/>:

@@ -87,6 +87,7 @@ function Lesson({data}){
     }
 
     const deleteSeance = async (event) => {
+        event.preventDefault();
         const fetchData = async () => {
             await deleteAPI("cours/"+coursId+"/seances/"+seanceId);
         };
@@ -95,9 +96,24 @@ function Lesson({data}){
 
         window.location.href = "/teacher/home";
     }
+    
+    const [student, setStudent] = useState([]);
+    useEffect(() => {
+        if (cours && cours.Student) {
+            const fetchData = async () => {
+                await getAPI("students/" + cours.Student.id, setStudent);
+            };
+            fetchData();
+        }
+    }, [cours]);
 
+    var userInstruments = [];
+    if(student.id != undefined){
+        userInstruments = student.User.userInstruments;
+    }
 
     if(cours.id != undefined){
+        
         return (
             <>
             <SimpleHeader/>
@@ -115,11 +131,11 @@ function Lesson({data}){
                         
                         <div className="editLessonDetails">
                             <h2>Instruments</h2>
-                            {/* <div className="editLessonInstruments">
-                                {student.instruments.map((instrument, index) => {
-                                    return <InstrumentText key={index} index={index} text={instrument}/>;
+                            <div className="editLessonInstruments">
+                                {userInstruments.map((instrument, index) => {
+                                    return <InstrumentText key={index} index={index} text={instrument.Instrument.Name}/>;
                                 })}
-                            </div> */}
+                            </div>
                             <hr></hr>
                             <textarea rows="4" name="description" defaultValue={seance.description}></textarea>
                             <div className='nextLesson'>
@@ -224,7 +240,7 @@ export default function EditLesson(){
         const fetchData = async () => {
             await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);
             await getAPI("cours/"+coursId, setCours);
-            await getAPI("cours/"+coursId+"/activities", setActivities);
+            await getAPI("cours/"+coursId+"/activities?limit=20", setActivities);
             await getAPI("vault-sheets", setPartitions);
         };
 
@@ -233,11 +249,13 @@ export default function EditLesson(){
 
     //Les activités de la séance
     const seanceActivities = [];
-    activities.map((activity, index) => {
-        if(activity.Seance.id == seance.id){
-            seanceActivities.push(activity);
-        }
-    });
+    if(activities.length != 0){
+        activities.map((activity, index) => {
+            if(activity.Seance.id == seance.id){
+                seanceActivities.push(activity);
+            }
+        });
+    }   
 
     const data = {cours, seance, seanceActivities, partitions};
     return (
