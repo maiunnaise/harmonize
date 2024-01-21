@@ -63,6 +63,7 @@ async function postAPI(request, setState, body){
 
     const response = await fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     const data = await response.json();
+    console.log(data.message);
     setState(data);
 }
 
