@@ -4,9 +4,9 @@ import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI } from '../components/fetchAPI.js';
 
-function TeachersDesc({teacher}){
+function TeachersDesc({teacher, onSendRequest}){
     return (
-        <div>
+        <div id={teacher.User.id}>
             <img className="findTeacherImg"src="../logo192.png" alt='${teacher.prenom} ${teacher.nom}'/>
             <div>
                 <div id="teacherName">
@@ -19,7 +19,7 @@ function TeachersDesc({teacher}){
                 </div>
             </div>
             <p className="textDesc">{teacher.User.description}</p>
-            <button>Envoyer une demande</button>
+            <button onClick={() => onSendRequest()}>Envoyer une demande</button>
         </div>
     )
 }
@@ -28,6 +28,7 @@ function TeachersDesc({teacher}){
 function FindTeachersDiv(){
     const [teachers, setTeachers] = useState([]);
     const [filteredData, setFilteredData] = useState([]);
+    const [selectedTeacher, setSelectedTeacher] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -73,8 +74,54 @@ function FindTeachersDiv(){
                 </div>
             }/>
             {filteredData.map((teacher, index) => {
-                return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} />}/>;
+                return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} onSendRequest={() => setSelectedTeacher(teacher)} />}/>;
             })}
+
+            {/* Afficher la popup si un professeur est sélectionné */}
+            {selectedTeacher.length !=0 && (
+                <SendCourseRequest teacher={selectedTeacher} onClose={() => setSelectedTeacher([])} />
+            )}
+            
+        </div>
+    )
+}
+
+function SendCourseRequest({teacher, onClose}){
+    console.log(teacher);
+    const[request, setRequest] = useState({});
+
+    const sendRequest = async () => {
+        await getAPI(`teachers/${teacher.id}`, setRequest);
+    }
+    console.log(request);
+    return (
+        <div  className="overlay" style={{display:"block"}}>
+                <div className="overlayContent">
+                    <p className="closeOverlay" onClick={onClose}>X</p>
+                    <h2>Un cours avec {teacher.User.prenom} {teacher.User.nom} ?</h2>
+                    <div className="overlayParams">
+                        <label>
+                            <p>Instrument</p>
+                            <select name='instrument'>
+                                <option value="">Instrument</option> 
+                                {teacher.User.userInstruments.map((instrument, index) => {
+                                    return <option key={index} value={instrument.Instrument.id}>{instrument.Instrument.Name}</option>;
+                                })}
+                            </select>
+                        </label>
+
+                        <label>
+                            <p>Difficulté</p>
+                            <select name='difficulty'>
+                                <option value="">Difficulté</option>
+                                <option value="Débutant">Débutant</option>
+                                <option value="Intermédiaire">Intermédiaire</option>
+                                <option value="Avancé">Avancé</option>
+                            </select>
+                        </label>
+                    </div>
+                    <button onClick={sendRequest}>Envoyer une demande</button>
+                </div>
         </div>
     )
 }
@@ -82,6 +129,6 @@ function FindTeachersDiv(){
 export default function FindTeachersPage(){
 
     return (
-    <FindTeachersDiv  />
+        <FindTeachersDiv  />
     );
 };
