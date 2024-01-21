@@ -3,6 +3,7 @@ import './Messages.css';
 import { Link , useNavigate, useParams } from 'react-router-dom';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 import { decodeToken } from "react-jwt";
+import CheckLogin from '../components/checkLogin.js';
 
 //Retourne le role de l'utilisateur
 function getRole(){
@@ -26,10 +27,12 @@ function MessagesHeader({user}) {
             <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate(-1)}></img>
             <h2>{user.User.prenom} {user.User.nom}</h2>
         </div>
-        <div>
-            <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
-            <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
-        </div>
+        <Link to="/nextVersion">
+            <div>
+                <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
+                <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
+            </div>
+        </Link>
       </header>
     );
 }
@@ -61,16 +64,17 @@ function ChatBar({cours}){
     return(
         <div className='ChatBar'>
             <input type="text" placeholder="Écrire un message..."/>
-            <div>
-                <div className='vocal'>
-                    <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
-                </div>
+            <Link to="/nextVersion">
                 <div>
-                    <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
-                    <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    <div className='vocal'>
+                        <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
+                    </div>
+                    <div>
+                        <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
+                        <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    </div>
                 </div>
-            </div>
-            
+            </Link>
         </div>
     );
 };
@@ -78,6 +82,35 @@ function ChatBar({cours}){
 
 function MessagesDisplay({msg, contact, cours}){
     // let contact = users.find((user) => user.id == contactId);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [data, setData] = useState([]);
+    let navigate = useNavigate();
+    useEffect(() => {
+        if(isAnswered){
+            navigate("/inbox")
+        }
+    }, [isAnswered]);
+
+    function acceptRequest(){
+        console.log(cours);
+
+        const accpetCourse = async () => {
+            await putAPI("cours/"+cours.id, {"isPending": null});
+            await postAPI("cours/"+cours.id+"/messages", setData, {"content": "Votre demande a été acceptée."});
+            setIsAnswered(true);
+        };
+        accpetCourse();
+
+    }
+
+    function denyRequest(){
+        const denyCourse = async () => {
+            await deleteAPI("cours/"+cours.id);
+            
+            setIsAnswered(true);
+        };
+        denyCourse();
+    }
     return msg.map((message, index) => {
 
 
@@ -90,9 +123,14 @@ function MessagesDisplay({msg, contact, cours}){
 
             fetchData();
             return (
-                <div className="messageReceived" key={message.id} id={message.id}>
+                <div className={msg.length>1?"messageReceived":"request"} key={message.id} id={message.id}>
                     <img src={contact.img} alt="profile"/>
-                    <p>{message.content}</p>
+                    {msg.length >1 ? <p>{message.content}</p>: 
+                    <div>
+                        {message.content}
+                        <p onClick={acceptRequest}>Accepter</p>
+                        <p onClick={denyRequest}>Refuser</p>
+                    </div>}
                 </div>
             );
         }
@@ -158,6 +196,7 @@ function MessagePage({data}){
 
 export default function Messages(){
     const coursId = useParams().id;
+    CheckLogin();
 
     const [msg, setMsg] = useState([]);
     const [cours, setCours] = useState([]);

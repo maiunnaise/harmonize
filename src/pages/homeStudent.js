@@ -134,6 +134,7 @@ export default function HomeStudent(){
             <EmptyInstruments instrument={instrument}/>
             {courses.length ==0 ? <p className='emptyCourse'>Pas de cours disponible</p> : courses.map((course) => {
                 return <GreyDiv content={<Course course={course} />}/>;
+                
             })}
         </div>
     );

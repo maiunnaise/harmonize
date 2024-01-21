@@ -26,6 +26,7 @@ import NotFound from './pages/notFound.js';
 import LessonsHistory from './pages/LessonsHistory.js';
 import LessonsHistoryDetails from './pages/LessonsHistoryDetails.js';
 import Register from './pages/register.js';
+import NextVersion from './pages/nextVersion.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -38,7 +39,7 @@ root.render(
           <Route path="inbox" element={<Inbox />}/>
           <Route path="search" element={<SearchPage />}/>
           <Route path="cours" element={<CoursSearch />}/>
-          <Route path="exercices" element={<ExercicesSearch />}/>
+          {/* <Route path="exercices" element={<ExercicesSearch />}/> */}
           <Route path="teacher/home" element={<TeacherHome />}/>
           <Route path="student/home" element={<HomeStudent/>}/>
           <Route path="library" element={<Library/>}/>
@@ -60,6 +61,7 @@ root.render(
         <Route path="teacher/editLesson/:lessonId" element={<EditLesson/>} />
         <Route path="teacher/lessonsHistory/:studentId" element={<LessonsHistory/>} />
         <Route path="teacher/lessonsHistory/:studentId/:lessonId" element={<LessonsHistoryDetails/>} />
+        <Route path="/nextVersion" element={<NextVersion/>} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />

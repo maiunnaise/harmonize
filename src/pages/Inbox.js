@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 import { decodeToken } from "react-jwt";
+import CheckLogin from '../components/checkLogin.js';
 
 // function getTimeSinceMessage(message){
 //     let time = (new Date() - new Date(message.date))/1000;
@@ -25,6 +26,7 @@ import { decodeToken } from "react-jwt";
 
 //Retourne le role de l'utilisateur
 function getRole(){
+
     const token = localStorage.getItem('token');
     let decodedToken = decodeToken(token);
 
@@ -60,7 +62,7 @@ function Contact({cours}){
         var lastMessage = msg[0];
         const role = getRole();
 
-        console.log();
+        console.log(cours);
 
         var contactRole = lastMessage.Sender;
         
@@ -73,7 +75,7 @@ function Contact({cours}){
                             <div className="inboxText">
                                  {role === "ROLE_STUDENT" ? 
                                     <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
-                                    <h2>{cours.Student.User.prenom} {cours.Student.User.prenom}</h2>}                      
+                                    <h2>{cours.Student.User.prenom} {cours.Student.User.nom}</h2>}                      
                                 <p>
                                     <span className="lastMessage">{lastMessage.content}</span> 
                                     {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
@@ -103,12 +105,14 @@ function Contact({cours}){
                     </Link>
                 }/>
             )
+            
         
         }
     }
 }
 
 function InboxDiv({users, cours}){
+
     const [filteredData, setFilteredData] = useState([]);
     useEffect(() => {
         setFilteredData(cours);
@@ -135,6 +139,7 @@ function InboxDiv({users, cours}){
 }
 
 export default function Inbox(){
+    CheckLogin();
 
     const [cours, setCours] = useState([]);
     useEffect(() => {
@@ -149,6 +154,7 @@ export default function Inbox(){
     if(cours.length > 0){
         
     };
+    console.log(cours);
 
     return (
         <InboxDiv cours={cours} />
