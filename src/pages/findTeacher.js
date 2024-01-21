@@ -1,41 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import './findTeacher.css';
 import GreyDiv from '../components/GreyDiv.js';
-import HistoryButton from '../components/HistoryButton.js';
 import SearchBar from '../components/SearchBar.js';
+import { getAPI } from '../components/fetchAPI.js';
 
-function TeachersDesc({teacher}){
+function TeachersDesc({teacher, onSendRequest}){
     return (
-        <div>
-            <img className="findTeacherImg"src={teacher.image} alt='${teacher.firstname} ${teacher.lastname}'/>
+        <div id={teacher.User.id}>
+            <img className="findTeacherImg"src="../logo192.png" alt='${teacher.prenom} ${teacher.nom}'/>
             <div>
                 <div id="teacherName">
-                    <h2>{teacher.firstname} {teacher.lastname} <span className="greyText"> · {teacher.location} </span></h2>
+                    <h2>{teacher.User.prenom} {teacher.User.nom} <span className="greyText"> · {teacher.city} </span></h2>
                 </div>
                 <div className='instrumentsTeach'>
-                    {teacher.instruments.map((instrument, index) => {
-                        return <p key={index} className="instrumentText">{instrument}</p>;
+                    {teacher.User.userInstruments.map((instrument, index) => {
+                        return <p key={index} className="instrumentText">{instrument.Instrument.Name}</p>;
                     })}
                 </div>
             </div>
-            <p className="textDesc">{teacher.description}</p>
-            <button>Envoyer une demande</button>
+            <p className="textDesc">{teacher.User.description}</p>
+            <button onClick={() => onSendRequest()}>Envoyer une demande</button>
         </div>
     )
 }
 
 
-function FindTeachersDiv({teachers}){
-    const [filteredData, setFilteredData] = useState(teachers);
-    const [searchTerm, setSearchTerm] = useState('');
+function FindTeachersDiv(){
+    const [teachers, setTeachers] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
+    const [selectedTeacher, setSelectedTeacher] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI("teachers", setTeachers);
+        };
+        fetchData();
+
+    }, []);
+
+    useEffect(() => {
+        if (teachers.length > 0){
+            setFilteredData(teachers);
+        }
+    }, [teachers])
+
     
     const handleSearch = (searchTerm) => {
-        const filteredResults = teachers.filter((item) =>
-            item.location.toLowerCase().includes(searchTerm.toLowerCase()) 
-        );
-        
+        if (searchTerm === '') {
+            setFilteredData(teachers);
+            return;
+        }
+    
+        const filteredResults = teachers.filter((item) => {
+            if (item.city !== null) {
+                return item.city.toLowerCase().includes(searchTerm.toLowerCase());
+            }
+            return false; 
+        });
+    
         setFilteredData(filteredResults);
     };
+
 
     return (
         <div className='content searchTeacher'>
@@ -49,21 +74,61 @@ function FindTeachersDiv({teachers}){
                 </div>
             }/>
             {filteredData.map((teacher, index) => {
-                return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} />}/>;
+                return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} onSendRequest={() => setSelectedTeacher(teacher)} />}/>;
             })}
+
+            {/* Afficher la popup si un professeur est sélectionné */}
+            {selectedTeacher.length !=0 && (
+                <SendCourseRequest teacher={selectedTeacher} onClose={() => setSelectedTeacher([])} />
+            )}
+            
         </div>
     )
 }
 
-const teachers = 
-[
-    {image: "../logo192.png", location: "Fruits", instruments: ["Piano","Guitare"], firstname: "Apple", lastname: "Araerpple", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
-    {image: "../logo192.png", location: "Fruits", instruments: ["aaa","bbb"], firstname: "Apple", lastname: "Arpple", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},
-    {image: "../logo192.png", location: "Saint-Lô", instruments: ["aaa","bbb"], firstname: "Apple", lastname: "Araerppeeee", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."},]
-;
+function SendCourseRequest({teacher, onClose}){
+    console.log(teacher);
+    const[request, setRequest] = useState({});
+
+    const sendRequest = async () => {
+        await getAPI(`teachers/${teacher.id}`, setRequest);
+    }
+    console.log(request);
+    return (
+        <div  className="overlay" style={{display:"block"}}>
+                <div className="overlayContent">
+                    <p className="closeOverlay" onClick={onClose}>X</p>
+                    <h2>Un cours avec {teacher.User.prenom} {teacher.User.nom} ?</h2>
+                    <div className="overlayParams">
+                        <label>
+                            <p>Instrument</p>
+                            <select name='instrument'>
+                                <option value="">Instrument</option> 
+                                {teacher.User.userInstruments.map((instrument, index) => {
+                                    return <option key={index} value={instrument.Instrument.id}>{instrument.Instrument.Name}</option>;
+                                })}
+                            </select>
+                        </label>
+
+                        <label>
+                            <p>Difficulté</p>
+                            <select name='difficulty'>
+                                <option value="">Difficulté</option>
+                                <option value="Débutant">Débutant</option>
+                                <option value="Intermédiaire">Intermédiaire</option>
+                                <option value="Avancé">Avancé</option>
+                            </select>
+                        </label>
+                    </div>
+                    <button onClick={sendRequest}>Envoyer une demande</button>
+                </div>
+        </div>
+    )
+}
 
 export default function FindTeachersPage(){
+
     return (
-    <FindTeachersDiv teachers={teachers} />
+        <FindTeachersDiv  />
     );
 };

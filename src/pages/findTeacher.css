@@ -67,3 +67,57 @@
 .instrumentsTeach{
   margin-bottom: 0.7em;
 }
+
+.overlayContent{
+  z-index: 999;
+  position: absolute;
+  width: 70%;
+  background-color: #474747;
+  border-radius: 30px;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  align-items: center;
+  left:15%;
+  top: 32%;
+  height: 35%;
+  text-align: center;
+}
+
+.overlayContent > .closeOverlay{
+  align-self: end;
+  padding: 0.2em 1em;
+  font-weight: bold;
+}
+
+.overlayContent > button{
+  margin-top: 0.5em;
+  padding: 1em 0.5em;
+  border-radius: 30px;
+  background-color: #845483;
+  border: 0;
+  width:80%;
+  font-weight: bold;
+}
+
+.overlayContent > .overlayParams{
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+  text-align: center;
+  padding-bottom: .5em;
+}
+
+.overlayParams option{
+  color: black;
+}
+
+.overlayParams select{
+  border-radius: 5px;
+  padding: 0.5em 1em;
+  border: 2px solid white;
+  background-color: transparent;
+  margin-top: 0.2em;
+}
