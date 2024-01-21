@@ -133,7 +133,10 @@ export default function HomeStudent(){
         <div className="homeStudent content">
             <EmptyInstruments instrument={instrument}/>
             {courses.length ==0 ? <p className='emptyCourse'>Pas de cours disponible</p> : courses.map((course) => {
-                return <GreyDiv content={<Course course={course} />}/>;
+                if(course.isPending != false){
+                    return <GreyDiv content={<Course course={course} />}/>;
+                }
+                
             })}
         </div>
     );

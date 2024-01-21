@@ -27,10 +27,12 @@ function MessagesHeader({user}) {
             <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate(-1)}></img>
             <h2>{user.User.prenom} {user.User.nom}</h2>
         </div>
-        <div>
-            <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
-            <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
-        </div>
+        <Link to="/nextVersion">
+            <div>
+                <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
+                <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
+            </div>
+        </Link>
       </header>
     );
 }
@@ -62,16 +64,17 @@ function ChatBar({cours}){
     return(
         <div className='ChatBar'>
             <input type="text" placeholder="Écrire un message..."/>
-            <div>
-                <div className='vocal'>
-                    <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
-                </div>
+            <Link to="/nextVersion">
                 <div>
-                    <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
-                    <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    <div className='vocal'>
+                        <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
+                    </div>
+                    <div>
+                        <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
+                        <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    </div>
                 </div>
-            </div>
-            
+            </Link>
         </div>
     );
 };
