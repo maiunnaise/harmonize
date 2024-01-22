@@ -115,3 +115,7 @@ body .TeacherHome{
     background-color: #CC3535;
 }
 
+.TeacherHome > .emptyCourse{
+    top : 15vh;
+}
+

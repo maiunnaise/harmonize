@@ -3,7 +3,11 @@
   padding: 0;
   box-sizing: border-box;
   color: white;
-  font-family: Lexend;  
+  font-family: Lexend; 
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -29,6 +33,9 @@ code {
   position: relative;
   overflow: scroll;
   padding-top: 1em;
+  max-width: 450px;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 a{

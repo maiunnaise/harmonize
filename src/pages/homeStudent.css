@@ -61,21 +61,14 @@
 
 .redAct{
     background-color: #C92A2A;
-    width: 3vw;
+    width: 1.5vh;;
     height: 100%;
     border-radius: 15px;
 }
 
 .greenAct{
     background-color: #409048;
-    width: 3vw;
-    height: 100%;
-    border-radius: 15px;
-}
-
-.orangeAct{
-    background-color: #E8A317;
-    width: 3vw;
+    width: 1.5vh;
     height: 100%;
     border-radius: 15px;
 }

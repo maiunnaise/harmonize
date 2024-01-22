@@ -49,6 +49,8 @@
     top: 73vh;
     position: absolute;
     left:1vw;
+    width: 50vh;
+    height: 10vh;
 }
 
 .addPart > .GreyDiv{
@@ -64,8 +66,8 @@
 }
 
 .addPart > .GreyDiv > img{
-    width : 8vw;
-    height: 8vw;
+    width : 4vh;
+    height: 4vh;
 }
 
 .addPart > .GreyDiv > p{

@@ -5,6 +5,7 @@ import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI} from '../components/fetchAPI.js';
 import CheckLogin from '../components/checkLogin.js';
+import EmptyInstruments from '../components/emptyInstruments'
 
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
@@ -113,7 +114,9 @@ function Home({cours, students}){
         }
     }
 
+
     return(
+        
         <div className="content TeacherHome">
             <h1>Mes élèves</h1>
             <div>
@@ -222,11 +225,40 @@ export default function TeacherHome(){
             }
         });
     }
+
+    const [instrumentUser, setInstrumentUser] = useState(['test']);
+    const [instrument, setInstrument] = useState([]);
+    
+    useEffect(() => {
+        const fetchInst = async () => {
+            await getAPI('user-instruments', setInstrumentUser);
+        };
+        fetchInst();
+
+    }, []);
+
+    useEffect(() => {
+        const fetchInstruments = async () => {
+            await getAPI('instruments', setInstrument);
+        };
+        if(instrumentUser.length == 0){
+            let overlay = document.querySelector('.overlay');
+            overlay.style.display = 'block';
+            fetchInstruments();
+        }
+        
+    }, [instrumentUser]);
+
+    console.log(instrumentUser);
     
     return (
-        cours.length > 0 && students.length > 0 ? 
+        <>
+        <EmptyInstruments instrument={instrument}/>
+        {cours.length > 0 && students.length > 0 ? 
         <Home cours={cours} students={students}/> :
-        null 
+        <p className='emptyCourse'>Pas de cours disponible</p>}
+        </>
+        
     );
 
     

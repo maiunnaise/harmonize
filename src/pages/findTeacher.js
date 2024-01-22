@@ -100,6 +100,9 @@ function FindTeachersDiv(){
 }
 
 function SendCourseRequest({teacher, onClose}){
+    useEffect(() => {
+        document.querySelector(".searchTeacher").scrollTo({top: 0, left: 0, behavior: 'smooth'});
+    }, []);
     const[request, setRequest] = useState({});
     const [user, setUser] = useState({});
     const [message, setMessage] = useState({});
