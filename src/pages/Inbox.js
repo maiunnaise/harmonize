@@ -95,7 +95,7 @@ function Contact({cours}){
                             <div className="inboxText">
                                  {role === "ROLE_STUDENT" ? 
                                     <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
-                                    <h2>{cours.Student.User.prenom} {cours.Student.User.prenom}</h2>}                      
+                                    <h2>{cours.Student.User.prenom} {cours.Student.User.nom}</h2>}                      
                                 <p>
                                     <span className="lastMessage">{lastMessage.content}</span> 
                                     {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}

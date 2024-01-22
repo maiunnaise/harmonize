@@ -251,7 +251,7 @@ export default function EditUser(){
     CheckLogin();
     return (
         <div>
-            <SimpleHeader />
+            <SimpleHeader route={"/user"} />
             <EditUserForm />
         </div>
     );

@@ -23,7 +23,7 @@ function Cours(){
     return (
         cours.length != 0 ? 
         <div className="simpleContent">
-            <SimpleHeader />
+            <SimpleHeader route={"/cours"} />
             <div id="CoursPage">
                 <h2>{cours.Title} <span className="greyText"> · {cours.Instrument.Name} {cours.Difficulty}</span></h2>
                 <p className='boldText'>{cours.description}</p>

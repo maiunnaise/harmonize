@@ -51,7 +51,7 @@ function Lesson({data}){
     if(cours.id != undefined){
         return (
             <>
-            <SimpleHeader/>
+            <SimpleHeader route={"/teacher/home"}/>
     
             <div className="simpleContent ">
                 <div className="editLessonPicName">

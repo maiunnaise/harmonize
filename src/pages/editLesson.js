@@ -117,7 +117,7 @@ function Lesson({data}){
         
         return (
             <>
-            <SimpleHeader/>
+            <SimpleHeader route={"/teacher/teacherLessons/"+coursId+"/"+seanceId}/>
     
             <div className="simpleContent ">
                 <div className="editLessonPicName">

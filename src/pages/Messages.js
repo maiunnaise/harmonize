@@ -24,7 +24,7 @@ function MessagesHeader({user}) {
     return (
       <header className='MessagesHeader'>
         <div>
-            <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate(-1)}></img>
+            <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate("/inbox")}></img>
             <h2>{user.User.prenom} {user.User.nom}</h2>
         </div>
         <Link to="/nextVersion">

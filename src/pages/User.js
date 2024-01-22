@@ -25,7 +25,7 @@ function UserInfo(){
     }
     return (
         <div className="simpleContent">
-            <SimpleHeader />
+            <SimpleHeader route={"/teacher/home"} />
             <div className='userPicName'>
                 <img src="../logo192.png" alt="profile"/>
                 <div>
