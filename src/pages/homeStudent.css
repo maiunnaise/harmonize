@@ -72,3 +72,17 @@
     height: 100%;
     border-radius: 15px;
 }
+
+.orangeAct{
+    background-color: #E8A317;
+    width: 3vw;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.emptyCourse{
+    font-weight: bold;
+    width: fit-content;
+    position: relative;
+    margin:0 auto;
+}

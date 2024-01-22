@@ -18,7 +18,7 @@ function Search(){
 
         fetchData();
     }, []);
-    console.log(data);
+
 
     useEffect(() => {
         if (data.length > 0) {

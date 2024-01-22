@@ -1,30 +1,62 @@
 import React, { useState, useEffect } from 'react';
 import './Messages.css';
 import { Link , useNavigate, useParams } from 'react-router-dom';
+import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import { decodeToken } from "react-jwt";
+import CheckLogin from '../components/checkLogin.js';
+
+//Retourne le role de l'utilisateur
+function getRole(){
+    const token = localStorage.getItem('token');
+    let decodedToken = decodeToken(token);
+
+    if(decodedToken.roles.includes('ROLE_STUDENT') && decodedToken != null){
+        return "ROLE_STUDENT";
+    }
+    else if (decodedToken.roles.includes('ROLE_TEACHER') && decodedToken != null){
+        return "ROLE_TEACHER";
+    }
+}
 
 function MessagesHeader({user}) {
+
     const navigate = useNavigate();
     return (
       <header className='MessagesHeader'>
         <div>
             <img className="backArrow" src="/logo/icons/back-arrow.png" alt="menu arrow" onClick={() => navigate(-1)}></img>
-            <h2>{user.firstname} {user.lastname}</h2>
+            <h2>{user.User.prenom} {user.User.nom}</h2>
         </div>
-        <div>
-            <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
-            <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
-        </div>
+        <Link to="/nextVersion">
+            <div>
+                <img className="phone" src="/logo/icons/phone.png" alt="phone logo"></img>
+                <img className="video" src="/logo/icons/video.png" alt="video logo"></img>
+            </div>
+        </Link>
       </header>
     );
 }
 
-function ChatBar(){
+function ChatBar({cours}){
+    const [data2,setData] = useState([]);
     useEffect(() => {
         let input = document.querySelector('input');
         input.addEventListener("keypress", function (e) {
             if (e.key === 'Enter') {
-               console.log(input.value);
-               input.value = "";
+    
+                let obj = {"content": input.value, "unread": true};
+                
+                console.log(obj);
+    
+                const fetchData = async () => {
+                    await postAPI("cours/"+cours.id+"/messages", setData, obj);
+                };
+    
+                fetchData();
+    
+                input.value = "";
+                
+                window.location.reload();
             }
          });
     }, []);
@@ -32,38 +64,80 @@ function ChatBar(){
     return(
         <div className='ChatBar'>
             <input type="text" placeholder="Écrire un message..."/>
-            <div>
-                <div className='vocal'>
-                    <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
-                </div>
+            <Link to="/nextVersion">
                 <div>
-                    <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
-                    <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    <div className='vocal'>
+                        <img className="micro" src="/logo/icons/micro.png" alt="microphone logo"></img>
+                    </div>
+                    <div>
+                        <img className="note" src="/logo/icons/sol-key.png" alt="note logo"></img>
+                        <img className="image" src="/logo/icons/image.png" alt="image logo"></img>
+                    </div>
                 </div>
-            </div>
-            
+            </Link>
         </div>
     );
 };
 
 
-function MessagesDisplay({data}){
-    let contactId = useParams().id;
-    let contact = users.find((user) => user.id == contactId);
-    return data.map((message, index) => {
-        if(message.Sender.id == contact.id){
+function MessagesDisplay({msg, contact, cours}){
+    // let contact = users.find((user) => user.id == contactId);
+    const [isAnswered, setIsAnswered] = useState(false);
+    const [data, setData] = useState([]);
+    let navigate = useNavigate();
+    useEffect(() => {
+        if(isAnswered){
+            navigate("/inbox")
+        }
+    }, [isAnswered]);
+
+    function acceptRequest(){
+        console.log(cours);
+
+        const accpetCourse = async () => {
+            await putAPI("cours/"+cours.id, {"isPending": null});
+            await postAPI("cours/"+cours.id+"/messages", setData, {"content": "Votre demande a été acceptée."});
+            setIsAnswered(true);
+        };
+        accpetCourse();
+
+    }
+
+    function denyRequest(){
+        const denyCourse = async () => {
+            await deleteAPI("cours/"+cours.id);
+            
+            setIsAnswered(true);
+        };
+        denyCourse();
+    }
+    return msg.map((message, index) => {
+
+
+        if(message.Sender == null ||message.Sender.id == contact.User.id ){
             console.log("Message reçu");
+            const obj = {"unread": false};
+            const fetchData = async () => {
+                await putAPI("cours/"+cours.id+"/messages/"+message.id, obj);
+            };
+
+            fetchData();
             return (
-                <div className="messageReceived" id='message.id'>
+                <div className={msg.length>1?"messageReceived":"request"} key={message.id} id={message.id}>
                     <img src={contact.img} alt="profile"/>
-                    <p>{message.content}</p>
+                    {msg.length >1 ? <p>{message.content}</p>: 
+                    <div>
+                        {message.content}
+                        <p onClick={acceptRequest}>Accepter</p>
+                        <p onClick={denyRequest}>Refuser</p>
+                    </div>}
                 </div>
             );
         }
-        else {
+        else if ( message.Sender.id != null  && message.Sender.id != contact.User.id) {
             console.log("Message envoyé");
             return (
-                <div className="messageSended" id='message.id'>
+                <div className="messageSended" key={message.id} id={message.id}>
                     <p>{message.content}</p>
                     <img src={contact.img} alt="profile"/> 
                 </div>
@@ -72,137 +146,74 @@ function MessagesDisplay({data}){
     })
 };
 
-function MessagePage({data,users}){
-    let contactId = useParams();
-    console.log(contactId.id);
-    let user = users.find((user) => user.id == contactId.id);
-    console.log(user);
+function MessagePage({data}){
+    let role = getRole();
+    let contact = role === "ROLE_STUDENT" ? data.cours.Teacher : data.cours.Student;
+    
+    //Supprime un message en restant appuyé dessus
+    function DeleteMsg(){
+        const messages = document.querySelectorAll(".messageSended, .messageReceived");
+        
+        messages.forEach(message => {
+            let pressTimer;
+            const startPress = () => {
+                pressTimer = setTimeout(() => {
+                    const fetchData = async () => {
+                        await deleteAPI("cours/"+data.cours.id+"/messages/"+message.id);
+                    };
+            
+                    fetchData();
+                    
+                }, 1000); 
+            };
+            const endPress = () => {
+                clearTimeout(pressTimer);
+                window.location.reload();
+            };
+            message.addEventListener('touchstart', startPress);
+            message.addEventListener('touchend', endPress);
+            message.addEventListener('mousedown', startPress);
+            message.addEventListener('mouseup', endPress);
+        });
+    
+    }
+
+    useEffect(() => {
+        DeleteMsg();
+    }, [data.msg]);
     
     return (
         <div className="simpleContent">
-            <MessagesHeader user={user}/>
+            <MessagesHeader user={contact}/>
             <div className='MessagesDisplay'>
-                <MessagesDisplay data={data}/>
+                <MessagesDisplay msg={data.msg} contact={contact} cours={data.cours}/>
             </div>
-            <ChatBar />
+            <ChatBar cours={data.cours}/>
         </div>
     )
 }
 
-let data = [
-    {
-        "id": 2,
-        "Cours": {
-            "id": 2
-        },
-        "content": "Salut Michel, en raison de fort brouillard je serai en distanciel ce matin.",
-        "Sender": {
-            "id": 2,
-            "email": "teacher@mmi.fr",
-            "roles": [
-                "ROLE_TEACHER",
-                "ROLE_USER"
-            ]
-        },
-        "Receiver": {
-            "id": 3,
-            "email": "student@mmi.fr",
-            "roles": [
-                "ROLE_STUDENT",
-                "ROLE_USER"
-            ]
-        }
-    },
-    {
-        "id": 3,
-        "Cours": {
-            "id": 2
-        },
-        "content": "Merci pour ta compréhension.",
-        "Sender": {
-            "id": 2,
-            "email": "teacher@mmi.fr",
-            "roles": [
-                "ROLE_TEACHER",
-                "ROLE_USER"
-            ]
-        },
-        "Receiver": {
-            "id": 3,
-            "email": "student@mmi.fr",
-            "roles": [
-                "ROLE_STUDENT",
-                "ROLE_USER"
-            ]
-        }
-    },
-    {
-        "id": 4,
-        "Cours": {
-            "id": 2
-        },
-        "content": "menfou hahahhahaha",
-        "Sender": {
-            
-            "id": 3,
-            "email": "student@mmi.fr",
-            "roles": [
-                "ROLE_STUDENT",
-                "ROLE_USER"
-            ]
-        },
-        "Receiver": {
-            "id": 2,
-            "email": "teacher@mmi.fr",
-            "roles": [
-                "ROLE_TEACHER",
-                "ROLE_USER"
-            ]
-        }
-    },
-    {
-        "id": 4,
-        "Cours": {
-            "id": 2
-        },
-        "content": "hahahhakzj fkkaaertaertaert eartaertaeta zetat",
-        "Sender": {
-            
-            "id": 3,
-            "email": "student@mmi.fr",
-            "roles": [
-                "ROLE_STUDENT",
-                "ROLE_USER"
-            ]
-        },
-        "Receiver": {
-            "id": 2,
-            "email": "teacher@mmi.fr",
-            "roles": [
-                "ROLE_TEACHER",
-                "ROLE_USER"
-            ]
-        }
-    },
-]
-
-let users = [
-    {id: 2,
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstname: "John",
-    lastname: "Doe",
-    email: "adadas@mail.com",
-    instruments: ["Piaeeeeno","Guitare"],},
-    {id: 3,
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstname: "John",
-    lastname: "Doe",
-    email: "adadas@mail.com",
-    instruments: ["Piaeeeeno","Guitare"],},
-]
 
 export default function Messages(){
+    const coursId = useParams().id;
+    CheckLogin();
+
+    const [msg, setMsg] = useState([]);
+    const [cours, setCours] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('cours/'+coursId+"/messages", setMsg);
+            await getAPI('cours/'+coursId, setCours);
+        };
+
+        fetchData();
+    }, []);
+    
+    const data = {msg, cours};
+
     return (
-        <MessagePage data={data} users={users} />
+        cours.id !== undefined && msg.length > 0 ?
+        <MessagePage data={data}/>:
+        null
     );
 };

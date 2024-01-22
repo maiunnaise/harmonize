@@ -1,5 +1,5 @@
 import './library.css';
-import Partition from '../components/Partition';
+import Partition from '../components/PartitionLib';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
@@ -210,6 +210,7 @@ export function Library() {
     <div className="content">
         <h1>Ma bibliothèque</h1>
         <Libform partitions={partitions}/>
+        <div className='libraryPart'>
         {partitions.length == 0 ? <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p> 
         :
         partitions.map((partition) => {
@@ -219,6 +220,7 @@ export function Library() {
             </Link>
             );
         })}
+        </div>
         <Link to="/addPartition" className='addPart'>
             <GreyDiv content={<AddPart/>}/>
         </Link>

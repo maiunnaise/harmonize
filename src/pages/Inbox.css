@@ -10,11 +10,11 @@
     text-overflow: ellipsis;
 }   
 
-.inboxText span:last-child {
+/* .inboxText span:last-child {
     align-self: flex-end;
     width: 4em;
     margin-right: 0.5em;
-}
+} */
 
 .inboxLastMsg {
     padding-inline: 2em;

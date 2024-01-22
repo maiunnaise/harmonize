@@ -11,9 +11,15 @@
     margin-bottom: 0.5em;
 }
 
-.partition > img{
-    width: 4vw;
-    height: 4vw;
+.libIcons > img{
+    width: 2vh;
+    height: 2vh;
+}
+
+.libIcons{
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
 }
 
 .partitionDesc > p:nth-of-type(2){

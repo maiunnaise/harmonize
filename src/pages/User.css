@@ -44,7 +44,7 @@
     font-size: small;
 }
 
-.userDetails .userEmail{
+.userDetails .userEmail, .userDesc{
     margin-left: 1em; 
     margin-top: 0.5em;
     font-size: small;            
