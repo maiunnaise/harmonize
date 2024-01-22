@@ -84,7 +84,7 @@ function Lesson({cours, seance, activities}){
                                 <Link to={`/teacher/editLesson/${cours.id}/${seance.id}`}>
                                     <button>Modifier le cours</button>
                                 </Link>
-                            <Link to={`/message/${cours.Student.id}`} className='inboxLink'>
+                            <Link to={`/message/${cours.id}`} className='inboxLink'>
                                 <button>Message</button>
                             </Link>
                         </div>
