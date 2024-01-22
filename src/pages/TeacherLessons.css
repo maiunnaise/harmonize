@@ -64,6 +64,13 @@
 .lessonStudentDetails .lessonStudentInstruments{
     margin-left: 0.5em;
     font-size: small;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lessonStudentDetails .lessonStudentInstruments p{
+    font-size: 0.9em;
+    margin-top: 0.5em;
 }
 
 .lessonStudentDetails .nextLesson {

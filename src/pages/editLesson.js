@@ -82,7 +82,9 @@ function Lesson({data}){
         };
 
         fetchData();
-        window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
+        setTimeout(() => {
+            window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
+        }, 800);
     }
 
     const deleteSeance = async (event) => {
