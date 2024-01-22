@@ -6,7 +6,6 @@ import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
-// import { act } from 'react-dom/test-utils/index.js';
 
 
 
@@ -54,26 +53,54 @@ function Lesson({data}){
     }
 
     const [activities2, setActivities] = useState([]);
+    const [pdf, setPDF] = useState([]);
     const sendNewActivities = async (event) => {
         event.preventDefault();
         // const [setData] = useState([]);
         const formData = new FormData(event.target); 
         
+        
         let obj = {};
         obj["idSeance"] = seanceId;
+        console.log(formData);
         for (let pair of formData.entries()) {
             obj[pair[0]] = pair[1];
         }   
         obj["status"] = "toDo";
-        console.log(JSON.stringify(obj));
+        // console.log(JSON.stringify(obj));
 
         const fetchData = async () => {
             await postAPI("cours/"+coursId+"/activities",setActivities, obj);
         };
-
         fetchData();
-        window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
-    }   
+        
+    
+    }  
+    
+    useEffect(() => {
+        let pdf = document.getElementById('file');
+        if(activities2.length != 0 && pdf.files[0] != undefined){
+            let formPDF = new FormData();
+            formPDF.append('file', pdf.files[0]);
+            const postPDF = async () => {
+                const options = {
+                    method: 'POST',
+                    headers: { 
+                        'Authorization': 'Bearer ' + localStorage.token,
+                    },
+                    body: formPDF
+                }
+                await fetch(`https://harmonize.mael-mouquet.fr/api/cours/${cours.id}/activities/${activities2.id}/files`, options)
+                window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
+            };
+            postPDF();
+            
+        }
+        else if(activities2.length != 0 && pdf.files[0] == undefined){
+            window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
+        }
+
+    }, [activities2]);
 
     const RemoveExercice = async (event, id) => {
         event.preventDefault();
@@ -187,7 +214,7 @@ function Lesson({data}){
                         <div id='popup'>
                             <div id='close'>&#10006;</div>
                             <h2>Ajouter un exercice</h2>
-                            <form onSubmit={sendNewActivities}>
+                            <form id="popupForm" onSubmit={sendNewActivities}>
                                 <div>
                                     <h3>Titre : </h3>
                                     <input type="text" name="title"></input>
@@ -207,7 +234,7 @@ function Lesson({data}){
                                 </div> 
                                 <div>
                                     <h3>Fichier :</h3> 
-                                    <input type="file" id="file" name="file" accept="image/png, image/jpeg, application/pdf" />  
+                                    <input type="file" id="file" name="file" accept="application/pdf" />  
                                 </div>
                                 <button type="submit">Valider</button>
                             </form>
