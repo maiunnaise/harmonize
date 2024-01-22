@@ -84,6 +84,11 @@ function ActivityDesc({activity}){
                     <button>Jouer</button>
                 </Link>
             : null}
+            {activity.files && activity.files.length !=0 ?
+                <Link to={`https://harmonize.mael-mouquet.fr/cours/files/${activity.files[0].filePath}`} target="_blank">
+                    <button>Visionner le pdf</button>
+                </Link>
+            : null}
         </div>
     )
 }

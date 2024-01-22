@@ -74,12 +74,12 @@ function Lesson({data}){
         };
         fetchData();
         
-        //window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
+    
     }  
     
     useEffect(() => {
-        if(activities2.length != 0){
-            let pdf = document.getElementById('file');
+        let pdf = document.getElementById('file');
+        if(activities2.length != 0 && pdf.files[0] != undefined){
             let formPDF = new FormData();
             formPDF.append('file', pdf.files[0]);
             const postPDF = async () => {
@@ -91,8 +91,13 @@ function Lesson({data}){
                     body: formPDF
                 }
                 await fetch(`https://harmonize.mael-mouquet.fr/api/cours/${cours.id}/activities/${activities2.id}/files`, options)
+                window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
             };
             postPDF();
+            
+        }
+        else if(activities2.length != 0 && pdf.files[0] == undefined){
+            window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
         }
 
     }, [activities2]);
