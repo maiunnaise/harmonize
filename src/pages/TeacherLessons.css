@@ -143,6 +143,10 @@
     border: none;
 }
 
+.lessonStudentDetails  .exercices > div:last-child hr {
+    opacity: 0;
+}
+
 .lessonStudentDetails .exercices a {
     display: flex;
     justify-content: end;

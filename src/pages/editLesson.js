@@ -76,13 +76,12 @@ function Lesson({data}){
     }   
 
     const RemoveExercice = async (event, id) => {
-
+        event.preventDefault();
         const fetchData = async () => {
             await deleteAPI("cours/"+coursId+"/activities/"+id);
         };
 
         fetchData();
-        event.stopPropagation();
         window.location.href = "/teacher/teacherLessons/"+coursId+"/"+seanceId;
     }
 
