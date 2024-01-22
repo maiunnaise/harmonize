@@ -18,7 +18,6 @@ export default function EmptyInstruments({instrument}) {
         for (const instrument of instruments) {
             instrumentsId.push(instrument.id);
         }
-        console.log(instrumentsId);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + localStorage.getItem('token') },
@@ -37,8 +36,8 @@ export default function EmptyInstruments({instrument}) {
                     <p className='closePopUp' onClick={closePopUp}>X</p>
                     <h3>Ajoutez vos instruments !</h3>
                     <div className='instrumentList'>
-                        {instrument.map((instrument) => {
-                            return <div className='instrument' id={instrument.id} onClick={selectInstrument}>
+                        {instrument.map((instrument, index) => {
+                            return <div className='instrument' id={instrument.id} onClick={selectInstrument} key={index}>
                                 <p>{instrument.Name}</p>
                             </div>
                         })}

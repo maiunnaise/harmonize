@@ -3,16 +3,14 @@ import './editLesson.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
-// import { act } from 'react-dom/test-utils/index.js';
+import { getAPI, postAPI} from '../components/fetchAPI.js';
 
 
 
 
 function Lesson({data}){
-    console.log(data);
     const cours = data.cours;
     
     const [data2,setData] = useState([]);
@@ -23,7 +21,6 @@ function Lesson({data}){
         for (let pair of formData.entries()) {
             obj[pair[0]] = pair[1];
         }
-        console.log(obj);
 
         const fetchData = async () => {
             await postAPI("cours/"+cours.id+"/seances", setData,obj);
@@ -99,35 +96,6 @@ export default function AddLesson(){
     CheckLogin();
     const coursId = useParams().coursId;
     const [cours, setCours] = useState([]);
-    const [studentCourse, setStudentCourse] = useState(null); 
-    const [seances, setSeance] = useState([]);
-
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         await getAPI("cours", setCours);
-    //     };
-
-    //     fetchData();
-    // }, []);
-
-    // let data = null; 
-
-    // if (cours.length != 0 && studentCourse.length != 0){
-    //     data = {studentCourse}; 
-    // }
-
-    // useEffect(() => {
-    //     var studentCours= [];
-    //     //Récupérer le cours de l'élève à partir de son id
-    //     for(let i = 0; i < cours.length; i++){
-    //         if(cours[i].Student.User.id == studentId){
-    //             studentCours = cours[i];
-    //         }
-    //     }
-
-    //     setStudentCourse(studentCours); 
-        
-    // }, [cours]);
 
     useEffect(() => {
 
@@ -138,7 +106,6 @@ export default function AddLesson(){
         fetchData();
     }, []); 
     const data = {cours};
-    console.log(data);
 
     return (
         <Lesson data={data} /> 

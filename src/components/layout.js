@@ -35,7 +35,7 @@ function Layout() {
             icons = document.querySelectorAll(`.Menu img:not(.Teachimg)`);
 
             icons = Array.from(icons);
-            icons.map(icon => {
+            icons.map((icon, index) => {
                 icon.src = icon.src.replace("-colored", "");
             })
             return;
@@ -44,7 +44,7 @@ function Layout() {
         icons = document.querySelectorAll(`.Menu img:not(.Teachimg, .${icon.className})`);
 
         icons = Array.from(icons);
-        icons.map(icon => {
+        icons.map((icon, index) => {
             icon.src = icon.src.replace("-colored", "");
         })
     }

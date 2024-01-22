@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './LessonsHistory.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
-import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
 
@@ -28,8 +27,6 @@ function History({lessons, studentId}){
             }
         }
     }
-
-    // ToReviewBorder();
     
     //Après le rendu
     useEffect(() => {
@@ -170,6 +167,7 @@ let lessons = [
 
 
 export default function LessonsHistory(){
+    CheckLogin();
     return (
         <div>
             <SimpleHeader />

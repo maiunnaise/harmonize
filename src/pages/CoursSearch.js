@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './CoursSearch.css';
 import GreyDiv from '../components/GreyDiv.js';
-import HistoryButton from '../components/HistoryButton.js';
 import SearchBar from '../components/SearchBar.js';
 import {getAPI} from '../components/fetchAPI.js';
 
@@ -28,14 +27,12 @@ function Search(){
 
     const cours =[];
 
-    data.map((coursData) => {
+    data.map((coursData, index) => {
         cours.push(coursData);
     });
-    console.log(cours);
 
     const [filteredData, setFilteredData] = useState(cours);
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [searchTerm, setSearchTerm] = useState('');
     
     const handleSearch = (searchTerm, category) => {
         const filteredResults = cours.filter((item) =>
@@ -47,10 +44,6 @@ function Search(){
             ? filteredResults
             : filteredResults.filter(item => item.Instrument.Name === selectedCategory);
       
-        //Combine les deux filtres
-        // const combinedFilteredData = category === undefined
-        //   ? filteredResults
-        //   : filteredByCategory;
       
         setFilteredData(filteredByCategory);
     };
@@ -73,11 +66,6 @@ function Search(){
             setSelectedCategory('All');
         }
     };
-
-    // const handleInputChange = (value) => {
-    // setSearchTerm(value);
-    // handleSearch(); // Update filtered data when changing search term
-    // };
 
     return (
         <div className="content CoursSearch">

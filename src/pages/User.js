@@ -74,13 +74,6 @@ function UserInfo(){
     )
 }
 
-// let user = {
-//     firstname: "John",
-//     lastname: "Doe",
-//     email: "adadasdad",
-//     instruments: ["Piano","Guitare"],
-// }
-
 export default function User(){
     
     return <UserInfo  />

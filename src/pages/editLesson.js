@@ -27,7 +27,6 @@ function Lesson({data}){
         for (let pair of formData.entries()) {
             obj[pair[0]] = pair[1];
         }
-        console.log(obj);
 
         const fetchData = async () => {
             await putAPI("cours/"+coursId+"/seances/"+seanceId, obj);
@@ -56,18 +55,15 @@ function Lesson({data}){
     const [pdf, setPDF] = useState([]);
     const sendNewActivities = async (event) => {
         event.preventDefault();
-        // const [setData] = useState([]);
         const formData = new FormData(event.target); 
         
         
         let obj = {};
         obj["idSeance"] = seanceId;
-        console.log(formData);
         for (let pair of formData.entries()) {
             obj[pair[0]] = pair[1];
         }   
         obj["status"] = "toDo";
-        // console.log(JSON.stringify(obj));
 
         const fetchData = async () => {
             await postAPI("cours/"+coursId+"/activities",setActivities, obj);
@@ -263,7 +259,6 @@ export default function EditLesson(){
     const [cours, setCours] = useState([]);
     const [activities, setActivities] = useState([]);
     const [partitions, setPartitions] = useState([]);
-    console.log(coursId, seanceId);
     useEffect(() => {
         const fetchData = async () => {
             await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);

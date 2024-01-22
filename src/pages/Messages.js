@@ -45,8 +45,6 @@ function ChatBar({cours}){
             if (e.key === 'Enter') {
     
                 let obj = {"content": input.value, "unread": true};
-                
-                console.log(obj);
     
                 const fetchData = async () => {
                     await postAPI("cours/"+cours.id+"/messages", setData, obj);
@@ -81,7 +79,6 @@ function ChatBar({cours}){
 
 
 function MessagesDisplay({msg, contact, cours}){
-    // let contact = users.find((user) => user.id == contactId);
     const [isAnswered, setIsAnswered] = useState(false);
     const [data, setData] = useState([]);
     let navigate = useNavigate();
@@ -92,7 +89,6 @@ function MessagesDisplay({msg, contact, cours}){
     }, [isAnswered]);
 
     function acceptRequest(){
-        console.log(cours);
 
         const accpetCourse = async () => {
             await putAPI("cours/"+cours.id, {"isPending": null});
@@ -115,7 +111,6 @@ function MessagesDisplay({msg, contact, cours}){
 
 
         if(message.Sender == null ||message.Sender.id == contact.User.id ){
-            console.log("Message reçu");
             const obj = {"unread": false};
             const fetchData = async () => {
                 await putAPI("cours/"+cours.id+"/messages/"+message.id, obj);
@@ -135,7 +130,6 @@ function MessagesDisplay({msg, contact, cours}){
             );
         }
         else if ( message.Sender.id != null  && message.Sender.id != contact.User.id) {
-            console.log("Message envoyé");
             return (
                 <div className="messageSended" key={message.id} id={message.id}>
                     <p>{message.content}</p>

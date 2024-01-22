@@ -70,7 +70,6 @@ function ActivityDesc({activity}){
     return(
         <div className="activityDesc">
             <h2>{activity.title}</h2>
-            {/* <p>pour le {activity.dueAt}</p> */}
             <label className='isFinished'>
                 Terminée ?
                 {activity.status =="finished"? <input type="checkbox" checked onChange={setNewStatus}/> : <input type="checkbox"  onChange={setNewStatus}/>}
@@ -98,7 +97,6 @@ function ActivityTotal({activity}){
     return(
         <>
         <GreyDiv content={<ActivityDesc activity={activity}/>}/>
-        {/* {activity.teacher.gender =="male" ? <p className='ActTeach'>De M.   {activity.teacher.name}</p> : <p className='ActTeach'>De Mme. {activity.teacher.name}</p>} */}
         </>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './TeacherLessons.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
@@ -9,9 +9,7 @@ import CheckLogin from '../components/checkLogin.js';
 function Lesson(lessonId){
     CheckLogin();
     let lesson, student;
-    console.log(lessonId.lessonId);
     lessons.map((l, index) => {
-        console.log(l.id, lessonId.lessonId);
         if(l.id == lessonId.lessonId){
             lesson = l;
         }

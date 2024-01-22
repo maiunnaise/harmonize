@@ -10,6 +10,9 @@ function getAPI(request, setState){
 
     fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     .then(response => response.json())
+    .catch((error) => {
+        return; 
+    })
     .then(data => {
         setState(data);
     });
@@ -62,6 +65,9 @@ async function postAPI(request, setState, body){
 
     await fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     .then(response => response.json())
+    .catch((error) => {
+        return; 
+    })
     .then(data => {
         setState(data);
     });

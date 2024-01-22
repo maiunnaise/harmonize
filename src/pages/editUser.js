@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './editUser.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
 import { getAPI, deleteAPI, putAPI } from '../components/fetchAPI.js';
 
@@ -33,57 +33,7 @@ function EditUserForm() {
         }
     }, [isOk]);
 
-    // const [inputs, setInputs] = useState({});
-    const userEmail = user.email;
-    // const [userData, setUserData] = useState({ email: userEmail });
-    // const [error, setError] = useState(null);
     const [isActive, setIsActive] = useState(false);
-
-
-    // const handleChange = (event) => {
-    //     setUserData({
-    //         ...userData,
-    //         email: event.target.value
-    //     });
-    // };
-
-    // function isValidEmail(email) {
-    //     console.log(email);
-    //     return /\S+@\S+\.\S+/.test(email);
-    // }
-  
-    // const handleSubmit = (event) => {
-    //     event.preventDefault();
-    //     console.log(userData.email);
-    //     if (!isValidEmail(userData.email)) {
-    //         window.alert("Email non valide");
-    //     } else {
-    //         setError(null);
-    //         console.log(userData.email)
-    //     }      
-    // }
-
-    // const addInstrument = () => {
-    //     setIsActive(current => !current);
-    //     var instrumentsDiv = document.getElementById('instruments');
-
-    //     for (var i = 0; i < instrumentsDiv.children.length; i++) {
-    //         var instrument = instrumentsDiv.children[i];
-    //         let instrumentName = instrument.children[0].innerHTML;
-    //         instrument.addEventListener('click', function() {
-    //             console.log(instrumentName);
-    //         });
-    //     }
-
-    //     let close = document.getElementById('close');
-
-    //     if (!close.hasEventListener) {
-    //         close.addEventListener('click', function() {
-    //             setIsActive(current => !current);
-    //         });
-    //         close.hasEventListener = true; 
-    //     }
-    // };
 
 
     function removeInstrument(e){
@@ -122,6 +72,9 @@ function EditUserForm() {
         };
         fetch('https://harmonize.mael-mouquet.fr/api/user-instruments', requestOptions)
         .then(response => response.json())
+        .catch((error) => {
+            return; 
+        })
         .then(data => {
             setIsActive(current => !current);
             getAPI('user-instruments', setInstruments);
@@ -131,11 +84,6 @@ function EditUserForm() {
 
     function submitData(){
         let changedData = document.querySelectorAll('.changedData');
-
-        // if (!isValidEmail(changedData[0].value)) {
-        //     window.alert("Email non valide");
-        //     return;
-        // }
         
         let data={};
         changedData.forEach(element => {
@@ -198,7 +146,7 @@ function EditUserForm() {
                                     <div id='close'>&#10006;</div>
                                     <h2>Instruments</h2>
                                     <div id="instruments">
-                                        {allInstruments.map((globalInstrument) => {
+                                        {allInstruments.map((globalInstrument, index) => {
                                             if (!instruments.some((instrument) => instrument.Instrument.Name === globalInstrument.Name)) {
                                                 return (
                                                 <div key={globalInstrument.id} id={globalInstrument.id} onClick={selectInstrument}>

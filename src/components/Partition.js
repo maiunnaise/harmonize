@@ -19,7 +19,7 @@ export default function Partition({partition}){
     }, []);
 
     let isInVault = false;
-    vaultSheets.map((vaultSheet) => {
+    vaultSheets.map((vaultSheet, index) => {
         if(vaultSheet.Sheet.id == partition.id){
             isInVault = true;
         }

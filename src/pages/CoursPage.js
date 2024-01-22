@@ -34,15 +34,6 @@ function Cours(){
     )
 }
 
-// let coursData = [{id: 5, titre: "Les notes", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-// category: "Solfège", img: "/img/cours-image.jpg",
-// content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
-// {id: 3, titre: "Les accords", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-// category: "Solfège", img: "/img/cours-image.jpg",
-// content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
-// {id: 2, titre: "Les notes", desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-// category: "Piano", img: "/img/cours-image.jpg",
-// content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}]
 
 export default function CoursPage(){
     return (

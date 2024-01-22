@@ -12,8 +12,8 @@ export function Libform({partitions}){
         let list = document.querySelectorAll("select");
         partitions = Array.from(partitions);
         list = Array.from(list);
-        list.map((select) => {
-            partitions.map((partition) => {
+        list.map((select, index) => {
+            partitions.map((partition, index) => {
                 if (select.id in partition.Sheet){
                     if (!select.innerHTML.includes(partition.Sheet[select.id])){
                         if(select.id == "Instrument"){
@@ -43,7 +43,7 @@ export function Libform({partitions}){
         let values = document.querySelectorAll("select");
         values = Array.from(values);
         let filters = [];
-        values.map((value) => {
+        values.map((value, index) => {
             if(value.value != ""){ 
                 filters.push(value.value);
             }
@@ -52,9 +52,9 @@ export function Libform({partitions}){
         let isFav = document.querySelector(".isFav");
         let partitions = document.querySelectorAll(".partition");
         partitions = Array.from(partitions);
-        partitions.map((partition) => {
+        partitions.map((partition, index) => {
             let count = 0;
-            filters.map((filter) => {
+            filters.map((filter, index) => {
                 if (partition.innerHTML.includes(filter)){
                     count++;
                 }
@@ -80,7 +80,7 @@ export function Libform({partitions}){
         let values = document.querySelectorAll("select");
         values = Array.from(values);
         let filters = [];
-        values.map((value) => {
+        values.map((value, index) => {
             if(value.value != ""){ 
                 filters.push(value.value);
             }
@@ -89,7 +89,7 @@ export function Libform({partitions}){
         partitions = Array.from(partitions);
         partitions.map((partition) => {
             let count = 0;
-            filters.map((filter) => {
+            filters.map((filter, index) => {
                 if (partition.innerHTML.includes(filter)){
                     count++;
                 }
@@ -118,7 +118,7 @@ export function Libform({partitions}){
         values = Array.from(values);
         let filters = values
             .filter(value => value.value !== "")
-            .map(value => value.value.toLowerCase()
+            .map((value, index) => value.value.toLowerCase()
         );
 
         let decoy = document.querySelector("select:first-of-type");
@@ -154,7 +154,7 @@ export function Libform({partitions}){
         if(filters.every(filter => filter.value == "") && !isFav.classList.contains("selectedFilter") && research == ""){
             let partitions = document.querySelectorAll(".partition");
             partitions = Array.from(partitions);
-            partitions.map((partition) => {
+            partitions.map((partition, index) => {
                 partition.style.display = "flex";
             })
         }
@@ -213,7 +213,7 @@ export function Library() {
         <div className='libraryPart'>
         {partitions.length == 0 ? <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p> 
         :
-        partitions.map((partition) => {
+        partitions.map((partition, index) => {
             return (
             <Link to={`/play/${partition.Sheet.id}`}>
                 <Partition partition={partition} style="fav"/>

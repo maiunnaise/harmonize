@@ -3,26 +3,9 @@ import './Inbox.css';
 import GreyDiv from '../components/GreyDiv.js';
 import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar.js';
-import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import { getAPI} from '../components/fetchAPI.js';
 import { decodeToken } from "react-jwt";
 import CheckLogin from '../components/checkLogin.js';
-
-// function getTimeSinceMessage(message){
-//     let time = (new Date() - new Date(message.date))/1000;
-//     if(time < 60){
-//         return `${Math.floor(time)} s`;
-//     }
-//     time = time/60;
-//     if(time < 60){
-//         return `${Math.floor(time)} min`;
-//     }
-//     time = time/60;
-//     if(time < 24){
-//         return `${Math.floor(time)} h`;
-//     }
-//     time = time/24;
-//     return `${Math.floor(time)} j`;
-// }
 
 //Retourne le role de l'utilisateur
 function getRole(){
@@ -62,8 +45,6 @@ function Contact({cours}){
         var lastMessage = msg[0];
         const role = getRole();
 
-        console.log(cours);
-
         var contactRole = lastMessage.Sender;
         
         if(lastMessage.unread === true && (contactRole== null || contactRole.roles[0] !== role)){
@@ -78,7 +59,7 @@ function Contact({cours}){
                                     <h2>{cours.Student.User.prenom} {cours.Student.User.nom}</h2>}                      
                                 <p>
                                     <span className="lastMessage">{lastMessage.content}</span> 
-                                    {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
+
                                 </p>
                             </div>
                         </div>
@@ -98,7 +79,7 @@ function Contact({cours}){
                                     <h2>{cours.Student.User.prenom} {cours.Student.User.nom}</h2>}                      
                                 <p>
                                     <span className="lastMessage">{lastMessage.content}</span> 
-                                    {/* <span>· {getTimeSinceMessage(lastMessage)}</span> */}
+                                   
                                 </p>
                             </div>
                         </div>
@@ -117,7 +98,6 @@ function InboxDiv({users, cours}){
     useEffect(() => {
         setFilteredData(cours);
     }, [cours]);
-    const [searchTerm, setSearchTerm] = useState('');
     const handleSearch = (searchTerm) => {
         const filteredResults = cours.filter((item) =>
           item.Student.User.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -154,7 +134,6 @@ export default function Inbox(){
     if(cours.length > 0){
         
     };
-    console.log(cours);
 
     return (
         <InboxDiv cours={cours} />

@@ -11,18 +11,18 @@ export function Addform({partitions}){
         let list = document.querySelectorAll("select");
         partitions = Array.from(partitions);
         list = Array.from(list);
-        list.map((select) => {
-            partitions.map((partition) => {
+        list.map((select, index) => {
+            partitions.map((partition, index) => {
                 if (select.id in partition){
                     if (!select.innerHTML.includes(partition[select.id])){
                         if(select.id == "Instrument"){
                             if( !select.innerHTML.includes(partition.Instrument.Name)){
-                                select.innerHTML += `<option value="${partition[select.id].Name}">${partition[select.id].Name}</option>`
+                                select.innerHTML += `<option key="${index}"value="${partition[select.id].Name}">${partition[select.id].Name}</option>`
                             }
                             
                         }
                         else{
-                            select.innerHTML += `<option value="${partition[select.id]}">${partition[select.id]}</option>`
+                            select.innerHTML += `<option key="${index}"value="${partition[select.id]}">${partition[select.id]}</option>`
                         }
                         
                     }
@@ -45,7 +45,7 @@ export function Addform({partitions}){
         let values = document.querySelectorAll("select");
         values = Array.from(values);
         let filters = [];
-        values.map((value) => {
+        values.map((value, index) => {
             if(value.value != ""){ 
                 filters.push(value.value);
             }
@@ -53,9 +53,9 @@ export function Addform({partitions}){
 
         let partitions = document.querySelectorAll(".partition");
         partitions = Array.from(partitions);
-        partitions.map((partition) => {
+        partitions.map((partition, index) => {
             let count = 0;
-            filters.map((filter) => {
+            filters.map((filter, index) => {
                 if (partition.innerHTML.includes(filter)){
                     count++;
                 }
@@ -79,7 +79,7 @@ export function Addform({partitions}){
         values = Array.from(values);
         let filters = values
             .filter(value => value.value !== "")
-            .map(value => value.value.toLowerCase()
+            .map((value,index) => value.value.toLowerCase()
         );
 
         let decoy = document.querySelector("select:first-of-type");
@@ -113,7 +113,7 @@ export function Addform({partitions}){
         if(filters.every(filter => filter.value == "") && research == ""){
             let partitions = document.querySelectorAll(".partition");
             partitions = Array.from(partitions);
-            partitions.map((partition) => {
+            partitions.map((partition, index) => {
                 partition.style.display = "flex";
             })
         }
@@ -158,10 +158,10 @@ export default function AddPartition() {
             <h1>Ajouter une partition</h1>
             <Addform partitions={partitions}/>
             <div className='harmonizePart'>
-                {partitions.map((partition) => {
+                {partitions.map((partition, index) => {
                 return (
                 <Link to={`/play/${partition.id}`}>
-                    <Partition partition={partition}/>
+                    <Partition partition={partition} key={index}/>
                 </Link>
                 );
                 })}

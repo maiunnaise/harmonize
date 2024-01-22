@@ -5,7 +5,7 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import { getAPI} from '../components/fetchAPI.js';
 
 
 

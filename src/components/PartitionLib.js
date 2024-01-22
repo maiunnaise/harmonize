@@ -1,9 +1,7 @@
 import './Partition.css';
-import { useEffect, useState } from "react";
 import {putAPI, deleteAPI} from '../components/fetchAPI';
 
 export default function Partition({partition, style}){
-    const [partitions] = useState([]);
 
 
     const putData = async (idSheet, body) => {
@@ -30,23 +28,12 @@ export default function Partition({partition, style}){
         e.preventDefault();
     }
 
-    function addLib(e){
-        if(e.target.src.includes("add")){
-            e.target.src = "/logo/icons/check.png";
-        }
-        else{
-            e.target.src = "/logo/icons/add.png";
-        };
-        e.preventDefault();
-    }
-
     function deleteLib(e){
         deleteData(e.target.parentElement.parentElement.id);
         e.target.parentElement.parentElement.remove();
         e.preventDefault();
     }
 
-    console.log(partitions);
     return(
         <div className={partition.isFavorite ? 'partition fav' : 'partition'} id={partition.id}>
             <div className='partitionDesc'>
@@ -59,7 +46,7 @@ export default function Partition({partition, style}){
                     <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
                     : style == "fav" && partition.isFavorite? (
                         <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
-                    : <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>
+                    : null
                 }
                 <img src="/logo/icons/trash-bin.png" alt="delete" onClick={deleteLib}/>
             </div>

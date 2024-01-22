@@ -100,7 +100,6 @@ function FindTeachersDiv(){
 }
 
 function SendCourseRequest({teacher, onClose}){
-    // console.log(teacher);
     const[request, setRequest] = useState({});
     const [user, setUser] = useState({});
     const [message, setMessage] = useState({});

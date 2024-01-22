@@ -46,17 +46,17 @@ function Login() {
 
     fetch('https://harmonize.mael-mouquet.fr/api/login-check', requestOptions)
       .then(response => response.json())
+      .catch((error) => {
+        console.log(error);
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Connexion';
+        errorLogin.style.display = 'block';
+        return setisLoggedIn(false); 
+      })
       .then(data => {
-        if(data.code === 401){
-          loginBtn.disabled = false;
-          loginBtn.innerHTML = 'Connexion';
-          errorLogin.style.display = 'block';
-          return setisLoggedIn(false);
-        }
-        else{
-          localStorage.setItem('token', data.token);
-          return setisLoggedIn(true);
-        }
+        
+        localStorage.setItem('token', data.token);
+        return setisLoggedIn(true);
       }
     );
   }

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './TeacherHome.css';
-// import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
-import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import { getAPI} from '../components/fetchAPI.js';
 import CheckLogin from '../components/checkLogin.js';
 
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
     if (cours.length > 0) {
-        cours.map((lesson) => {
+        cours.map((lesson, index) => {
             //Trie les séances par date
             lesson.seances = lesson.seances.sort(function(a, b){
                 let dateA = new Date(a.startAt).getTime();
@@ -129,7 +128,7 @@ function Home({cours, students}){
                 return(
                     <>
                     <div className='prochainCours'>
-                        {lessons.map((lesson) => { 
+                        {lessons.map((lesson, index) => { 
                             //Si l'élève n'a pas de séance prévue n'affiche pas
                             if(lesson.seances.length == 0){
                                 return null;
@@ -169,9 +168,9 @@ function Home({cours, students}){
                         })}
                     </div>
                     <div className='listeEleves'>
-                        {lessons.map((lesson) => { 
+                        {lessons.map((lesson, index) => { 
                             return(
-                                <Link  to={`../teacher/teacherLessons/${lesson.id}`}>
+                                <Link  to={`../teacher/teacherLessons/${lesson.id}`} key={index}>
                                     <GreyDiv
                                         content={
                                         <div id={student.id}>
@@ -205,6 +204,7 @@ function Home({cours, students}){
 export default function TeacherHome(){
     const [cours, setCours] = useState([]);
     const token = localStorage.getItem('token');
+    CheckLogin();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -213,13 +213,9 @@ export default function TeacherHome(){
         fetchData();
     }, [token]);
 
-    // if (cours.length === 0) {
-    //     return null; // or any other loading indicator
-    // }
-
     const students = [];
     if (cours.length > 0){
-        cours.map((lesson) => {
+        cours.map((lesson, index) => {
             //si lesson.Student.id est différent des autres Student.id
             if(!students.some(student => student.id === lesson.Student.id)){
                 students.push(lesson.Student);

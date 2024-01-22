@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './ExercicesSearch.css';
-// import PurpleButton from '../components/PurpleButton.js';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 
@@ -85,7 +84,7 @@ function NiveauBar({ exercice }) {
     
     return (
         <div>
-            {niveaux.map((level) => {
+            {niveaux.map((level, index) => {
                 return (
                     <div key={level.id} id={`lvl${level.id}from${exercice.id}`} className='hidden'>
                         <h3>{level.Titre}</h3>

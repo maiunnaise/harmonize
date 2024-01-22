@@ -1,7 +1,5 @@
 import SimpleHeader from "../components/simpleHeader"
 import "./register.css"
-import { useEffect, useState } from "react";
-import { postAPI } from "../components/fetchAPI";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,12 +8,10 @@ function isValidEmail(email) {
 }
 
 export default function Register() {
-    const [validData, setValidData] = useState();
 
     function checkData() {
         const datas = document.querySelectorAll('input, select');
         const error = document.querySelector('.error');
-        // const role = document.querySelector('select[name="role"]').value;
         let isValid = true;
         const requestOptions = {
             method: 'POST',
@@ -40,7 +36,6 @@ export default function Register() {
         }
     
         error.style.display = isValid ? 'none' : 'block';
-        // setValidData(isValid);
         if(isValid){
             requestOptions.body = JSON.stringify(requestOptions.body);
             fetchData(requestOptions);
@@ -56,7 +51,6 @@ export default function Register() {
             return; 
         })
         .then(data => {
-            console.log(data);
 
             navigate('/login', { state: { fromRegisterPage: true } });
                 
