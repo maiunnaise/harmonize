@@ -74,7 +74,7 @@ function Lesson({cours, seance, activities}){
                                             <span key={index} className={`${exercice.status}`}></span>
                                             <p>{exercice.title}</p>
                                         </div>
-                                        <Link to={`../exercices/${exercice.id}`} ><button className={`${exercice.status}Btn`} >Voir</button></Link>
+                                        <Link to={`../activity/${cours.id}/${exercice.id}`} ><button className={`${exercice.status}Btn`} >Voir</button></Link>
                                     </div>
                                     <hr></hr>
                                 </div>
