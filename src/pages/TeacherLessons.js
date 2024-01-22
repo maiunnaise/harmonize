@@ -5,25 +5,12 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import {getAPI} from '../components/fetchAPI.js';
+import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
 
-function Lesson(lessonId){
+
+
+function Lesson({cours, seance, activities}){
     CheckLogin();
-    let lesson, student;
-
-
-    console.log(lessonId.lessonId);
-    lessons.map((l, index) => {
-        console.log(l.id, lessonId.lessonId);
-        if(l.id == lessonId.lessonId){
-            lesson = l;
-        }
-    });
-    students.map((s, index) => {
-        if(s.id === lesson.studentId){
-            student = s;
-        }
-    });
 
     function formatDate(date) {
         return (
@@ -33,154 +20,118 @@ function Lesson(lessonId){
         )
     }
 
-    return (
-        <>
-        <SimpleHeader/>
   
-        <div className="simpleContent">
-            <div className="lessonStudentPicName">
-                <img src="../logo192.png" alt="profile"/>
-                <div>
-                    <h2>{student.firstName}<br/> {student.lastName}</h2>
-                    <p>{lesson.title}</p>
+    const [student, setStudent] = useState([]);
+    useEffect(() => {
+        if (cours && cours.Student) {
+            const fetchData = async () => {
+                await getAPI("students/" + cours.Student.id, setStudent);
+            };
+            fetchData();
+        }
+    }, [cours]);
+
+    var userInstruments = [];
+    if(student.id != undefined){
+        userInstruments = student.User.userInstruments;
+    }
+    
+    if(cours.id != undefined){
+        return (
+            <>            
+            <SimpleHeader/>
+            
+            <div className="simpleContent">
+                <div className="lessonStudentPicName">
+                    <img src="../logo192.png" alt="profile"/>
+                    <div>
+                        <h2>{cours.Student.User.prenom}<br/> {cours.Student.User.nom}</h2>
+                        <p>{cours.Instrument.Name} {cours.difficulty}</p>
+                    </div>
                 </div>
-            </div>
-            <GreyDiv content={
-                <div className="lessonStudentDetails">
-                    <h2>Instruments</h2>
-                    <div className="lessonStudentInstruments">
-                        {student.instruments.map((instrument, index) => {
-                            return <InstrumentText key={index} index={index} text={instrument}/>;
-                        })}
-                    </div>
-                    <hr></hr>
-                    <p>{lesson.desc}</p>
-                    <div className='nextLesson'>
-                        <p>Date du cours :</p>
-                        <div>{formatDate(new Date(lesson.date))}</div>
-                    </div>
-                    <div className="exercices">
-                        {lesson.exercices && lesson.exercices.length > 0 ? 
-                            <h3>Exercices</h3> 
-                        : null}
-                        {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
-                            <div>
+                <GreyDiv content={
+                    <div className="lessonStudentDetails">
+                        <h2>Instruments</h2>
+                        <div className="lessonStudentInstruments">
+                            {userInstruments.map((instrument, index) => {
+                                return <InstrumentText key={index} index={index} text={instrument.Instrument.Name}/>;
+                            })}
+                        </div>
+                        <hr></hr>
+                        <p>{seance.description}</p>
+                        <div className='nextLesson'>
+                            <p>Prochain cours :</p>
+                            <div>{formatDate(new Date(seance.startAt))}</div>
+                        </div>
+                        <div className="exercices">
+                            {activities.length > 0 ? 
+                                <h3>Exercices</h3> 
+                            : null}
+                            {activities.length > 0 ? activities.map((exercice, index) => (
                                 <div>
                                     <div>
-                                        <span key={index} className={`${exercice.state}`}></span>
-                                        <p>{exercice.desc}</p>
+                                        <div>
+                                            <span key={index} className={`${exercice.status}`}></span>
+                                            <p>{exercice.title}</p>
+                                        </div>
+                                        <Link to={`../exercices/${exercice.id}`} ><button className={`${exercice.status}Btn`} >Voir</button></Link>
                                     </div>
-                                    <Link to={`../exercices/${lesson.id}/${exercice.id}`} ><button className={`${exercice.state}Btn`}>Voir</button></Link>
+                                    <hr></hr>
                                 </div>
-                                <hr></hr>
-                            </div>
-                        )) : null}
-                    </div>
-                    <div className='buttons'>
-                            <Link to={`../teacher/editLesson/${lesson.id}`}>
-                                <button>Modifier le cours</button>
+                            )) : null}
+                        </div>
+                        <div className='buttons'>
+                                <Link to={`/teacher/editLesson/${cours.id}/${seance.id}`}>
+                                    <button>Modifier le cours</button>
+                                </Link>
+                            <Link to={`/message/${cours.Student.id}`} className='inboxLink'>
+                                <button>Message</button>
                             </Link>
-                        <Link to={`/message/${student.id}`} className='inboxLink'>
-                            <button>Message</button>
-                        </Link>
+                        </div>
                     </div>
+                }/>
+                <div className="lessonStudentHistoryBtn">
+                    <Link to={`/history/${cours.Student.id}`}>
+                        <button>Historique</button>
+                    </Link>
                 </div>
-            }/>
-            <div className="lessonStudentHistoryBtn">
-                <Link to={`../teacher/LessonsHistory/${student.id}`}>
-                    <button>Historique</button>
-                </Link>
             </div>
-        </div>
-        </>
-    )
+            </>
+        )
+    }
 }
 
-let students = [
-    {id: 5, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Meejez", 
-    lastName: "Eztzert",
-    instruments: ["Piano","Guitare"],
-    },
-    {id: 4, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Drtud", 
-    lastName: "Ttttt",
-    instruments: ["Piano","Guitare"],
-    },
-    {id: 3, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Xbcxvb", 
-    lastName: "Wertzert",
-    instruments: ["Piano","Guitare"],
-    },
-]
-
-let lessons = [
-    {id: 1, 
-    studentId: 5,
-    title: "Piano débutant", 
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-    date: "2021-04-15 15:00:00",
-    exercices: [
-        {id: 1,
-        title: "Exercice 1",
-        desc: "Apprendre les notes de musique",
-        state: "finished",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "reviewed",
-        },
-        {id: 3,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-        {id: 4,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-    ],
-    },
-    {id: 2, 
-    studentId: 4,
-    title: "Piano débutant", 
-    desc: "Apprendre les notes de musique",
-    date: "2021-04-15 15:00:00",
-    exercices: [
-        {id: 1,
-        title: "Exercice 1",
-        desc: "Apprendre les notes de musique",
-        state: "finished",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "reviewed",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-    ],
-    },
-    {id: 3, 
-    studentId:3,
-    title: "Piano débutant", 
-    desc: "Apprendre les notes de musique",
-    date: "2022-04-15 15:00:00",
-    exercices: null,
-    },
-]
-
-
 export default function TeacherLessons(){
+    const coursId = useParams().coursId;
+    const seanceId = useParams().seanceId;
+    const [seance, setSeance] = useState([]);
+    const [cours, setCours] = useState([]);
+    const [activities, setActivities] = useState([]);
+
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);
+            await getAPI("cours/"+coursId, setCours);
+            await getAPI("cours/"+coursId+"/activities?limit=20", setActivities);
+        };
+
+        fetchData();
+    }, []);
+    
+    //Les activités de la séance
+    const seanceActivities = [];
+    if(activities.length != 0){
+        activities.map((activity, index) => {
+            if(activity.Seance.id == seance.id){
+                seanceActivities.push(activity);
+            }
+        });
+    }   
+
     return (
-        <Lesson lessonId={useParams().lessonId} />
+        cours.id !== undefined && seance.id !== undefined ?
+        <Lesson  cours={cours} seance={seance} activities={seanceActivities}/>:
+        null
     );
 };

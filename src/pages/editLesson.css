@@ -1,7 +1,6 @@
 .simpleContent {
     height: 90vh;
-    margin-top: 6em;
-
+    /* margin-top: 6em; */
 }
 
 .editLessonPicName {
@@ -46,7 +45,7 @@
     font-size: 0.8em;
 }
 
-.editLessonDetails h2 {
+.editLessonDetails h2, .editLessonPopUp h2 {
     margin-bottom: 0.5em;
     font-size: medium;
     margin-left: 1em;
@@ -67,7 +66,13 @@
 
 .editLessonDetails .editLessonInstruments{
     margin-left: 0.5em;
-    font-size: small;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.editLessonDetails .editLessonInstruments p{
+    font-size: 0.9em;
+    margin-top: 0.5em;
 }
 
 .editLessonDetails .nextLesson {
@@ -183,18 +188,19 @@
     margin-inline: auto;
 }
 
-.validateBtn button{
+.validateBtn button, .editLessonPopUp button{
     width: 50%;
-    justify-content: center;
+    display: block;
     border: #845583 1px solid;
     background-color: #845583;
     border-radius: 30px;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin-bottom: 1.5em;
+    margin-inline: auto;
 }
 
-.editLessonDetails textarea {
+.editLessonDetails textarea, .editLessonPopUp textarea {
     background-color: #393939;
     width: 100%;
     resize: none;
@@ -204,4 +210,76 @@
     border: 1px solid #9F9F9F;
     background-color: rgb(0,0,0,0);
     margin-left: 0.5em;
+}
+
+.editLessonPopUp #overlay {
+    position:fixed;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    background:rgba(0, 0, 0, 0.8);
+    z-index:9999;
+    height: 100%;
+}
+
+.editLessonPopUp #popup #close {
+    position:absolute;
+    right:0.5em;
+    top:0.5em;
+    z-index:99;
+    width:25px;
+    height:25px;
+    cursor:pointer;
+    color: #fff;
+    display: inline-block;
+}
+
+.editLessonPopUp #popup {
+    position:absolute;
+    width:70%;
+    /* height:31em; */
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    background: #3D3D3D;
+    box-shadow: 0px 0px 10px 0px black;
+    overflow: scroll;
+}
+
+.editLessonPopUp #popup h2 {
+    height: 2.5em;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    border-bottom: #474747 1px solid;
+    text-align: center;
+    height: 3em;
+}
+
+.editLessonPopUp #popup h3 {
+    text-align: center;
+    margin-bottom: 0.5em;
+    color: #e3e3e3;
+}
+
+.editLessonPopUp #popup form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.editLessonPopUp #popup form > div {
+    margin-bottom: 1em;
+    
+}
+
+.editLessonPopUp #popup input,.editLessonPopUp #popup select {
+    background-color: #393939;
+    border: gray 1px solid;
+}
+
+.editLessonPopUp #popup #file {
+    width: 90%;
+    margin-left: 1em;
 }

@@ -5,17 +5,52 @@ import './TeacherHome.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import CheckLogin from '../components/checkLogin.js';
 
+function Home({cours, students}){
+    // Attendre que les cours soient chargés    
+    if (cours.length > 0) {
+        cours.map((lesson) => {
+            //Trie les séances par date
+            lesson.seances = lesson.seances.sort(function(a, b){
+                let dateA = new Date(a.startAt).getTime();
+                let dateB = new Date(b.startAt).getTime();
+                if (dateA > dateB) {
+                    return -1;
+                }
+            });
+    
+        });
 
-function Home({lessons, students}){
-    const [filteredData, setFilteredData] = useState(students);
+        //Trie les cours par date de la prochaine scéance
+        cours = cours.sort(function(a, b){
+            if(a.seances.length == 0){
+                return 1;
+            }
+            if(b.seances.length == 0){
+                return -1;
+            }
+            let dateA = new Date(a.seances[0].startAt).getTime();
+            let dateB = new Date(b.seances[0].startAt).getTime();
+            if (dateA > dateB) {
+                return -1;
+            }
+        });
+    }
+    
+    const [filteredData, setFilteredData] = useState([]);
+    //Permet d'afficher les élèves sans recherche
+    useEffect(() => {
+        setFilteredData(students);
+    }, [students]);
     const [searchTerm, setSearchTerm] = useState('');
 
+    //Gere la recherche
     const handleSearch = (searchTerm) => {
         setSearchTerm(searchTerm);
         const filteredResults = students.filter((item) =>
-          item.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.lastName.toLowerCase().includes(searchTerm.toLowerCase())
+          item.User.prenom.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.User.nom.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredData(filteredResults);
     };
@@ -34,9 +69,8 @@ function Home({lessons, students}){
         }
     }, [searchTerm]);
 
-
     function getLessonsByStudentId(id) {
-        return lessons.filter(lesson => lesson.studentId === id)[0];
+        return cours.filter(lesson => lesson.Student.User.id === id);
     }
 
     function formatDate(date) {
@@ -58,168 +92,146 @@ function Home({lessons, students}){
         }
     }
     
-    //Après le rendu
+    //Après le rendu des div d'exercices, masque les div vides
     useEffect(() => {
         clearExercices();
-    }, []);
+    }, [filteredData]);
 
-    return (
+    //Passer de la liste d'éleves au prochain cours
+    function switchList(){
+        let prochainCours = document.querySelector('.prochainCours');
+        let listeEleves = document.querySelector('.listeEleves');
+        let button = document.querySelector('.TeacherHome > div:first-of-type > button');
+        if(prochainCours.style.display == "none"){
+            prochainCours.style.display = "block";
+            listeEleves.style.display = "none";
+            button.innerHTML = "Voir liste élèves";
+        }
+        else {
+            prochainCours.style.display = "none";
+            listeEleves.style.display = "block";
+            button.innerHTML = "Voir prochains cours";
+        }
+    }
+
+    return(
         <div className="content TeacherHome">
             <h1>Mes élèves</h1>
-            <SearchBar onSearch={handleSearch} />
+            <div>
+                <SearchBar onSearch={handleSearch} />
+                <button onClick={switchList}>Liste d'élèves</button>
+            </div>
             {filteredData.map((student, index) => {
-                let lesson = getLessonsByStudentId(student.id);
-                if(lesson == undefined){
-                    return(null);
-                }
+                student = student.User;
 
+                //Retourne les cours de l'élève avec le prof
+                let lessons = getLessonsByStudentId(student.id);
                 return(
-                    <Link key={index} to={`../teacher/teacherLessons/${lesson.id}`}>
-                        <GreyDiv
-                            key={index}
-                            content={
-                            <div id={student.id}>
-                                <div className='lessonHeader'>
-                                    <img src={student.img} alt={`${student.firstName} ${student.lastName}`}/>
-                                    <div>
-                                        <h2>{`${student.firstName} ${student.lastName}`}</h2>
-                                        <h2 className="greyText"> {lesson.title}</h2>
-                                    </div>   
-                                </div>
-                                <p>{lesson.desc}</p>
-                                <div className='nextLesson'>
-                                    <p>Prochain cours :</p>
-                                    <div>{formatDate(new Date(lesson.date))}</div>
-                                </div>
-                                <div className='exercices'>
-                                    <p>Exercices</p>
-                                    <div>
-                                        {lesson.exercices && lesson.exercices.length > 0 ? lesson.exercices.map((exercice, index) => (
-                                            <span key={index} className={`${exercice.state}`}></span>
-                                        )) : null}
-                                    </div>
-                                </div>
-                            </div>
+                    <>
+                    <div className='prochainCours'>
+                        {lessons.map((lesson) => { 
+                            //Si l'élève n'a pas de séance prévue n'affiche pas
+                            if(lesson.seances.length == 0){
+                                return null;
                             }
-                        /> 
-                    </Link> 
+                            else {
+                                return(
+                                    <Link key={lesson.seances[0].id} to={`../teacher/teacherLessons/${lesson.id}/${lesson.seances[0].id}`}>
+                                        <GreyDiv
+                                            content={
+                                            <div id={lesson.id}>
+                                                <div className='lessonHeader'>
+                                                    <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
+                                                    <div>
+                                                        <h2>{`${student.prenom} ${student.nom}`}</h2>
+                                                        <h2 className="greyText">{`${lesson.Instrument.Name} ${lesson.difficulty}`}</h2>
+                                                    </div>   
+                                                </div>
+                                                <p>{lesson.desc}</p>
+                                                <div className='nextLesson'>
+                                                    <p>Prochain cours :</p>
+                                                    <div>{formatDate(new Date(lesson.seances[0].startAt))}</div>
+                                                </div>
+                                                <div className='exercices'>
+                                                    <p>Exercices</p>
+                                                    <div >
+                                                        {lesson.seances[0] && lesson.seances[0].activities.length > 0 ? lesson.seances[0].activities.map((activity, index) => (
+                                                            <span className={`${activity.status}`}></span>
+                                                        )) : null}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            }
+                                        /> 
+                                    </Link> 
+                                )
+                            }
+                        })}
+                    </div>
+                    <div className='listeEleves'>
+                        {lessons.map((lesson) => { 
+                            return(
+                                <Link  to={`../teacher/teacherLessons/${lesson.id}`}>
+                                    <GreyDiv
+                                        content={
+                                        <div id={student.id}>
+                                            <div className='lessonHeader'>
+                                                <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
+                                                <div>
+                                                    <h2>{`${student.prenom} ${student.nom}`}</h2>
+                                                    <h2 className="greyText">{`${lesson.Instrument.Name} ${lesson.difficulty}`}</h2>
+                                                </div>   
+                                            </div>
+                                        </div>
+                                        }
+                                    /> 
+                                </Link>
+                            
+                            )
+                        })}
+                    </div>
+                    </>
                 )
             })}
         </div> 
     )
 }
 
-let students = [
-    {id: 5, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Meejez", 
-    lastName: "Eztzert",
-    },
-    {id: 4, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Drtud", 
-    lastName: "Ttttt",
-    },
-    {id: 3, 
-    img: "https://www.w3schools.com/howto/img_avatar.png",
-    firstName: "Xbcxvb", 
-    lastName: "Wertzert",
-    },
-]
 
-let lessons = [
-    {id: 1, 
-    studentId: 5,
-    title: "Piano débutant", 
-    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-    date: "2021-04-15 15:00:00",
-    exercices: [
-        {id: 1,
-        title: "Exercice 1",
-        desc: "Apprendre les notes de musique",
-        state: "finished",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "reviewed",
-        },
-        {id: 3,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-        {id: 4,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-    ],
-    },
-    {id: 2, 
-    studentId: 4,
-    title: "Piano débutant", 
-    desc: "Apprendre les notes de musique",
-    date: "2021-08-15 12:00:00",
-    exercices: [
-        {id: 1,
-        title: "Exercice 1",
-        desc: "Apprendre les notes de musique",
-        state: "finished",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "reviewed",
-        },
-        {id: 2,
-        title: "Exercice 2",
-        desc: "Apprendre les notes de musique",
-        state: "toDo",
-        },
-    ],
-    },
-    {id: 3, 
-    studentId: 3,
-    title: "Piano débutant", 
-    desc: "Apprendre les notes de musique",
-    date: "2021-04-15 16:00:00",
-    exercices: null,
-    },
-]
 
-function sortStudents(students, lessons){
-    
-    lessons = lessons.sort(function(a, b){
-        let dateA = new Date(a.date).getTime();
-        let dateB = new Date(b.date).getTime();
-        if (dateA > dateB) {
-            return -1;
-        }
-    });
+ 
 
-    var studentsOrder = [];
-
-    lessons.forEach(lesson => {
-        let student = students.filter(student => student.id === lesson.studentId )[0];
-        studentsOrder.push(student);
-    });
-
-    return studentsOrder;
-}
-// console.log(students, sortStudents(students, lessons) );
-students = sortStudents(students, lessons);
 
 export default function TeacherHome(){
-    // const [data, setData] = useState([]);
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         await putAPI('seances/12',6,{"startAt": "2023-13-29T15:00:00Z","endAt": "2023-13-20T16:00:00Z"});
-    //     };
+    const [cours, setCours] = useState([]);
+    const token = localStorage.getItem('token');
 
-    //     fetchData();
-    // }, []);
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('cours', setCours);
+        };
+        fetchData();
+    }, [token]);
+
+    // if (cours.length === 0) {
+    //     return null; // or any other loading indicator
+    // }
+
+    const students = [];
+    if (cours.length > 0){
+        cours.map((lesson) => {
+            //si lesson.Student.id est différent des autres Student.id
+            if(!students.some(student => student.id === lesson.Student.id)){
+                students.push(lesson.Student);
+            }
+        });
+    }
+    
     return (
-    <Home lessons={lessons} students={students}/>
+        cours.length > 0 && students.length > 0 ? 
+        <Home cours={cours} students={students}/> :
+        null 
     );
+
+    
 };

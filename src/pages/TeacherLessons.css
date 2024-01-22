@@ -64,6 +64,13 @@
 .lessonStudentDetails .lessonStudentInstruments{
     margin-left: 0.5em;
     font-size: small;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lessonStudentDetails .lessonStudentInstruments p{
+    font-size: 0.9em;
+    margin-top: 0.5em;
 }
 
 .lessonStudentDetails .nextLesson {
@@ -141,6 +148,10 @@
     height: 1px;
     background-color: #505050;
     border: none;
+}
+
+.lessonStudentDetails  .exercices > div:last-child hr {
+    opacity: 0;
 }
 
 .lessonStudentDetails .exercices a {

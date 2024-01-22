@@ -1,6 +1,5 @@
 function getAPI(request, setState){
     let token = localStorage.getItem('token');
-
     const requestOptions = {
         method: 'GET',
         headers: { 
@@ -8,7 +7,7 @@ function getAPI(request, setState){
             'Authorization': 'Bearer ' + token,
         }
     };
-  
+
     fetch(`https://harmonize.mael-mouquet.fr/api/${request}`, requestOptions)
     .then(response => response.json())
     .then(data => {

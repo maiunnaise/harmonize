@@ -19,6 +19,7 @@ function Search(){
         fetchData();
     }, []);
 
+
     useEffect(() => {
         if (data.length > 0) {
             setFilteredData(data);
