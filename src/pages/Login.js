@@ -92,7 +92,7 @@ function Login() {
           <input type="password" name="password" />
         </label>
         <p className='errorLogin'>Adresse mail ou mot de passe erroné</p>
-        <p>Mot de passe oublié ?</p>
+        {/* <p>Mot de passe oublié ?</p> */}
         <button value="Connexion" onClick={getToken} className='loginBtn'>Connexion</button>
         <Link to="/register">
           <p className='register'>Créer un compte</p>
