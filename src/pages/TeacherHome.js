@@ -141,7 +141,7 @@ function Home({cours, students}){
                                             content={
                                             <div id={lesson.id}>
                                                 <div className='lessonHeader'>
-                                                    <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
+                                                    <img src="../logo/icons/avatar.png" alt={`${student.prenom} ${student.nom}`}/>
                                                     <div>
                                                         <h2>{`${student.prenom} ${student.nom}`}</h2>
                                                         <h2 className="greyText">{`${lesson.Instrument.Name} ${lesson.difficulty}`}</h2>
@@ -176,7 +176,7 @@ function Home({cours, students}){
                                         content={
                                         <div id={student.id}>
                                             <div className='lessonHeader'>
-                                                <img src={student.img} alt={`${student.prenom} ${student.nom}`}/>
+                                                <img src="/logo/icons/avatar.png" alt={`${student.prenom} ${student.nom}`}/>
                                                 <div>
                                                     <h2>{`${student.prenom} ${student.nom}`}</h2>
                                                     <h2 className="greyText">{`${lesson.Instrument.Name} ${lesson.difficulty}`}</h2>

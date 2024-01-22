@@ -124,7 +124,7 @@ function MessagesDisplay({msg, contact, cours}){
             fetchData();
             return (
                 <div className={msg.length>1?"messageReceived":"request"} key={message.id} id={message.id}>
-                    <img src={contact.img} alt="profile"/>
+                    <img src="../logo/icons/avatar.png" alt="profile"/>
                     {msg.length >1 ? <p>{message.content}</p>: 
                     <div>
                         {message.content}
@@ -139,7 +139,7 @@ function MessagesDisplay({msg, contact, cours}){
             return (
                 <div className="messageSended" key={message.id} id={message.id}>
                     <p>{message.content}</p>
-                    <img src={contact.img} alt="profile"/> 
+                    <img src="../logo/icons/avatar.png" alt="profile"/> 
                 </div>
             );
         }

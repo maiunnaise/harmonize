@@ -121,7 +121,7 @@ function Lesson({data}){
     
             <div className="simpleContent ">
                 <div className="editLessonPicName">
-                    <img src="../logo192.png" alt="profile"/>
+                    <img src="/logo/icons/avatar.png" alt="profile"/>
                     <div>
                         <h2>{cours.Student.User.prenom}<br/> {cours.Student.User.nom}</h2>
                         <p>{cours.Instrument.Name} {cours.difficulty}</p>

@@ -71,7 +71,7 @@ function Contact({cours}){
                 <GreyDiv className="unread msgDiv" content={
                     <Link to={`/message/${cours.id}`} className='inboxLink'>
                         <div className="inboxContact">
-                            <img src="../logo192.png" alt="contact"/>
+                            <img src="../logo/icons/avatar.png" alt="contact"/>
                             <div className="inboxText">
                                  {role === "ROLE_STUDENT" ? 
                                     <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :
@@ -91,7 +91,7 @@ function Contact({cours}){
                 <GreyDiv className="msgDiv" content={
                     <Link to={`/message/${cours.id}`} className='inboxLink'>
                         <div className="inboxContact">
-                            <img src="../logo192.png" alt="contact"/>
+                            <img src="../logo/icons/avatar.png" alt="contact"/>
                             <div className="inboxText">
                                  {role === "ROLE_STUDENT" ? 
                                     <h2>{cours.Teacher.User.prenom} {cours.Teacher.User.nom}</h2> :

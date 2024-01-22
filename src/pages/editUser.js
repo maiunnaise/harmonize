@@ -168,7 +168,7 @@ function EditUserForm() {
         <div className="simpleContent">
             <div id="editUser">
                 <div className='userPicName'>
-                    <img className="userPic" src="../logo192.png" alt="profile"/>
+                    <img className="userPic" src="/logo/icons/avatar.png" alt="profile"/>
                     <div className="userName">
                         <h2>{user.prenom}<br/> {user.nom}</h2>
                     </div>

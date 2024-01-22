@@ -43,7 +43,7 @@ function Lesson({cours, seance, activities}){
             
             <div className="simpleContent">
                 <div className="lessonStudentPicName">
-                    <img src="../logo192.png" alt="profile"/>
+                    <img src="/logo/icons/avatar.png" alt="profile"/>
                     <div>
                         <h2>{cours.Student.User.prenom}<br/> {cours.Student.User.nom}</h2>
                         <p>{cours.Instrument.Name} {cours.difficulty}</p>

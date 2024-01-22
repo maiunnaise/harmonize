@@ -27,7 +27,7 @@ function UserInfo(){
         <div className="simpleContent">
             <SimpleHeader route={"/teacher/home"} />
             <div className='userPicName'>
-                <img src="../logo192.png" alt="profile"/>
+                <img src="/logo/icons/avatar.png" alt="profile"/>
                 <div>
                     <h2>{user.prenom}<br/> {user.nom}</h2>
                 </div>
