@@ -106,12 +106,8 @@ body .TeacherHome{
     margin-top: 0.2em;
 }
 
-.TeacherHome .exercices .reviewed {
-    background-color: #409048;
-}
-
 .TeacherHome .exercices .finished {
-    background-color: #FFA800;
+    background-color: #409048;
 }
 
 .TeacherHome .exercices .toDo {
