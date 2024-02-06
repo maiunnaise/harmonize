@@ -248,15 +248,13 @@ export default function TeacherHome(){
         }
         
     }, [instrumentUser]);
-
-    console.log(instrumentUser);
     
     return (
         <>
         <EmptyInstruments instrument={instrument}/>
         {cours.length > 0 && students.length > 0 ? 
         <Home cours={cours} students={students}/> :
-        <p className='emptyCourse'>Pas de cours disponible</p>}
+        <p className='emptyCourseTeach'>Pas de cours disponible</p>}
         </>
         
     );
