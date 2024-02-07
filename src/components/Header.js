@@ -1,5 +1,6 @@
 import './Header.css';
 import { Link } from 'react-router-dom';
+import { DarkModeToggle } from '../components/DarkModeToggle.js';
 
 function Header() {
   return (
@@ -10,9 +11,10 @@ function Header() {
       <Link to="/home">
         <img src="/logo/logo_harmonize.png" className="logo" alt="logo" />
       </Link>
-      <Link to="/nextVersion">
+      {/* <Link to="/nextVersion">
           <img src="/logo/icons/settings.png" className="settings" alt="logo settings" />
-      </Link>
+      </Link> */}
+      <DarkModeToggle />
     </header>
   );
 }

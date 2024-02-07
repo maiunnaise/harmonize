@@ -32,7 +32,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-inline: 1em;
-    background-color: #3D3D3D;  
+    background-color: var(--div-background-2);
     border-radius: 30px;
     height: 2em;
     position: fixed;
@@ -133,12 +133,13 @@
 }
 
 .messageReceived p, .request div {
-    background-color: #3D3D3D;
+    background-color: var(--div-background-2);
 }
 
 .messageSended p {
     background-color: #845583;
     margin-left: 1em;
+    color: white;
 }
 
 .request div p:first-of-type{

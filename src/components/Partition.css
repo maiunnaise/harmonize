@@ -1,5 +1,5 @@
 .partition{
-    background-color: #474747;
+    background-color: var(--div-background-2);
     display: flex;
     flex-direction: row;
     border-radius: 35px;

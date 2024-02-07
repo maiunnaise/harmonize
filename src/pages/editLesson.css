@@ -48,7 +48,6 @@
 .editLessonDetails h2, .editLessonPopUp h2 {
     margin-bottom: 0.5em;
     font-size: medium;
-    margin-left: 1em;
     padding-top: 1em;
 }
 
@@ -56,7 +55,7 @@
     margin-top: 1em;
     margin-bottom: 0.5em;
     height: 1px;
-    background-color: #4A4A4A;
+    background-color: var(--header-border);
     border: none;
 }
 
@@ -92,7 +91,7 @@
     border: 0;
     border-radius: 30px;
     padding: 0.5em;
-    background-color: #505050;
+    background-color: var(--div-background);
     color-scheme: dark;
 }
 
@@ -116,7 +115,7 @@
 }
 
 .editLessonDetails .exercices {
-    background-color: #474747;
+    background-color: var(--div-background);
     border-radius: 30px;
     margin-top: 1em;
 }
@@ -147,7 +146,7 @@
     width: 90%;
     margin-inline: auto;
     height: 1px;
-    background-color: #505050;
+    background-color: var(--header-border);
     border: none;
 }
 
@@ -173,7 +172,7 @@
 
 .editLessonDetails .buttons button:last-of-type {
     border: #e12222 1px solid;
-    color: #f1dddd;
+    color: #e86060;
 }
 
 .validateBtn a {
@@ -194,10 +193,11 @@
     padding-bottom: 0.5em;
     margin-bottom: 1.5em;
     margin-inline: auto;
+    color: white !important;
 }
 
 .editLessonDetails textarea, .editLessonPopUp textarea {
-    background-color: #393939;
+    background-color: var(--div-background);
     width: 100%;
     resize: none;
 }
@@ -239,7 +239,7 @@
     left:50%;
     transform: translate(-50%, -50%);
     border-radius: 10px;
-    background: #3D3D3D;
+    background: var(--color-background);
     box-shadow: 0px 0px 10px 0px black;
     overflow: scroll;
 }
@@ -248,15 +248,16 @@
     height: 2.5em;
     margin-bottom: 1em;
     padding-bottom: 1em;
-    border-bottom: #474747 1px solid;
+    border-bottom: var(--header-border) 1px solid;
     text-align: center;
     height: 3em;
+    
 }
 
 .editLessonPopUp #popup h3 {
     text-align: center;
     margin-bottom: 0.5em;
-    color: #e3e3e3;
+    color: var(--text-color-2);
 }
 
 .editLessonPopUp #popup form {
@@ -271,7 +272,7 @@
 }
 
 .editLessonPopUp #popup input,.editLessonPopUp #popup select {
-    background-color: #393939;
+    background-color: var(--div-background);
     border: gray 1px solid;
 }
 

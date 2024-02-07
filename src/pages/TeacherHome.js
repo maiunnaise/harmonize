@@ -7,6 +7,7 @@ import { getAPI} from '../components/fetchAPI.js';
 import CheckLogin from '../components/checkLogin.js';
 import EmptyInstruments from '../components/emptyInstruments'
 
+
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
     if (cours.length > 0) {
@@ -248,16 +249,15 @@ export default function TeacherHome(){
         }
         
     }, [instrumentUser]);
-
-    console.log(instrumentUser);
     
     return (
-        <>
+        <div>
+            
         <EmptyInstruments instrument={instrument}/>
         {cours.length > 0 && students.length > 0 ? 
         <Home cours={cours} students={students}/> :
         <p className='emptyCourse'>Pas de cours disponible</p>}
-        </>
+        </div>
         
     );
 

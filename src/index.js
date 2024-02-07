@@ -34,7 +34,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
       <Routes>
-
+        
         <Route path="/" element={<Layout />}>
           <Route path="findTeacher" element={<FindTeachersPage />}/>
           <Route path="inbox" element={<Inbox />}/>

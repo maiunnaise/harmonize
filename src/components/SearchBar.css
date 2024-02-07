@@ -1,6 +1,6 @@
 .SearchBar{
     color: rgb(255, 255, 255);
-    background-color: #474747;
+    background-color: var(--div-background);
     padding: 8px;
     border-radius: 30px;
     border: 0;

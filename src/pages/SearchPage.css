@@ -26,13 +26,14 @@
     font-size: small;
     border-radius: 15px;
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
-.SearchPage #toolsDiv > div > p{
+.SearchPage #toolsDiv  div > p{
     font-size: 1em;
     padding-bottom: 2em;
     margin-top: -0.25em;
+    color: white !important;
 }
 
 .SearchPage #toolsDiv  div > img{

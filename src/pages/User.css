@@ -72,6 +72,10 @@
     width: 100%;
 }
 
+.userModifBtn > a > button{
+    color: white;
+}
+
 .userModifBtn .logout {
     width: 100%;
     border: 1px solid #c92a2a;

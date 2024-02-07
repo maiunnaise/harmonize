@@ -1,8 +1,8 @@
 header{
     width:100vw;
     height: fit-content;
-    border-bottom: 2px solid #272727;
-    background-color:#2e2e2e;
+    border-bottom: 2px solid var(--header-border);
+    background-color: var(--color-background);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,6 +16,7 @@ header{
     width:auto;
     height: 6vh;
     display: inline-block;
+    
 }
 
 .user, .settings{
