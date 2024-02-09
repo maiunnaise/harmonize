@@ -4,7 +4,6 @@
   padding: 8px;
   border-radius: 30px;
   border: 0;
-  margin-inline: 1em;
 }
 .divSearchTeacher > h2 {
   font-size: medium;
@@ -19,17 +18,20 @@
 
 .searchBtns {
   position: relative;
-  align-self: center;
   display: flex;
   align-items: center;
+  justify-content: left;
+  margin-bottom: 0.35em;
 }
 
 .searchBtns  button, .searchTeacher > .GreyDiv > div > button {
   background-color: #845483;
   border:0;
   border-radius: 30px;
-  padding: 0.5em 1em;
+  padding: 0.2em 0.5em;
   font-weight: bold;
+  font-size: 0.8em;
+  margin-left: 1em;
 }
 
 .searchTeacher > .GreyDiv > div > button{
@@ -39,6 +41,60 @@
 .searchTeacher > .GreyDiv{
   padding:1em;
 }
+
+.searchTeacher > .GreyDiv > div > div{
+  min-height: 5.5em;
+}
+
+.searchTeacher .divSearchTeacher form {
+  margin-inline: auto;
+  margin-top: 0.5em;
+}
+
+.searchTeacher .divSearchTeacher form img {
+  width: 1.2em;
+  margin-top: 0.2em;
+}
+
+.searchTeacher select {
+  background-color: #3D3D3D;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  margin-inline: 0.5em;
+  margin-bottom: 0.25em;
+  color: #a268a1;
+  font-weight: bold;
+  font-size: 0.95em;
+  overflow: scroll;
+  /* width: 8em; */
+}
+
+
+.searchTeacher form #instrumentSelect, .searchTeacher form #rythmSelect, .searchTeacher .searchBtns {
+  display: none;
+}
+
+.searchTeacher form input[type="submit"] {
+  display: none;
+  background-color: #845483;
+  margin-top: 0.5em;
+  margin-inline: auto;
+  font-weight: bold;
+}
+
+.searchTeacher > img {
+  width: 10em;
+  opacity: 0.1;
+  display: block;
+  position: absolute;
+  left: 30%;
+  top: 40%;
+  z-index: -4;
+}
+
 
 .findTeacherImg {
   width: 5em;
@@ -65,7 +121,14 @@
 }
 
 .instrumentsTeach{
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 0.7em;
+}
+
+.instrumentsTeach p {
+  font-size: 0.75em;
+  margin-top: 0.35em;
 }
 
 .overlayContent{
