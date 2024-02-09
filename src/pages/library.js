@@ -17,7 +17,9 @@ export function Libform({partitions}){
                 if (select.id in partition.Sheet){
                     if (!select.innerHTML.includes(partition.Sheet[select.id])){
                         if(select.id == "Instrument"){
-                            select.innerHTML += `<option value="${partition.Sheet[select.id].Name}">${partition.Sheet[select.id].Name}</option>`
+                            if( !select.innerHTML.includes(partition.Sheet.Instrument.Name)){
+                                select.innerHTML += `<option value="${partition.Sheet[select.id].Name}">${partition.Sheet[select.id].Name}</option>`
+                            }
                         }
                         else{
                             select.innerHTML += `<option value="${partition.Sheet[select.id]}">${partition.Sheet[select.id]}</option>`

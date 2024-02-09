@@ -1,0 +1,71 @@
+#popupPart {
+    position: relative;
+    width: 70%;
+    height: fit-content;
+    background-color: #474747;
+    border-radius: 15px;
+    padding: 1.5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#popupPart h2 {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: fit-content;
+}
+
+#popupPart .close{
+    align-self: flex-end;
+    font-weight: bold;
+}
+
+#popupPart .choosePart{
+    padding: 0.2em 0.5em;
+    border-bottom: white 1px solid;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+#popupPart .choosePart div{
+    font-weight: bold;
+    padding: 0.2em 0.5em;
+    /*sah moche*/
+}
+
+#overlayPartEdit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#popupPart .btnCreate{
+    background-color: #2d2d2d;
+    background-color: #845583;
+    padding: 0.5em 1em;
+    border-radius: 25px;
+    font-weight: bold;
+    margin-top: 1em;
+}
+
+#popupPart .createNewPart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+#popupPart .instrumentChoice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+}
