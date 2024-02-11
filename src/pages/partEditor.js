@@ -27,7 +27,7 @@ function CreateNewPart(){
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                setInstruments(data.instruments.$sort);
+                setInstruments(data.instruments);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -36,6 +36,26 @@ function CreateNewPart(){
         fetchInstruments();
     }, []);
     console.log(instruments);
+
+    function addInstruments(e){
+        console.log(e.target.value)
+
+        instruments.map((instrument, index) => {
+            let select = document.getElementById('instrument');
+            if(instrument.name == e.target.value){
+                select.disabled = false;
+                select.innerHTML = "<option value=''>Choisir un instrument</option>";
+                instrument.instruments.map((inst, index) => {
+                    select.innerHTML += "<option value='"+inst.name+"'>"+inst.trad+"</option>";
+                })
+            }
+            else if(e.target.value == ""){
+                select.innerHTML = "<option value=''>Choisir un instrument</option>";
+                select.disabled = true; 
+            }
+                
+        })
+    }
 
     return(
         <div id='overlayPartEdit' className='overlay'>
@@ -47,13 +67,17 @@ function CreateNewPart(){
                     <input type="text" name="title" id="title"/>
                     <label htmlFor="instrumentType">Instrument</label>
                     <div className='instrumentChoice'>
-                        <select name="instrumentType" id="instrumentType">
+                        <select name="instrumentType" id="instrumentType" onChange={addInstruments}>
                             <option value="">Choisir un type</option>
-                            <option value="strings">Cordes</option>
+                            {instruments.map((instrument, index) => {
+                                return(
+                                    <option value={instrument.name} key={index}>{instrument.trad}</option>
+                                )
+                            })}
+                            
                         </select>
-                        <select name="instrument" id="instrument">
+                        <select name="instrument" id="instrument" disabled>
                             <option value="">Choisir un instrument</option>
-                            <option value="strings">Violon</option>
                         </select>
                     </div>
                     <div className='btnCreate'>Créer</div>
