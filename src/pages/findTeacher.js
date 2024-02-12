@@ -37,7 +37,7 @@ function TeachersDesc({teacher, onSendRequest}){
     )
 }
 
-
+let formSended = false;
 
 function FindTeachersDiv(){
     const [teachers, setTeachers] = useState([]);
@@ -59,34 +59,22 @@ function FindTeachersDiv(){
     //     }
     // }, [teachers])
 
-    
-    // const handleSearch = (searchTerm) => {
-    //     if (searchTerm === '') {
-    //         setFilteredData(teachers);
-    //         return;
-    //     }
-    //     const filteredResults = teachers.filter((item) => {
-    //         if (item.city !== null) {
-    //             return item.city.toLowerCase().includes(searchTerm.toLowerCase());
-    //         }
-    //         return false; 
-    //     });
-    
-    //     setFilteredData(filteredResults);
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault()
         console.log(e.target.difficulty.value);
         console.log(e.target.instrument.value);
         console.log(e.target.ville.value);
         console.log(e.target.rythm.value);
-
-        // const fetchData = async () => {
-        //     await getAPI("instruments", setInstruments);
-        // };
-        // fetchData();
-    
+        let difficulty = e.target.difficulty.value;
+        let instrument = e.target.instrument.value;
+        let ville = e.target.ville.value;
+        let rythm = e.target.rythm.value;
+        formSended = true;
+        const fetchData = async () => {
+            console.log("teachers?difficulty="+difficulty+"&instrument="+instrument+"&city="+ville+"&frequence="+rythm);
+            await getAPI("teachers?difficulty="+difficulty+"&instrument="+instrument+"&city="+ville+"&frequence="+rythm, setTeachers);
+        };
+        fetchData();
     }
 
     //Geolocalisation
@@ -196,15 +184,25 @@ function FindTeachersDiv(){
                     </form>
                 </div>
             }/>
-            {filteredData.map((teacher, index) => {
+    
+            {teachers.map((teacher, index) => {
+                console.log(teacher);
                 return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} onSendRequest={() => setSelectedTeacher(teacher)} />}/>;
             })}
+            {console.log(formSended, !formSended)}
+            {teachers.length == 0 && formSended ?
+                (<GreyDiv content={<p>Aucun enseignant trouvé</p>} />):
+                null
+            }
+            {!formSended ? 
+                (<img src="/logo/logo_harmonize.png" alt="logo harmonize"/>):
+                null
+            }
 
             {/* Afficher la popup si un professeur est sélectionné */}
             {selectedTeacher.length !=0 && (
                 <SendCourseRequest teacher={selectedTeacher} onClose={() => setSelectedTeacher([])} />
-            )}
-            <img src="/logo/logo_harmonize.png" alt="logo harmonize"/>   
+            )}   
         </div>
     )
 }

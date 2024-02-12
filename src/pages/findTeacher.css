@@ -59,6 +59,7 @@
 .searchTeacher select {
   background-color: #3D3D3D;
   border: 0;
+  border-bottom: solid 0.5px;
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
