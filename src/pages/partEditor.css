@@ -76,3 +76,7 @@
 .savePart{
     width: fit-content;
 }
+
+.vip{
+    font-weight: bold;
+}

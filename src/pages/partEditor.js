@@ -7,6 +7,7 @@ import { decodeToken } from 'react-jwt';
 import Embed from 'flat-embed';
 
 export default function PartEditor() {
+    CheckLogin();
     const [isCreated, setIsCreated]= useState(false);
     const [partData, setPartData] = useState([]);
     //const [showCreatePart, setShowCreatePart] = useState(false);
@@ -30,7 +31,7 @@ export default function PartEditor() {
                         <p>Dans votre bibliothèque :</p>
                         <select name="partitions" id="partitions">
                             <option value="">Vos partitions</option>
-                            <option value="65ca3f0732e4e7dea04b40c2">Partition test</option>
+                            <option value="65ca3f0732e4e7dea04b40c2" >Partition test</option>
                         </select>
                         <div onClick={()=> {setIsCreated(true); setPartData(test)}}>Modifier cette partition</div>
                     </div>
@@ -158,8 +159,10 @@ function CreateNewPart({isCreated, setData}){
                 select.disabled = false;
                 select.innerHTML = "<option value=''>Choisir un instrument</option>";
                 instrument.instruments.map((inst, index) => {
-                    select.innerHTML += "<option value='"+inst.name+"'>"+inst.trad+"</option>";
-                })
+                    select.innerHTML += `<option value="${inst.name}" ${inst.premium ? 'disabled' : ''}>
+                    ${inst.trad}${inst.premium ? " - Premium" : ""}
+                </option>`;
+            })
             }
             else if(e.target.value == ""){
                 select.innerHTML = "<option value=''>Choisir un instrument</option>";

@@ -6,43 +6,53 @@
             "instruments": [
                 {
                     "name": "hq-trumpet",
-                    "trad": "Trompette"
+                    "trad": "Trompette",
+                    "premium": true
                 },
                 {
                     "name": "hq-trombone",
-                    "trad": "Trombone"
+                    "trad": "Trombone",
+                    "premium": true
                 },
                 {
                     "name": "hq-french-horn",
-                    "trad": "Cor en fa"
+                    "trad": "Cor en fa",
+                    "premium": true
                 },
                 {
                     "name": "hq-horn-in-c",
-                    "trad": "Cor en do"
+                    "trad": "Cor en do",
+                    "premium": true
                 },
                 {
                     "name": "hq-horn-in-d",
-                    "trad": "Cor en ré"
+                    "trad": "Cor en ré",
+                    "premium": true
                 },
                 {
                     "name": "hq-baritone-horn",
-                    "trad": "Cor baryton"
+                    "trad": "Cor baryton",
+                    "premium": true
                 },
                 {
                     "name": "hq-baritone-horn-treble",
-                    "trad": "Cor baryton en Sol"
+                    "trad": "Cor baryton en Sol",
+                    "premium": true
                 },
                 {
                     "name": "euphonium",
-                    "trad": "Euphonium"
+                    "trad": "Euphonium",
+                    "premium": false
                 },
                 {
                     "name": "hq-tuba",
-                    "trad": "Tuba"
+                    "trad": "Tuba",
+                    "premium": true
                 },
                 {
                     "name": "brass",
-                    "trad": "Section de cuivres"
+                    "trad": "Section de cuivres",
+                    "premium": false
                 }
             ]
         },
@@ -52,19 +62,23 @@
             "instruments": [
                 {
                     "name": "synth-bass-1",
-                    "trad": "Basse synthé 1"
+                    "trad": "Basse synthé 1",
+                    "premium": true
                 },
                 {
                     "name": "synth-bass-2",
-                    "trad": "Basse synthé 2"
+                    "trad": "Basse synthé 2",
+                    "premium": true
                 },
                 {
                     "name": "synth-bass-3",
-                    "trad": "Basse synthé 3"
+                    "trad": "Basse synthé 3",
+                    "premium": true
                 },
                 {
                     "name": "choir-synth",
-                    "trad": "Synthé de choeur"
+                    "trad": "Synthé de choeur",
+                    "premium": false
                 }
             ]
         },
@@ -74,11 +88,13 @@
             "instruments": [
                 {
                     "name": "accordion",
-                    "trad": "Accordéon"
+                    "trad": "Accordéon",
+                    "premium": false
                 },
                 {
                     "name": "harmonica",
-                    "trad": "Harmonica"
+                    "trad": "Harmonica",
+                    "premium": false
                 }
             ]
         },
@@ -88,43 +104,53 @@
             "instruments": [
                 {
                     "name": "hq-grand-piano",
-                    "trad": "Piano à queue"
+                    "trad": "Piano à queue",
+                    "premium": true
                 },
                 {
                     "name": "hq-piano-tight",
-                    "trad": "Piano serré"
+                    "trad": "Piano serré",
+                    "premium": true
                 },
                 {
                     "name": "hq-piano-concert",
-                    "trad": "Piano de concert"
+                    "trad": "Piano de concert",
+                    "premium": true
                 },
                 {
                     "name": "piano",
-                    "trad": "Piano"
+                    "trad": "Piano",
+                    "premium": false
                 },
                 {
                     "name": "harpsichord",
-                    "trad": "Clavecin"
+                    "trad": "Clavecin",
+                    "premium": false
                 },
                 {
                     "name": "celesta",
-                    "trad": "Célesta"
+                    "trad": "Célesta",
+                    "premium": false
                 },
                 {
                     "name": "organ",
-                    "trad": "Orgue"
+                    "trad": "Orgue",
+                    "premium": false
                 },
                 {
                     "name": "hammond-organ",
-                    "trad": "Orgue Hammond"
+                    "trad": "Orgue Hammond",
+                    "premium": false
                 },
                 {
                     "name": "reed-organ",
-                    "trad": "Orgue à anche"
+                    "trad": "Orgue à anche",
+                    "premium": false
                 },
                 {
                     "name": "rotary-organ",
-                    "trad": "Orgue rotatif"
+                    "trad": "Orgue rotatif",
+                    "premium": false
                 }
             ]
         },
@@ -134,39 +160,48 @@
             "instruments": [
                 {
                     "name": "timpani",
-                    "trad": "Timbales"
+                    "trad": "Timbales",
+                    "premium": false
                 },
                 {
                     "name": "xylophone",
-                    "trad": "Xylophone"
+                    "trad": "Xylophone",
+                    "premium": false
                 },
                 {
                     "name": "vibraphone",
-                    "trad": "Vibraphone"
+                    "trad": "Vibraphone",
+                    "premium": false
                 },
                 {
                     "name": "glockenspiel",
-                    "trad": "Glockenspiel"
+                    "trad": "Glockenspiel",
+                    "premium": false
                 },
                 {
                     "name": "marimba",
-                    "trad": "Marimba"
+                    "trad": "Marimba",
+                    "premium": false
                 },
                 {
                     "name": "tubular-bells",
-                    "trad": "Carillon tubulaire"
+                    "trad": "Carillon tubulaire",
+                    "premium": false
                 },
                 {
                     "name": "music-box",
-                    "trad": "Boîte à musique"
+                    "trad": "Boîte à musique",
+                    "premium": false
                 },
                 {
                     "name": "soprano-steel-drums",
-                    "trad": "Steel drums soprano"
+                    "trad": "Steel drums soprano",
+                    "premium": false
                 },
                 {
                     "name": "bass-steel-drums",
-                    "trad": "Steel drums basse"
+                    "trad": "Steel drums basse",
+                    "premium": false
                 }
             ]
         },
@@ -176,168 +211,209 @@
             "instruments": [
                 {
                     "name": "hq-drumset-rock",
-                    "trad": "Batterie rock"
+                    "trad": "Batterie rock",
+                    "premium": true
                 },
                 {
                     "name": "hip-hop-drum-set",
-                    "trad": "Batterie hip-hop"
+                    "trad": "Batterie hip-hop",
+                    "premium": true
                 },
                 {
                     "name": "marching-snare-drums",
-                    "trad": "Caisse claire de marche"
+                    "trad": "Caisse claire de marche",
+                    "premium": true
                 },
                 {
                     "name": "marching-tenor-drums",
-                    "trad": "Ténor de marche"
+                    "trad": "Ténor de marche",
+                    "premium": true
                 },
                 {
                     "name": "marching-bass-drums",
-                    "trad": "Basse de marche"
+                    "trad": "Basse de marche",
+                    "premium": true
                 },
                 {
                     "name": "marching-cymbals",
-                    "trad": "Cymbales de marche"
+                    "trad": "Cymbales de marche",
+                    "premium": true
                 },
                 {
                     "name": "concert-bass-drum",
-                    "trad": "Basse de concert"
+                    "trad": "Basse de concert",
+                    "premium": true
                 },
                 {
                     "name": "gong",
-                    "trad": "Gong"
+                    "trad": "Gong",
+                    "premium": true
                 },
                 {
                     "name": "nagado-drums",
-                    "trad": "Nagado"
+                    "trad": "Nagado",
+                    "premium": true
                 },
                 {
                     "name": "woodblocks",
-                    "trad": "Claves"
+                    "trad": "Claves",
+                    "premium": true
                 },
                 {
                     "name": "bongos",
-                    "trad": "Bongos"
+                    "trad": "Bongos",
+                    "premium": true
                 },
                 {
                     "name": "congas",
-                    "trad": "Congas"
+                    "trad": "Congas",
+                    "premium": true
                 },
                 {
                     "name": "claves",
-                    "trad": "Claves"
+                    "trad": "Claves",
+                    "premium": true
                 },
                 {
                     "name": "agogo-bells",
-                    "trad": "Cloches agogo"
+                    "trad": "Cloches agogo",
+                    "premium": true
                 },
                 {
                     "name": "whistles",
-                    "trad": "Sifflets"
+                    "trad": "Sifflets",
+                    "premium": true
                 },
                 {
                     "name": "wind-chimes",
-                    "trad": "Carillons"
+                    "trad": "Carillons",
+                    "premium": true
                 },
                 {
                     "name": "finger-snap",
-                    "trad": "Clap"
+                    "trad": "Clap",
+                    "premium": false
                 },
                 {
                     "name": "hand-clap",
-                    "trad": "Clap"
+                    "trad": "Clap",
+                    "premium": false
                 },
                 {
                     "name": "suspended-cymbal",
-                    "trad": "Cymbale suspendue"
+                    "trad": "Cymbale suspendue",
+                    "premium": true
                 },
                 {
                     "name": "triangle",
-                    "trad": "Triangle"
+                    "trad": "Triangle",
+                    "premium": true
                 },
                 {
                     "name": "jingle-bells",
-                    "trad": "Cloches"
+                    "trad": "Cloches",
+                    "premium": true
 
                 },
                 {
                     "name": "maracas",
-                    "trad": "Maracas"
+                    "trad": "Maracas",
+                    "premium": true
                 },
                 {
                     "name": "drumline-acoustic-bass-drum",
-                    "trad": "Basse acoustique"
+                    "trad": "Basse acoustique",
+                    "premium": true
                 },
                 {
                     "name": "drumline-side-stick",
-                    "trad": "Side stick"
+                    "trad": "Side stick",
+                    "premium": true
                 },
                 {
                     "name": "drumline-acoustic-snare-drum",
-                    "trad": "Caisse claire acoustique"
+                    "trad": "Caisse claire acoustique",
+                    "premium": true
                 },
                 {
                     "name": "drumline-floor-tom",
-                    "trad": "Tom basse"
+                    "trad": "Tom basse",
+                    "premium": true
                 },
                 {
                     "name": "drumline-low-tom",
-                    "trad": "Tom basse"
+                    "trad": "Tom basse",
+                    "premium": true
                 },
                 {
                     "name": "drumline-low-mid-tom",
-                    "trad": "Tom basse-médium"
+                    "trad": "Tom basse-médium",
+                    "premium": true
                 },
                 {
                     "name": "drumline-mid-tom",
-                    "trad": "Tom médium"
+                    "trad": "Tom médium",
+                    "premium": true
                 },
                 {
                     "name": "drumline-high-mid-tom",
-                    "trad": "Tom médium-aigu"
+                    "trad": "Tom médium-aigu",
+                    "premium": true
                 },
                 {
                     "name": "drumline-high-tom",
-                    "trad": "Tom aigu"
+                    "trad": "Tom aigu",
+                    "premium": true
                 },
                 {
                     "name": "drumline-closed-hi-hat",
-                    "trad": "Charleston fermé"
+                    "trad": "Charleston fermé",
+                    "premium": true
                 },
                 {
                     "name": "drumline-open-hi-hat",
-                    "trad": "Charleston ouvert"
+                    "trad": "Charleston ouvert",
+                    "premium": true
                 },
                 {
                     "name": "drumline-pedal-hi-hat",
-                    "trad": "Charleston à pédale"
+                    "trad": "Charleston à pédale",
+                    "premium": true
                 },
                 {
                     "name": "drumline-crash-cymbal",
-                    "trad": "Cymbale crash"
+                    "trad": "Cymbale crash",
+                    "premium": true
                 },
                 {
                     "name": "drumline-ride-cymbal",
-                    "trad": "Cymbale ride"
+                    "trad": "Cymbale ride",
+                    "premium": true
                 },
                 {
                     "name": "drumline-chinese-cymbal",
-                    "trad": "Cymbale chinoise"
+                    "trad": "Cymbale chinoise",
+                    "premium": true
                 },
                 {
                     "name": "drumline-ride-bell",
-                    "trad": "Cloche de cymbale ride"
+                    "trad": "Cloche de cymbale ride",
+                    "premium": true
                 },
                 {
                     "name": "drumline-tambourine",
-                    "trad": "Tambourin"
+                    "trad": "Tambourin",
+                    "premium": true
                 },
                 {
                     "name": "drumline-splash-cymbal",
-                    "trad": "Cymbale splash"
+                    "trad": "Cymbale splash",
+                    "premium": true
                 },
                 {
                     "name": "drumline-cowbell",
-                    "trad": "Cloche"
+                    "trad": "Cloche",
+                    "premium": true
                 }
             ]
         },
@@ -347,99 +423,123 @@
             "instruments": [
                 {
                     "name": "hq-acoustic-guitar",
-                    "trad": "Guitare acoustique"
+                    "trad": "Guitare acoustique",
+                    "premium": true
                 },
                 {
                     "name": "guitar-nylon",
-                    "trad": "Guitare classique"
+                    "trad": "Guitare classique",
+                    "premium": false
                 },
                 {
                     "name": "guitar-steel",
-                    "trad": "Guitare folk"
+                    "trad": "Guitare folk",
+                    "premium": true
                 },
                 {
                     "name": "hq-ukulele",
-                    "trad": "Ukulélé"
+                    "trad": "Ukulélé",
+                    "premium": true
                 },
                 {
                     "name": "hq-electric-guitar",
-                    "trad": "Guitare électrique"
+                    "trad": "Guitare électrique",
+                    "premium": true
                 },
                 {
                     "name": "electric-guitar-clean",
-                    "trad": "Guitare électrique clean"
+                    "trad": "Guitare électrique clean",
+                    "premium": false
                 },
                 {
                     "name": "electric-guitar-jazz",
-                    "trad": "Guitare électrique jazz"
+                    "trad": "Guitare électrique jazz",
+                    "premium": true
                 },
                 {
                     "name": "electric-guitar-muted",
-                    "trad": "Guitare électrique étouffée"
+                    "trad": "Guitare électrique étouffée",
+                    "premium": true
                 },
                 {
                     "name": "premium-guitar-distortion",
-                    "trad": "Guitare électrique distorsion"
+                    "trad": "Guitare électrique distorsion",
+                    "premium": true
                 },
                 {
                     "name": "premium-guitar-crunch",
-                    "trad": "Guitare électrique crunch"
+                    "trad": "Guitare électrique crunch",
+                    "premium": true
                 },
                 {
                     "name": "premium-guitar-lead",
-                    "trad": "Guitare électrique lead"
+                    "trad": "Guitare électrique lead",
+                    "premium": true
                 },
                 {
                     "name": "distortion-guitar",
-                    "trad": "Guitare électrique distorsion"
+                    "trad": "Guitare électrique distorsion",
+                    "premium": true
                 },
                 {
                     "name": "hq-modern-electric-bass",
-                    "trad": "Basse électrique moderne"
+                    "trad": "Basse électrique moderne",
+                    "premium": true
                 },
                 {
                     "name": "hq-vintage-electric-bass",
-                    "trad": "Basse électrique vintage"
+                    "trad": "Basse électrique vintage",
+                    "premium": true
                 },
                 {
                     "name": "electric-bass",
-                    "trad": "Basse électrique"
+                    "trad": "Basse électrique",
+                    "premium": false
                 },
                 {
                     "name": "electric-bass-pick",
-                    "trad": "Basse électrique médiator"
+                    "trad": "Basse électrique médiator",
+                    "premium": true
                 },
                 {
                     "name": "slap-bass",
-                    "trad": "Basse électrique slap"
+                    "trad": "Basse électrique slap",
+                    "premium": true
                 },
                 {
                     "name": "koto",
-                    "trad": "Koto"
+                    "trad": "Koto",
+                    "premium": true
                 },
                 {
                     "name": "shamisen",
-                    "trad": "Shamisen"
+                    "trad": "Shamisen",
+                    "premium": true
                 },
                 {
                     "name": "oud",
-                    "trad": "Oud"
+                    "trad": "Oud",
+                    "premium": true
                 },
                 {
                     "name": "banjo",
-                    "trad": "Banjo"
+                    "trad": "Banjo",
+                    "premium": true
                 },
                 {
                     "name": "mandolin",
-                    "trad": "Mandoline"
+                    "trad": "Mandoline",
+                    "premium": true
                 },
                 {
                     "name": "harp",
-                    "trad": "Harpe"
+                    "trad": "Harpe",
+                    "premium": false
                 },
                 {
                     "name": "sitar",
-                    "trad": "Sitar"
+                    "trad": "Sitar",
+                    "premium": true
                 }
             ]
         },
@@ -449,31 +549,38 @@
             "instruments": [
                 {
                     "name": "hq-violin",
-                    "trad": "Violon"
+                    "trad": "Violon",
+                    "premium": true
                 },
                 {
                     "name": "violin-lead",
-                    "trad": "Violon solo"
+                    "trad": "Violon solo",
+                    "premium": true
                 },
                 {
                     "name": "hq-viola",
-                    "trad": "Alto"
+                    "trad": "Alto",
+                    "premium": true
                 },
                 {
                     "name": "hq-cello",
-                    "trad": "Violoncelle"
+                    "trad": "Violoncelle",
+                    "premium": true
                 },
                 {
                     "name": "violoncello",
-                    "trad": "Violoncelle solo"
+                    "trad": "Violoncelle solo",
+                    "premium": false
                 },
                 {
                     "name": "hq-contrabass",
-                    "trad": "Contrebasse"
+                    "trad": "Contrebasse",
+                    "premium": true
                 },
                 {
                     "name": "string-ensemble",
-                    "trad": "Ensemble de cordes"
+                    "trad": "Ensemble de cordes",
+                    "premium": true
                 }
             ]
         },
@@ -483,75 +590,93 @@
             "instruments": [
                 {
                     "name": "hq-choir-soprano-women",
-                    "trad": "Choeur de femmes soprano"
+                    "trad": "Choeur de femmes soprano",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-soprano-girls",
-                    "trad": "Choeur de filles soprano"
+                    "trad": "Choeur de filles soprano",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-soprano-boys",
-                    "trad": "Choeur de garçons soprano"
+                    "trad": "Choeur de garçons soprano",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-countertenor-men",
-                    "trad": "Choeur d'hommes contre-ténor"
+                    "trad": "Choeur d'hommes contre-ténor",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-alto-women",
-                    "trad": "Choeur de femmes alto"
+                    "trad": "Choeur de femmes alto",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-alto-girls",
-                    "trad": "Choeur de filles alto"
+                    "trad": "Choeur de filles alto",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-tenor-hall",
-                    "trad": "Choeur d'hommes ténor hall"
+                    "trad": "Choeur d'hommes ténor hall",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-tenor-cathedral",
-                    "trad": "Choeur d'hommes ténor cathédrale"
+                    "trad": "Choeur d'hommes ténor cathédrale",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-bass-hall",
-                    "trad": "Choeur d'hommes basse hall"
+                    "trad": "Choeur d'hommes basse hall",
+                    "premium": true
                 },
                 {
                     "name": "hq-choir-bass-cathedral",
-                    "trad": "Choeur d'hommes basse cathédrale"
+                    "trad": "Choeur d'hommes basse cathédrale",
+                    "premium": true
                 },
                 {
                     "name": "choir-soprano",
-                    "trad": "Choeur soprano"
+                    "trad": "Choeur soprano",
+                    "premium": false
                 },
                 {
                     "name": "choir-alto",
-                    "trad": "Choeur alto"
+                    "trad": "Choeur alto",
+                    "premium": false
                 },
                 {
                     "name": "choir-tenor",
-                    "trad": "Choeur ténor"
+                    "trad": "Choeur ténor",
+                    "premium": false
                 },
                 {
                     "name": "choir-bass",
-                    "trad": "Choeur basse"
+                    "trad": "Choeur basse",
+                    "premium": false
                 },
                 {
                     "name": "choir-aahs",
-                    "trad": "Choeur aahs"
+                    "trad": "Choeur aahs",
+                    "premium": true
                 },
                 {
                     "name": "voice-oohs",
-                    "trad": "Voix oohs"
+                    "trad": "Voix oohs",
+                    "premium": true
                 },
                 {
                     "name": "voice-lead",
-                    "trad": "Voix lead"
+                    "trad": "Voix lead",
+                    "premium": true
                 },
                 {
                     "name": "kazoo",
-                    "trad": "Kazoo"
+                    "trad": "Kazoo",
+                    "premium": true
                 }
             ]
 
@@ -562,107 +687,133 @@
             "instruments":[
                 {
                     "name": "piccolo",
-                    "trad": "Piccolo"
+                    "trad": "Piccolo",
+                    "premium": true
                 },
                 {
                     "name": "hq-orchestral-flute",
-                    "trad": "Flûte orchestre"
+                    "trad": "Flûte orchestre",
+                    "premium": true
                 },
                 {
                     "name": "hq-traditional-flute",
-                    "trad": "Flûte traditionnelle"
+                    "trad": "Flûte traditionnelle",
+                    "premium": true
                 },
                 {
                     "name": "flute",
-                    "trad": "Flûte"
+                    "trad": "Flûte",
+                    "premium": true
                 },
                 {
                     "name": "alto-flute",
-                    "trad": "Flûte alto"
+                    "trad": "Flûte alto",
+                    "premium": true
                 },
                 {
                     "name": "pan-flute",
-                    "trad": "Flûte de pan"
+                    "trad": "Flûte de pan",
+                    "premium": true
                 },
                 {
                     "name": "recorder",
-                    "trad": "Flûte à bec"
+                    "trad": "Flûte à bec",
+                    "premium": true
                 },
                 {
                     "name": "tin-whistle",
-                    "trad": "Flûte irlandaise"
+                    "trad": "Flûte irlandaise",
+                    "premium": true
                 },
                 {
                     "name": "oboe",
-                    "trad": "Hautbois"
+                    "trad": "Hautbois",
+                    "premium": true
                 },
                 {
                     "name": "english-horn",
-                    "trad": "Cor anglais"
+                    "trad": "Cor anglais",
+                    "premium": true
                 },
                 {
                     "name": "hq-concert-clarinet",
-                    "trad": "Clarinette de concert"
+                    "trad": "Clarinette de concert",
+                    "premium": true
                 },
                 {
                     "name": "hq-clarinet-ensemble",
-                    "trad": "Ensemble de clarinettes"
+                    "trad": "Ensemble de clarinettes",
+                    "premium": true
                 },
                 {
                     "name": "clarinet",
-                    "trad": "Clarinette"
+                    "trad": "Clarinette",
+                    "premium": false
                 },
                 {
                     "name": "alto-clarinet",
-                    "trad": "Clarinette alto"
+                    "trad": "Clarinette alto",
+                    "premium": true
                 },
                 {
                     "name": "bass-clarinet",
-                    "trad": "Clarinette basse"
+                    "trad": "Clarinette basse",
+                    "premium": true
                 },
                 {
                     "name": "contrabass-clarinet",
-                    "trad": "Clarinette contrebasse"
+                    "trad": "Clarinette contrebasse",
+                    "premium": true
                 },
                 {
                     "name": "bassoon",
-                    "trad": "Basson"
+                    "trad": "Basson",
+                    "premium": false
                 },
                 {
                     "name": "contrabassoon",
-                    "trad": "Contrebasson"
+                    "trad": "Contrebasson",
+                    "premium": true
                 },
                 {
                     "name": "hq-soprano-saxophone",
-                    "trad": "Saxophone soprano"
+                    "trad": "Saxophone soprano",
+                    "premium": true
                 },
                 {
                     "name": "hq-alto-saxophone",
-                    "trad": "Saxophone alto"
+                    "trad": "Saxophone alto",
+                    "premium": true
                 },
                 {
                     "name": "hq-tenor-saxophone",
-                    "trad": "Saxophone ténor"
+                    "trad": "Saxophone ténor",
+                    "premium": true
                 },
                 {
                     "name": "hq-baritone-saxophone",
-                    "trad": "Saxophone baryton"
+                    "trad": "Saxophone baryton",
+                    "premium": true
                 },
                 {
                     "name": "bagpipe",
-                    "trad": "Cornemuse"
+                    "trad": "Cornemuse",
+                    "premium": true
                 },
                 {
                     "name": "ocarina",
-                    "trad": "Ocarina"
+                    "trad": "Ocarina",
+                    "premium": true
                 },
                 {
                     "name": "dizi-flute",
-                    "trad": "Flûte dizi"
+                    "trad": "Flûte dizi",
+                    "premium": true
                 },
                 {
                     "name": "shakuhachi-flute",
-                    "trad": "Flûte shakuhachi"
+                    "trad": "Flûte shakuhachi",
+                    "premium": true
                 }
             ]
         },
@@ -672,11 +823,13 @@
             "instruments": [
                 {
                     "name": "cat",
-                    "trad": "Miaulements de chat"
+                    "trad": "Miaulements de chat",
+                    "premium": false
                 },
                 {
                     "name": "starwars",
-                    "trad": "Kit Star Wars"
+                    "trad": "Kit Star Wars",
+                    "premium": false
                 }
             ]
         }
