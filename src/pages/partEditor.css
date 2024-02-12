@@ -37,7 +37,6 @@
 #popupPart .choosePart div{
     font-weight: bold;
     padding: 0.2em 0.5em;
-    /*sah moche*/
 }
 
 #overlayPartEdit{
@@ -46,8 +45,7 @@
     align-items: center;
 }
 
-#popupPart .btnCreate{
-    background-color: #2d2d2d;
+#popupPart .btnCreate, .savePart{
     background-color: #845583;
     padding: 0.5em 1em;
     border-radius: 25px;
@@ -69,4 +67,12 @@
     justify-content: center;
     align-items: center;
     gap: 0.5em;
+}
+
+#popupPart #title{
+    color : black;
+}
+
+.savePart{
+    width: fit-content;
 }
