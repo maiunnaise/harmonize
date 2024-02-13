@@ -1,0 +1,65 @@
+.DrumMachine h1 {
+    margin-top: 2.5em;
+}
+
+.DrumMachine .grid {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: end;
+    margin-inline: 2em;
+}
+
+.DrumMachine .grid div {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* step */
+.DrumMachine .grid div div:last-of-type div{
+    width: 10%;
+    height: 30px;
+    border: 1px solid #6f6f6f;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.DrumMachine .grid div > div:first-child {
+    border: #6f6f6f 1px solid;
+    background-color: #393939;
+    max-width: 8em;
+    margin: 2px;
+}
+
+.DrumMachine .grid div p {
+    margin-right: 2em;
+    width: 4em;
+    margin-top: 0.2em;
+}
+
+.DrumMachine .grid div .muteBtn {
+    height: 0.5em;
+    width: 0.5em;
+    border-radius: 50%;
+    background-color: #97e622;
+    border: 0;
+    filter: drop-shadow(0 0 0.2rem #97e622);
+    margin-inline: 0.5em;
+    margin-top: 0.65em;
+}
+
+.DrumMachine  input[type="range"]{
+    margin-top: 2em;
+}
+
+.DrumMachine .playBtn {
+    width: 50%;
+    background-color: #845583;
+    border: 0;
+    border-radius: 30px;
+    display: block;
+    margin-inline: auto;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
