@@ -13,6 +13,16 @@ export default function PartEditor() {
     const navigate = useNavigate();
     const [changeContent, setChangeContent] = useState(false);
 
+    const [customSheets, setCustomSheets] = useState([]); 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            await getAPI('vault-custom-sheets', setCustomSheets);
+        };
+
+        fetchData();
+    }, [])
+
     useEffect(() => {
        if (isCreated ===true && partData.length ==0){
             closePopUp();
@@ -26,16 +36,26 @@ export default function PartEditor() {
         <div className='simpleContent' id='partEdit'>
             <SimpleHeader />
             <h1>Éditeur de partition</h1>
-            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData}/> : <ChoosePart isCreated={setIsCreated} setData={setPartData} changeContent={setChangeContent}/>} />
+            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData} customSheets={customSheets}/> : <ChoosePart isCreated={setIsCreated} setData={setPartData} changeContent={setChangeContent} customSheets={customSheets}/>} />
             {isCreated && partData.length!=0 ? <EmbedEditor data={partData}/> :null}
         </div>
 
     )
 }
 
-function ChoosePart({isCreated, setData, changeContent}){
+function ChoosePart({isCreated, setData, changeContent, customSheets}){
+    const [partData, setPartData] = useState([]);
 
-    function editPart(){
+    useEffect(() => {
+        if(partData && partData.length != 0){
+            console.log(partData);
+            const dataPart = {title: partData.title, id: partData.scoreKey, author: partData.author};
+            setData(dataPart);
+            isCreated(true);
+        }
+    }, [partData]);
+
+    async function editPart(){
         let part = document.getElementById('partitions');
 
         if(part.value == ""){
@@ -43,11 +63,10 @@ function ChoosePart({isCreated, setData, changeContent}){
             error.style.display = 'block';
             return;
         }
-        const dataPart = {title: part.options[part.selectedIndex].text, id: part.value};
-        setData(dataPart);
-        isCreated(true);
-    }
 
+        await getAPI('custom-sheets/'+part.value, setPartData);
+    }
+    
     return(
         <div id='overlayPartEdit' className='overlay'>
             <div id="popupPart">
@@ -58,9 +77,13 @@ function ChoosePart({isCreated, setData, changeContent}){
                     <p>Dans votre bibliothèque :</p>
                     <select name="partitions" id="partitions">
                         <option value="">Vos partitions</option>
-                        <option value="65ca3f0732e4e7dea04b40c2" >Partition test</option>
+                        {customSheets.length !=0 ? customSheets.map((sheet, index) => {
+                            return(
+                                <option value={sheet.CustomSheet.id} key={index}>{sheet.CustomSheet.title}</option>
+                            )
+                        }):null}
                     </select>
-                    <div onClick={editPart}>Modifier cette partition</div>
+                    <div onClick={()=>editPart()}>Modifier cette partition</div>
                     <p className='error'>Veuillez choisir une partition</p>
                 </div>
 
@@ -71,7 +94,6 @@ function ChoosePart({isCreated, setData, changeContent}){
 }
 
 function EmbedEditor({data}){
-
     let container;
     const [embed, setEmbed]=useState({});
     const [scoreKey, setScoreKey] = useState()
@@ -124,7 +146,7 @@ function EmbedEditor({data}){
 
     return(
         <>
-            <h2>{data.title}</h2>
+            <h2 id='titlePart'>{data.title}<span> - {data.author.prenom} {data.author.nom}</span></h2>
             
             <div className='embedEdit'>
             </div>
@@ -136,9 +158,12 @@ function EmbedEditor({data}){
 
 
 
-function CreateNewPart({isCreated, setData}){
+function CreateNewPart({isCreated, setData, customSheets}){
 
     const [instruments, setInstruments] = useState([]);
+
+    const [newPart, setNewPart] = useState([]);
+
     useEffect(() => {
         async function fetchInstruments() {
             try {
@@ -216,12 +241,20 @@ function CreateNewPart({isCreated, setData}){
                 return; 
             })
             .then(data => {
+                data.author = customSheets[0].User;
                 setData(data);
                 isCreated(true);
+                addCustomPart(data);
             });
         };
     
         addPart();
+
+        const addCustomPart = async (data) => {
+            await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:instrument.value});
+        };
+
+        
     }
 
     return(

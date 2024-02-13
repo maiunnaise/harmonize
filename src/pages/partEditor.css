@@ -80,3 +80,12 @@
 .vip{
     font-weight: bold;
 }
+
+#titlePart{
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+#titlePart span{
+    font-weight: normal;
+}
