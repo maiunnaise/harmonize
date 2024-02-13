@@ -1,7 +1,7 @@
 import CheckLogin from '../components/checkLogin';
 import SimpleHeader from '../components/simpleHeader';
 import './partEditor.css';
-import { getAPI, postAPI, deleteAPI, putAPI } from '../components/fetchAPI';
+import { getAPI, postAPI} from '../components/fetchAPI';
 import { useEffect, useState} from 'react';
 import Embed from 'flat-embed';
 import { useNavigate } from 'react-router-dom';
@@ -208,10 +208,12 @@ function CreateNewPart({isCreated, setData, customSheets}){
         let title = document.querySelector('#title');
         let instrumentType = document.querySelector('#instrumentType');
         let instrument = document.querySelector('#instrument');
+        let style = document.querySelector('#style');
+        let difficulty = document.querySelector('#Difficulté');
     
         console.log(title.value, instrumentType.value, instrument.value)
 
-        if(title.value == "" || instrumentType.value == "" || instrument.value == ""){
+        if(title.value == "" || instrumentType.value == "" || instrument.value == ""|| style.value == "" || difficulty.value == ""){
             let error = document.querySelector('.error');
             error.style.display = 'block';
             return;
@@ -251,7 +253,7 @@ function CreateNewPart({isCreated, setData, customSheets}){
         addPart();
 
         const addCustomPart = async (data) => {
-            await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:instrument.value});
+            await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:instrument.value, style: style.value, difficulty: difficulty.value, author: data.author.id});
         };
 
         
@@ -265,6 +267,16 @@ function CreateNewPart({isCreated, setData, customSheets}){
                 <form action="" className='createNewPart'>
                     <label htmlFor="title">Titre de la partition</label>
                     <input type="text" name="title" id="title"/>
+                    <label htmlFor="Style">Style</label>
+                    <input type="text" name="style" id="style"/>
+                    <label htmlFor="Difficulté">Difficulté</label>
+                    <select name='Difficulté' id='Difficulté'>
+                        <option value="">Choisir une difficulté</option>
+                        <option value="Facile">Facile</option>
+                        <option value="Intermédiaire">Intermédiaire</option>
+                        <option value="Difficile">Difficile</option>
+                    </select>
+                    
                     <label htmlFor="instrumentType">Instrument</label>
                     <div className='instrumentChoice'>
                         <select name="instrumentType" id="instrumentType" onChange={addInstruments}>
@@ -280,6 +292,7 @@ function CreateNewPart({isCreated, setData, customSheets}){
                             <option value="">Choisir un instrument</option>
                         </select>
                     </div>
+                    
                     <div className='btnCreate' onClick={generatePart}>Créer</div>
                 </form>
                 <p className='error'>Veuillez renseigner tous les champs</p>
