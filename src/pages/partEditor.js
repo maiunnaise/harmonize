@@ -2,54 +2,71 @@ import CheckLogin from '../components/checkLogin';
 import SimpleHeader from '../components/simpleHeader';
 import './partEditor.css';
 import { getAPI, postAPI, deleteAPI, putAPI } from '../components/fetchAPI';
-import { useEffect, useState } from 'react';
-import { decodeToken } from 'react-jwt';
+import { useEffect, useState} from 'react';
 import Embed from 'flat-embed';
+import { useNavigate } from 'react-router-dom';
 
 export default function PartEditor() {
     CheckLogin();
     const [isCreated, setIsCreated]= useState(false);
     const [partData, setPartData] = useState([]);
-    //const [showCreatePart, setShowCreatePart] = useState(false);
+    const navigate = useNavigate();
     const [changeContent, setChangeContent] = useState(false);
 
     useEffect(() => {
-       if (isCreated ===true){
-        closePopUp();
+       if (isCreated ===true && partData.length ==0){
+            closePopUp();
+            navigate('/search')
+       }else if(isCreated === true && partData.length !=0){
+            closePopUp();
        }
     }, [isCreated]);
-
-    function ChoosePart(){
-        const test = {title: "PartitionTest", id: "65ca3f0732e4e7dea04b40c2"};
-        return(
-            <div id='overlayPartEdit' className='overlay'>
-                <div id="popupPart">
-                    <p className="close" onClick={closePopUp}>X</p>
-                    <h2>Choisir une partition</h2>
-                    
-                    <div className="choosePart">
-                        <p>Dans votre bibliothèque :</p>
-                        <select name="partitions" id="partitions">
-                            <option value="">Vos partitions</option>
-                            <option value="65ca3f0732e4e7dea04b40c2" >Partition test</option>
-                        </select>
-                        <div onClick={()=> {setIsCreated(true); setPartData(test)}}>Modifier cette partition</div>
-                    </div>
-    
-                    <div className='btnCreate' onClick={()=>setChangeContent(true)}>Créer une partition</div>
-                </div>
-            </div>
-        )
-    }
 
     return(
         <div className='simpleContent' id='partEdit'>
             <SimpleHeader />
             <h1>Éditeur de partition</h1>
-            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData}/> : <ChoosePart />} />
+            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData}/> : <ChoosePart isCreated={setIsCreated} setData={setPartData} changeContent={setChangeContent}/>} />
             {isCreated && partData.length!=0 ? <EmbedEditor data={partData}/> :null}
         </div>
 
+    )
+}
+
+function ChoosePart({isCreated, setData, changeContent}){
+
+    function editPart(){
+        let part = document.getElementById('partitions');
+
+        if(part.value == ""){
+            let error = document.querySelector('.error');
+            error.style.display = 'block';
+            return;
+        }
+        const dataPart = {title: part.options[part.selectedIndex].text, id: part.value};
+        setData(dataPart);
+        isCreated(true);
+    }
+
+    return(
+        <div id='overlayPartEdit' className='overlay'>
+            <div id="popupPart">
+                <p className="close" onClick={()=>isCreated(true)}>X</p>
+                <h2>Choisir une partition</h2>
+                
+                <div className="choosePart">
+                    <p>Dans votre bibliothèque :</p>
+                    <select name="partitions" id="partitions">
+                        <option value="">Vos partitions</option>
+                        <option value="65ca3f0732e4e7dea04b40c2" >Partition test</option>
+                    </select>
+                    <div onClick={editPart}>Modifier cette partition</div>
+                    <p className='error'>Veuillez choisir une partition</p>
+                </div>
+
+                <div className='btnCreate' onClick={()=>changeContent(true)}>Créer une partition</div>
+            </div>
+        </div>
     )
 }
 
@@ -58,7 +75,6 @@ function EmbedEditor({data}){
     let container;
     const [embed, setEmbed]=useState({});
     const [scoreKey, setScoreKey] = useState()
-    //const [postRevision, setPostRevision] = useState(false)
     useEffect(()=>{
         console.log(data)
         if(data.length !=0){
@@ -83,14 +99,6 @@ function EmbedEditor({data}){
         
     }, [data])
 
-    // useEffect(()=>{
-    //     if(postRevision === true){
-    //         console.log(scoreKey, embed)
-    //         savePart(scoreKey);
-    //     }
-
-    // },[postRevision])
-
     function savePart(scoreKey){
         console.log(embed)
         embed.getMusicXML().then(function(xml){
@@ -110,7 +118,6 @@ function EmbedEditor({data}){
             };
 
             addRevision();
-            //setPostRevision(false);
         })
 
     }
@@ -178,6 +185,12 @@ function CreateNewPart({isCreated, setData}){
         let instrument = document.querySelector('#instrument');
     
         console.log(title.value, instrumentType.value, instrument.value)
+
+        if(title.value == "" || instrumentType.value == "" || instrument.value == ""){
+            let error = document.querySelector('.error');
+            error.style.display = 'block';
+            return;
+        }
     
         let body = {
             'title': title.value,
@@ -214,7 +227,7 @@ function CreateNewPart({isCreated, setData}){
     return(
         <div id='overlayPartEdit' className='overlay'>
             <div id="popupPart">
-                <p className="close" onClick={closePopUp}>X</p>
+                <p className="close" onClick={()=>isCreated(true)}>X</p>
                 <h2>Créer une partition</h2>
                 <form action="" className='createNewPart'>
                     <label htmlFor="title">Titre de la partition</label>
@@ -236,6 +249,7 @@ function CreateNewPart({isCreated, setData}){
                     </div>
                     <div className='btnCreate' onClick={generatePart}>Créer</div>
                 </form>
+                <p className='error'>Veuillez renseigner tous les champs</p>
             </div>
         </div>
     
@@ -251,27 +265,5 @@ function closePopUp(){
 function PopUpPart({content}){
     return(
         content
-    )
-}
-
-function ChoosePart(){
-    return(
-        <div id='overlayPartEdit' className='overlay'>
-            <div id="popupPart">
-                <p className="close" onClick={closePopUp}>X</p>
-                <h2>Choisir une partition</h2>
-                
-                <div className="choosePart">
-                    <p>Dans votre bibliothèque :</p>
-                    <select name="partitions" id="partitions">
-                        <option value="">Vos partitions</option>
-                        <option value="part1">Partition 1</option>
-                    </select>
-                    <div>Modifier cette partition</div>
-                </div>
-
-                <div className='btnCreate'>Créer une partition</div>
-            </div>
-        </div>
     )
 }
