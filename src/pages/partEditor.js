@@ -253,7 +253,9 @@ function CreateNewPart({isCreated, setData, customSheets}){
         addPart();
 
         const addCustomPart = async (data) => {
-            await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:instrument.value, style: style.value, difficulty: difficulty.value, author: data.author.id});
+            let inst = instrument.value[0].toUpperCase() + instrument.value.slice(1);
+            style.value = style.value[0].toUpperCase() + style.value.slice(1);
+            await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:inst, style: style.value, difficulty: difficulty.value, author: data.author.id});
         };
 
         

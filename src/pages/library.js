@@ -7,7 +7,7 @@ import { getAPI } from '../components/fetchAPI';
 import { useState } from 'react';
 
 
-export function Libform({partitions}){
+export function Libform({partitions, customSheets}){
     useEffect(() => {
         let list = document.querySelectorAll("select");
         partitions = Array.from(partitions);
@@ -23,6 +23,24 @@ export function Libform({partitions}){
                         }
                         else{
                             select.innerHTML += `<option value="${partition.Sheet[select.id]}">${partition.Sheet[select.id]}</option>`
+                        }
+                        
+                    }
+                }
+            })
+            customSheets.map((partition, index) => {
+                if (select.id=="Instrument"){
+                    select.id = "instrument";
+                }
+                if (select.id in partition.CustomSheet){
+                    if (!select.innerHTML.includes(partition.CustomSheet[select.id])){
+                        if(select.id == "author"){
+                            if( !select.innerHTML.includes(partition.CustomSheet.author.nom)){
+                                select.innerHTML += `<option value="${partition.CustomSheet.author.nom}">${partition.CustomSheet.author.nom}</option>`
+                            }
+                        }
+                        else{
+                            select.innerHTML += `<option value="${partition.CustomSheet[select.id]}">${partition.CustomSheet[select.id]}</option>`
                         }
                         
                     }
@@ -213,7 +231,7 @@ export function Library() {
     return (
     <div className="content">
         <h1>Ma bibliothèque</h1>
-        <Libform partitions={partitions}/>
+        <Libform partitions={partitions} customSheets={customSheets}/>
         <div className='libraryPart'>
         {partitions.length === 0 || customSheets.length === 0 ? (
             <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p>
