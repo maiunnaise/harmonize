@@ -13,7 +13,7 @@ export default function PartitionReader() {
   let container;
   let {id} = useParams();
   let {custom} = useParams();
-  console.log(custom);
+
   const [partition, setPartition] = useState([]);
     useEffect(() => {
       
