@@ -55,7 +55,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="teacher/teacherLessons/:coursId/:seanceId" element={<TeacherLessons/>} />
         <Route path="/activity/:idCourse/:idAct" element={<Activity/>}/>
-        <Route path="/play/:id" element={<PartitionReader/>}/>
+        <Route path="/play/:id/:custom?" element={<PartitionReader/>}/>
         <Route path="/history/:idCourse" element={<History/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
