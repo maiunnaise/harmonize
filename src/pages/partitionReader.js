@@ -12,11 +12,18 @@ export default function PartitionReader() {
   let embed;
   let container;
   let {id} = useParams();
+  let {custom} = useParams();
+
   const [partition, setPartition] = useState([]);
     useEffect(() => {
       
         const fetchData = async () => {
-          await getAPI(`sheets/${id}`, setPartition);
+          if(custom === "custom"){
+            await getAPI(`custom-sheets/${id}`, setPartition);
+          }
+          else{
+            await getAPI(`sheets/${id}`, setPartition);
+          }
         };
 
         fetchData();
@@ -45,12 +52,13 @@ export default function PartitionReader() {
 
     }, [partition]);
 
+
     return (
       <>
         <SimpleHeader />
         <div className="simpleContent partReader">
             <h1>Lecteur de partition</h1>
-            <h2>{partition.title} <span>- {partition.author}</span></h2>
+            <h2>{partition.title} <span>- {custom ==="custom" && partition.length !=0? partition.author.nom :partition.author}</span></h2>
             <div id="partitionReader">
             </div>
         </div>

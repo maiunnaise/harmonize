@@ -28,6 +28,7 @@ import LessonsHistory from './pages/LessonsHistory.js';
 import LessonsHistoryDetails from './pages/LessonsHistoryDetails.js';
 import Register from './pages/register.js';
 import NextVersion from './pages/nextVersion.js';
+import PartEditor from './pages/partEditor.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -54,7 +55,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="teacher/teacherLessons/:coursId/:seanceId" element={<TeacherLessons/>} />
         <Route path="/activity/:idCourse/:idAct" element={<Activity/>}/>
-        <Route path="/play/:id" element={<PartitionReader/>}/>
+        <Route path="/play/:id/:custom?" element={<PartitionReader/>}/>
         <Route path="/history/:idCourse" element={<History/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -64,6 +65,7 @@ root.render(
         <Route path="teacher/lessonsHistory/:studentId" element={<LessonsHistory/>} />
         <Route path="teacher/lessonsHistory/:studentId/:lessonId" element={<LessonsHistoryDetails/>} />
         <Route path="/nextVersion" element={<NextVersion/>} />
+        <Route path='/partEditor' element={<PartEditor/>} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />
