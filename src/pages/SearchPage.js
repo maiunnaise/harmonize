@@ -9,9 +9,9 @@ function Search(){
         <div className="content SearchPage">
             <h2>Explorer</h2>
             <div id="toolsDiv">
-                <Link to="/nextVersion">
+                <Link to="/partEditor">
                     <div id='partitionDiv'>
-                        <p>Créateur de partition</p>
+                        <p>Éditeur de partition</p>
                         <img src="/logo/icons/sol-key.png" alt="sol key" />
                     </div>
                 </Link>
