@@ -28,6 +28,9 @@ import LessonsHistory from './pages/LessonsHistory.js';
 import LessonsHistoryDetails from './pages/LessonsHistoryDetails.js';
 import Register from './pages/register.js';
 import NextVersion from './pages/nextVersion.js';
+import Metronome from './pages/Metronome.js';
+import Accordeur from './pages/Accordeur.js';
+import DrumMachine from './pages/DrumMachine.js'
 import PartEditor from './pages/partEditor.js';
 
 
@@ -64,6 +67,9 @@ root.render(
         <Route path="teacher/teacherLessons/:coursId/" element={<AddLesson/>} />
         <Route path="teacher/lessonsHistory/:studentId" element={<LessonsHistory/>} />
         <Route path="teacher/lessonsHistory/:studentId/:lessonId" element={<LessonsHistoryDetails/>} />
+        <Route path="/metronome" element={<Metronome/>} />
+        <Route path="/accordeur" element={<Accordeur/>} />
+        <Route path="/drum-machine" element={<DrumMachine/>} />
         <Route path="/nextVersion" element={<NextVersion/>} />
         <Route path='/partEditor' element={<PartEditor/>} />
 
