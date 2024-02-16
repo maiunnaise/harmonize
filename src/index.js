@@ -33,6 +33,7 @@ import Accordeur from './pages/Accordeur.js';
 import DrumMachine from './pages/DrumMachine.js'
 import PartEditor from './pages/partEditor.js';
 import ForgotPassword from './pages/ForgotPassword.js';
+import ForgotPasswordVerif from './pages/ForgotPasswordVerif.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -75,6 +76,7 @@ root.render(
         <Route path='/partEditor' element={<PartEditor/>} />
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password/:forgotPasswordToken" element={<ForgotPasswordVerif />} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />
