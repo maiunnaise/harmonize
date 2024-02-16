@@ -221,41 +221,7 @@ export function Library() {
     const [partitions, setPartitions] = useState([]);
     const [customSheets, setCustomSheets] = useState([]);
 
-    // let partitionsData = sessionStorage.getItem('vault-sheets');
-    // let customSheetsData = sessionStorage.getItem('vault-custom-sheets');
-    // let cacheTime = sessionStorage.getItem('cacheTime');
-
     useEffect(() => {
-        // const fetchData = async () => {
-        //     const now = new Date();
-    
-        //     let partitionsData = sessionStorage.getItem('vault-sheets');
-        //     let customSheetsData = sessionStorage.getItem('vault-custom-sheets');
-    
-        //     partitionsData = partitionsData ? JSON.parse(partitionsData) : null;
-        //     customSheetsData = customSheetsData ? JSON.parse(customSheetsData) : null;
-    
-        //     if (partitionsData && partitionsData.cacheTime && now.getTime() - partitionsData.cacheTime < 30 * 1000) {
-        //         setPartitions(partitionsData.data);
-        //     } else {
-        //         await getAPI('vault-sheets', data => {
-        //             setPartitions(data);
-        //             sessionStorage.setItem('vault-sheets', JSON.stringify({ data, cacheTime: now.getTime() }));
-        //         });
-        //     }
-    
-        //     if (customSheetsData && customSheetsData.cacheTime && now.getTime() - customSheetsData.cacheTime < 30 * 1000) {
-        //         setCustomSheets(customSheetsData.data);
-        //     } else {
-        //         await getAPI('vault-custom-sheets', data => {
-        //             setCustomSheets(data);
-        //             sessionStorage.setItem('vault-custom-sheets', JSON.stringify({ data, cacheTime: now.getTime() }));
-        //         });
-        //     }
-        // };
-    
-        // fetchData();
-
         manageCache('vault-sheets', 30, setPartitions, 'vault-sheets');
         manageCache('vault-custom-sheets', 30, setCustomSheets, 'vault-custom-sheets');
     }, []);

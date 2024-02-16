@@ -6,6 +6,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { getAPI } from '../components/fetchAPI';
 import EmptyInstruments from '../components/emptyInstruments';
+import manageCache from '../components/cache';
+
 
 function getNextClass(seances){
 
@@ -106,23 +108,28 @@ export default function HomeStudent(){
     
     useEffect(() => {
         const fetchData = async () => {
-            await getAPI('cours', setCourses);
+            //await getAPI('cours', setCourses);
             await getAPI('user-instruments', setInstrumentUser);
         };
 
 
         fetchData();
+        manageCache('cours', 600, setCourses, 'cours');
+        //manageCache('user-instruments', 604800, setInstrumentUser, 'user-instruments');
+
+
 
     }, []);
 
     useEffect(() => {
-        const fetchInstruments = async () => {
-            await getAPI('instruments', setInstrument);
-        };
+        // const fetchInstruments = async () => {
+        //     await getAPI('instruments', setInstrument);
+        // };
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';
-            fetchInstruments();
+            //fetchInstruments();
+            manageCache('instruments', 604800, setInstrument, 'instruments');
         }
         
     }, [instrumentUser]);

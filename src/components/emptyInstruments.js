@@ -1,6 +1,10 @@
 import './emptyInstruments.css';
+import manageCache from '../components/cache';
+import { useState } from 'react';
+
 
 export default function EmptyInstruments({instrument}) {
+    const [instruments, setInstruments] = useState([]);
 
     function selectInstrument(e){
         e.target.parentElement.classList.toggle('selectedInstrument');
@@ -26,9 +30,14 @@ export default function EmptyInstruments({instrument}) {
         fetch('https://harmonize.mael-mouquet.fr/api/user-instruments', requestOptions)
         .then(response => response.json())
         .then(data => {
+            //sessionStorage.setItem('user-instruments', JSON.stringify({ data.Instrument, cacheTime: new Date().getTime() }));
             closePopUp();
         });
+
+        //manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
+
     }
+    
 
     return(
         <div className='overlay'>
