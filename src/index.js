@@ -32,8 +32,10 @@ import Metronome from './pages/Metronome.js';
 import Accordeur from './pages/Accordeur.js';
 import DrumMachine from './pages/DrumMachine.js'
 import PartEditor from './pages/partEditor.js';
+import Calendar from './pages/Calendar.js';
 import ForgotPassword from './pages/ForgotPassword.js';
 import ForgotPasswordVerif from './pages/ForgotPasswordVerif.js';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -73,6 +75,7 @@ root.render(
         <Route path="/drum-machine" element={<DrumMachine/>} />
         <Route path="/nextVersion" element={<NextVersion/>} />
         <Route path='/partEditor' element={<PartEditor/>} />
+        <Route path='/calendrier' element={<Calendar/>} />
 
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/forgot-password/:forgotPasswordToken" element={<ForgotPasswordVerif />} />
