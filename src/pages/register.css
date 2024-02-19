@@ -4,7 +4,7 @@
 }
 
 .registerForm input{
-    background-color: #474747;
+    background-color: var(--div-background);
     border: none;
     padding: 0.5em 1em;
     border-radius: 50px;
@@ -27,7 +27,7 @@
 }
 
 .details select{
-    background-color: #474747;
+    background-color: var(--div-background);
     border: none;
     padding: 0.5em 1em;
     border-radius: 50px;
@@ -43,6 +43,7 @@
     margin-top: 1em;
     width: 100%;
     align-self: center;
+    color: white;
 }
 
 .registerForm label p > span, .error{

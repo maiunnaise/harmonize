@@ -19,7 +19,7 @@
 }
 
 .loginForm, .registerForm{
-    background-color: #3D3D3D;
+    background-color: var(--div-background-2);
     width: 90vw;
     height: fit-content;
     padding: 1.5em;
@@ -42,7 +42,7 @@
 }
 
 .loginForm input{
-    background-color: #474747;
+    background-color: var(--div-background);
     border: none;
     padding: 0.5em 1em;
     border-radius: 50px;
@@ -59,6 +59,7 @@
     margin-top: 1em;
     width: 100%;
     align-self: center;
+    color: white;
 }
 
 .loginForm > div{

@@ -4,7 +4,7 @@
 
 .libform > input{
     width: 90%;
-    background-color: #474747;
+    background-color: var(--div-background-2);
     border: none;
     border-radius: 15px;
     padding: 0.5em 0.5em;
@@ -26,7 +26,7 @@
 }
 
 .filters > select, .filters > .isFav{
-    border : white 2px solid;
+    border : var(--div-background) 2px solid;
     background-color: transparent;
     border-radius: 8px;
     padding: 0.2em 0.5em;
@@ -39,6 +39,7 @@
 .filters > .selectedFilter{
     border : #845583 2px solid;
     background-color: #845583;
+    color: white;
 }
 
 .filters > .selectedFilter > option{

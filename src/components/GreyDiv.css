@@ -1,6 +1,6 @@
 .GreyDiv {
     margin-inline: 1em;
-    background-color: #3D3D3D;
+    background-color: var(--div-background-2);
     border-radius: 30px;
     padding-bottom: 1em;
     font-family: Lexend, Bold; 

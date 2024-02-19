@@ -8,6 +8,7 @@ import CheckLogin from '../components/checkLogin.js';
 import EmptyInstruments from '../components/emptyInstruments'
 import manageCache from '../components/cache.js';
 
+
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
     if (cours.length > 0) {
@@ -246,12 +247,14 @@ export default function TeacherHome(){
     }, [instrumentUser]);
     
     return (
-        <>
+        <div>
+            
         <EmptyInstruments instrument={instrument}/>
         {cours.length > 0 && students.length > 0 ? 
         <Home cours={cours} students={students}/> :
-        <p className='emptyCourseTeach'>Pas de cours disponible</p>}
-        </>
+        <p className='emptyCourse'>Pas de cours disponible</p>}
+        </div>
+
         
     );
 

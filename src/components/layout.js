@@ -18,18 +18,22 @@ function Layout() {
         if(location.includes("home")){
             icon = document.querySelector(".Menu .home");
             icon.src = "/logo/icons/home-colored.png";
+            icon.setAttribute("id", "colored");
         }
         else if(location === "/library" || location === "/addPartition"){
             icon = document.querySelector(".Menu .library");
             icon.src = "/logo/icons/open-book-colored.png";
+            icon.setAttribute("id", "colored");
         }
         else if(location === "/search" || location === "/cours" || location === "/exercices"){
             icon = document.querySelector(".Menu .search");
             icon.src = "/logo/icons/compass-circular-tool-colored.png";
+            icon.setAttribute("id", "colored");
         }
         else if(location === "/inbox"){
             icon = document.querySelector(".Menu .message");
             icon.src = "/logo/icons/speech-bubble-colored.png";
+            icon.setAttribute("id", "colored");
         }
         else{
             icons = document.querySelectorAll(`.Menu img:not(.Teachimg)`);
@@ -37,6 +41,7 @@ function Layout() {
             icons = Array.from(icons);
             icons.map((icon, index) => {
                 icon.src = icon.src.replace("-colored", "");
+                icon.removeAttribute("id");
             })
             return;
         }
@@ -46,6 +51,7 @@ function Layout() {
         icons = Array.from(icons);
         icons.map((icon, index) => {
             icon.src = icon.src.replace("-colored", "");
+            icon.removeAttribute("id");
         })
     }
 
