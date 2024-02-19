@@ -14,7 +14,7 @@ function Menu() {
         <Link to="/home">
             <img src="/logo/icons/home.png" className="home" alt="logo home" />
         </Link>
-        <Link to="/nextVersion">
+        <Link to="/calendrier">
           <img src="/logo/icons/calendar.png" className="calendar" alt="logo calendar" />
         </Link>
         <Link to="/search">

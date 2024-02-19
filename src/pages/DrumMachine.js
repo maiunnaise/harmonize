@@ -3,7 +3,7 @@ import './DrumMachine.css';
 import SimpleHeader from "../components/simpleHeader"
 
 const DrumMachinePage = () => {
-    const [stepsNb, setStepsNb] = useState(10);
+    const [stepsNb, setStepsNb] = useState(12);
     const instruments = ['kick', 'snare', 'hiHat', 'crash', 'tom'];
     const [pattern, setPattern] = useState(() => Array.from({ length: instruments.length }, () => Array(stepsNb).fill(false)));
     const [isPlaying, setIsPlaying] = useState(false);
@@ -61,7 +61,7 @@ const DrumMachinePage = () => {
     }
 
     const changeStepsNb = (e) => {
-      if(e.target.value >= 10 && e.target.value <= 34){ 
+      if(e.target.value >= 8 && e.target.value <= 32){ 
         const newStepsNb = parseInt(e.target.value);
         setStepsNb(newStepsNb);
         let inputSteps = document.getElementById('inputSteps');
@@ -160,8 +160,8 @@ const DrumMachinePage = () => {
           </div>
           <div>
             <label for="stepsNb">Steps</label>
-            <input name="stepsNb" type="range" min="10" id="rangeSteps" max="34" step="4" defaultValue={stepsNb} onChange={changeStepsNb}/>
-            <input type="number" min="10" max="32" id="inputSteps" defaultValue={stepsNb} onChange={changeStepsNb}/>
+            <input name="stepsNb" type="range" min="8" id="rangeSteps" max="32" step="4" defaultValue={stepsNb} onChange={changeStepsNb}/>
+            <input type="number" min="8" max="32" id="inputSteps" defaultValue={stepsNb} onChange={changeStepsNb}/>
           </div>
         </div> 
         <button className="playBtn" onClick={handlePlayPause}>{isPlaying ? 'Pause' : 'Play'}</button>

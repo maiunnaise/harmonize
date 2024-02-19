@@ -73,6 +73,9 @@
   /* width: 8em; */
 }
 
+.searchTeacher select option{
+  background-color: whitesmoke;
+}
 
 .searchTeacher form #instrumentSelect, .searchTeacher form #rythmSelect, .searchTeacher .searchBtns {
   display: none;

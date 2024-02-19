@@ -32,6 +32,7 @@ import Metronome from './pages/Metronome.js';
 import Accordeur from './pages/Accordeur.js';
 import DrumMachine from './pages/DrumMachine.js'
 import PartEditor from './pages/partEditor.js';
+import Calendar from './pages/Calendar.js';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -72,6 +73,7 @@ root.render(
         <Route path="/drum-machine" element={<DrumMachine/>} />
         <Route path="/nextVersion" element={<NextVersion/>} />
         <Route path='/partEditor' element={<PartEditor/>} />
+        <Route path='/calendrier' element={<Calendar/>} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />
