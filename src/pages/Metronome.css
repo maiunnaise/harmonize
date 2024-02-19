@@ -1,0 +1,12 @@
+.MetronomePage iframe {
+    display: block;
+    margin-inline:auto;
+    margin-top: 5em;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (max-width: 380px) {
+    .MetronomePage iframe {
+        width: 100% !important;
+    }
+}

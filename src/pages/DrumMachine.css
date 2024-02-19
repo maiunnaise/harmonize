@@ -1,0 +1,141 @@
+.DrumMachine h1 {
+    margin-top: 2.5em;
+}
+
+.DrumMachine .grid {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: end;
+    margin-inline: 1em;
+}
+
+.DrumMachine .grid div {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* step */
+.DrumMachine .grid div div:last-of-type div{
+    width: 20%;
+    height: 40px;
+    border: 1px solid #6f6f6f;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.DrumMachine .grid div > div:first-child {
+    border: #6f6f6f 1px solid;
+    background-color: #393939;
+    width: 5em;
+    margin: 2px;
+}
+
+.DrumMachine .grid div p {
+    margin-right: 2em;
+    width: 4em;
+    margin-top: 0.5em;
+}
+
+.DrumMachine .grid div .muteBtn {
+    height: 0.5em;
+    min-width: 0.5em;
+    border-radius: 50%;
+    background-color: #97e622;
+    border: 0;
+    filter: drop-shadow(0 0 0.2rem #97e622);
+    margin-inline: 0.5em;
+    margin-top: 0.9em;
+}
+
+.DrumMachine .playBtn {
+    width: 50%;
+    background-color: #845583;
+    border: 0;
+    border-radius: 30px;
+    display: block;
+    margin-inline: auto;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+.DrumMachine .controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.DrumMachine .controls div {
+    margin-top: 1em;
+    margin-inline: 0.5em;
+    margin-bottom: 1.25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: #6f6f6f 1px solid;
+    padding: 0.5em;
+    border-radius: 10px;
+    background-color: #393939;
+    text-align: center;
+    width: 25%;
+}
+
+.DrumMachine .controls div input[type="number"] {
+    border: 0;
+    background-color: #393939;
+    margin-top: 0.2em;
+    width: 80%;
+    font-size: 1.75em;
+    text-align: center;
+    margin-inline: auto;
+}
+
+.DrumMachine .controls div input:focus{
+    outline: none;
+}
+
+.DrumMachine .controls div p {
+    margin-top: 0.2em;
+    width: 80%;
+    font-size: 1.75em;
+    text-align: center;
+    margin-inline: auto;
+}
+
+
+.DrumMachine input[type="range"] {
+    margin-top: 1em;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+    width: 85%;
+    margin-inline: auto;
+}
+
+.DrumMachine input[type="range"]:focus {
+    outline: none;
+}
+
+.DrumMachine input[type="range"]::-webkit-slider-runnable-track {
+background-color: #a98aa8;
+border-radius: 0.5rem;
+height: 0.5rem;
+}
+
+.DrumMachine input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none; /* Override default look */
+appearance: none;
+margin-top: -4px; /* Centers thumb on the track */
+background-color: #845583;
+border-radius: 0.5rem;
+height: 1rem;
+width: 1rem;
+}
+
+.DrumMachine input[type="range"]:focus::-webkit-slider-thumb {
+outline: 3px solid #845583;
+outline-offset: 0.125rem;
+}
+

@@ -88,6 +88,10 @@
     padding-top: .5em;
 }
 
+.forgotpwd{
+    width: fit-content;
+}
+
 .popUpRegister, .popUpInstrument{
     position: absolute;
     z-index:1 ;

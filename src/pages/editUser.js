@@ -5,7 +5,9 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import {useNavigate } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, deleteAPI, putAPI } from '../components/fetchAPI.js';
+import { deleteAPI, putAPI } from '../components/fetchAPI.js';
+import manageCache from '../components/cache';
+
 
 
 
@@ -17,12 +19,11 @@ function EditUserForm() {
     const navigate = useNavigate();
     const [isOk, setIsOk] = useState(false);
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('user', setUser);
-            await getAPI('user-instruments', setInstruments);
-            await getAPI('instruments', setAllInstruments);
-        };
-        fetchData();
+
+
+        manageCache('user', 300, setUser, 'user');
+        manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
+        manageCache('instruments', 604800, setAllInstruments, 'instruments');
 
     }, []);
 
@@ -39,6 +40,7 @@ function EditUserForm() {
     function removeInstrument(e){
         let ide = e.target.parentElement.id;
         deleteAPI('user-instruments/'+ide);
+        sessionStorage.removeItem('user-instruments');
         e.target.parentElement.style.display = 'none';
     }
 
@@ -49,7 +51,7 @@ function EditUserForm() {
     function popUp(){
         setIsActive(current => !current);
         let close = document.getElementById('close');
-        getAPI('user-instruments', setInstruments);
+        manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
 
         if (!close.hasEventListener) {
             close.addEventListener('click', function() {
@@ -60,6 +62,7 @@ function EditUserForm() {
     }
 
     function addInstrument(){
+        sessionStorage.removeItem('user-instruments');
         let instrumentsSelected = document.querySelectorAll('.selectedInstrument');
         let instrumentsId = [];
         for (const instrument of instrumentsSelected) {
@@ -77,7 +80,7 @@ function EditUserForm() {
         })
         .then(data => {
             setIsActive(current => !current);
-            getAPI('user-instruments', setInstruments);
+            manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
         });
 
     }
@@ -103,6 +106,8 @@ function EditUserForm() {
             }
         });
         putAPI('user/'+user.id, data);
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('user-instruments');
         if (user.roles && user.roles.includes("ROLE_TEACHER")) {
             let changedDataTeacher = document.querySelector('.changedDataTeacher');
             putAPI('teachers/'+user.teachers[0].id, {city:changedDataTeacher.value});

@@ -1,13 +1,14 @@
 import './library.css';
-import Partition from '../components/PartitionLib';
+import {Partition, PartitionCustom} from '../components/PartitionLib';
 import { useEffect } from "react";
 import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
 import { getAPI } from '../components/fetchAPI';
 import { useState } from 'react';
+import manageCache from '../components/cache';
 
 
-export function Libform({partitions}){
+export function Libform({partitions, customSheets}){
     useEffect(() => {
         let list = document.querySelectorAll("select");
         partitions = Array.from(partitions);
@@ -17,10 +18,30 @@ export function Libform({partitions}){
                 if (select.id in partition.Sheet){
                     if (!select.innerHTML.includes(partition.Sheet[select.id])){
                         if(select.id == "Instrument"){
-                            select.innerHTML += `<option value="${partition.Sheet[select.id].Name}">${partition.Sheet[select.id].Name}</option>`
+                            if( !select.innerHTML.includes(partition.Sheet.Instrument.Name)){
+                                select.innerHTML += `<option value="${partition.Sheet[select.id].Name}">${partition.Sheet[select.id].Name}</option>`
+                            }
                         }
                         else{
                             select.innerHTML += `<option value="${partition.Sheet[select.id]}">${partition.Sheet[select.id]}</option>`
+                        }
+                        
+                    }
+                }
+            })
+            customSheets.map((partition, index) => {
+                if (select.id=="Instrument"){
+                    select.id = "instrument";
+                }
+                if (select.id in partition.CustomSheet){
+                    if (!select.innerHTML.includes(partition.CustomSheet[select.id])){
+                        if(select.id == "author"){
+                            if( !select.innerHTML.includes(partition.CustomSheet.author.nom)){
+                                select.innerHTML += `<option value="${partition.CustomSheet.author.nom}">${partition.CustomSheet.author.nom}</option>`
+                            }
+                        }
+                        else{
+                            select.innerHTML += `<option value="${partition.CustomSheet[select.id]}">${partition.CustomSheet[select.id]}</option>`
                         }
                         
                     }
@@ -198,28 +219,38 @@ function AddPart(){
 export function Library() {
 
     const [partitions, setPartitions] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('vault-sheets', setPartitions);
-        };
+    const [customSheets, setCustomSheets] = useState([]);
 
-        fetchData();
+    useEffect(() => {
+        manageCache('vault-sheets', 30, setPartitions, 'vault-sheets');
+        manageCache('vault-custom-sheets', 30, setCustomSheets, 'vault-custom-sheets');
     }, []);
+
 
     return (
     <div className="content">
         <h1>Ma bibliothèque</h1>
-        <Libform partitions={partitions}/>
+        <Libform partitions={partitions} customSheets={customSheets}/>
         <div className='libraryPart'>
-        {partitions.length == 0 ? <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p> 
-        :
-        partitions.map((partition, index) => {
-            return (
-            <Link to={`/play/${partition.Sheet.id}`}>
-                <Partition partition={partition} style="fav"/>
-            </Link>
-            );
-        })}
+        {partitions.length === 0 || customSheets.length === 0 ? (
+            <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p>
+            ) : 
+            (
+                <>
+                    {partitions.map((partition, index) => (
+                    <Link key={index} to={`/play/${partition.Sheet.id}`}>
+                        <Partition partition={partition} style="fav" />
+                    </Link>
+                    ))}
+                    {customSheets.map((partition, index) => (
+                    <Link key={index} to={`/play/${partition.CustomSheet.id}/custom`}>
+                        <PartitionCustom partition={partition}/>
+                    </Link>
+                    ))}
+                </>
+            )
+        }
+
         </div>
         <Link to="/addPartition" className='addPart'>
             <GreyDiv content={<AddPart/>}/>

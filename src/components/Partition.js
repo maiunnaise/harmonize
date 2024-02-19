@@ -1,6 +1,7 @@
 import './Partition.css';
 import { useEffect, useState } from "react";
 import {getAPI, postAPI} from '../components/fetchAPI';
+import manageCache from '../components/cache';
 
 export default function Partition({partition}){
 
@@ -8,14 +9,12 @@ export default function Partition({partition}){
     const [vaultSheets, setVaultSheets] = useState([]);
     const postPart = async (body) => {
         await postAPI(`vault-sheets`,setAddPartition,body);
+        sessionStorage.removeItem(`vault-sheets`);
     };
 
     useEffect(() => {
-        const fetchVault = async () => {
-            await getAPI(`vault-sheets`,setVaultSheets);
-        };
 
-        fetchVault();
+        manageCache("vault-sheets", 60, setVaultSheets, `vault-sheets`);
     }, []);
 
     let isInVault = false;

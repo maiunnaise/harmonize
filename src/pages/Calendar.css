@@ -1,0 +1,76 @@
+.Calendar {
+    --fc-button-bg-color: #845583;
+    --fc-button-border-color: #664165;
+    --fc-button-hover-bg-color: #664165;
+    --fc-button-hover-border-color: #664165;
+    --fc-button-active-bg-color: #664165;
+    --fc-button-active-border-color: #664165;
+    --fc-event-bg-color: #ab7daa;
+    --fc-event-border-color: #ab7daa;
+    --fc-event-selected-overlay-color: #ab7daa;
+    --fc-today-bg-color: rgba(255, 255, 255, 0.25);
+}
+
+/* .Calendar .fc-timegrid-slot-lane {
+    background-color: red;
+} */
+
+/* .Calendar .fc-day-today {
+    background: rgb(255, 255, 255 ,0.5) !important;
+}  */
+
+.Calendar > div:first-of-type {
+    margin-top: 5em;
+    margin-inline: 1em;
+    height: 35em;
+}
+
+.Calendar .fc-toolbar-title{
+    font-size: 1em;
+    text-align: center;
+    margin-bottom: 0.5em;
+}
+
+.Calendar .fc-button {
+    font-size: 0.9em;
+}
+
+.Calendar .fc-today-button, .Calendar .fc-button-group {
+    margin-top: 0.5e;
+}
+
+.Calendar .fc-timegrid-slot-label {
+    font-size: 0.8em;
+}
+
+.Calendar .fc-timegrid-slot {
+    height: 5px; /* Adjust the height as per your requirement */
+}
+
+.Calendar .fc-daygrid-day {
+    height: 5px; /* Adjust the height as per your requirement */
+}
+
+.Calendar .fc-col-header-cell {
+    font-size: 0.8em;
+    padding: 0.3em;
+    background-color: #845583;
+}
+
+.Calendar .fc-event {
+    font-size: 0.7em;
+}
+
+@media screen and (max-width:408px) {
+    .Calendar .fc-header-toolbar .fc-toolbar-chunk:last-child {
+        text-align: end;
+    }
+
+    .Calendar .fc-header-toolbar .fc-toolbar-chunk:last-child button {
+        margin-bottom: 0.5em;
+    }
+
+    .Calendar .fc-col-header-cell {
+        font-size: 0.6em;
+    }
+}

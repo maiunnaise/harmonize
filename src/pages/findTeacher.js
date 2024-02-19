@@ -1,29 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import './findTeacher.css';
 import GreyDiv from '../components/GreyDiv.js';
-import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI } from '../components/fetchAPI.js';
-import { Link } from 'react-router-dom';
+import manageCache from '../components/cache';
 
 function TeachersDesc({teacher, onSendRequest}){
     const [user, setUser] = useState({});
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("user", setUser);
-        };
-        fetchData();
+
+        manageCache('user', 300, setUser, 'user');
     }, []);
     return (
         <div id={teacher.User.id}>
-            <img className="findTeacherImg"src="../logo192.png" alt='${teacher.prenom} ${teacher.nom}'/>
             <div>
-                <div id="teacherName">
-                    <h2>{teacher.User.prenom} {teacher.User.nom} <span className="greyText"> · {teacher.city} </span></h2>
-                </div>
-                <div className='instrumentsTeach'>
-                    {teacher.User.userInstruments.map((instrument, index) => {
-                        return <p key={index} className="instrumentText">{instrument.Instrument.Name}</p>;
-                    })}
+                <img className="findTeacherImg"src="../logo192.png" alt='${teacher.prenom} ${teacher.nom}'/>
+                <div>
+                    <div id="teacherName">
+                        <h2>{teacher.User.prenom} {teacher.User.nom} <span className="greyText"> · {teacher.city} </span></h2>
+                    </div>
+                    <div className='instrumentsTeach'>
+                        {teacher.User.userInstruments.map((instrument, index) => {
+                            return <p key={index} className="instrumentText">{instrument.Instrument.Name}</p>;
+                        })}
+                    </div>
                 </div>
             </div>
             <p className="textDesc">{teacher.User.description}</p>
@@ -35,66 +34,163 @@ function TeachersDesc({teacher, onSendRequest}){
     )
 }
 
+let formSended = false;
 
 function FindTeachersDiv(){
     const [teachers, setTeachers] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
+    const [instruments, setInstruments] = useState([]);
     const [selectedTeacher, setSelectedTeacher] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("teachers", setTeachers);
-        };
-        fetchData();
+        manageCache('instruments', 604800, setInstruments, 'instruments');
 
     }, []);
 
-    useEffect(() => {
-        if (teachers.length > 0){
-            setFilteredData(teachers);
-        }
-    }, [teachers])
 
-    
-    const handleSearch = (searchTerm) => {
-        if (searchTerm === '') {
-            setFilteredData(teachers);
-            return;
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(e.target.difficulty.value);
+        console.log(e.target.instrument.value);
+        console.log(e.target.ville.value);
+        console.log(e.target.rythm.value);
+        let difficulty = e.target.difficulty.value;
+        let instrument = e.target.instrument.value;
+        let ville = e.target.ville.value;
+        let rythm = e.target.rythm.value;
+        formSended = true;
+        const fetchData = async () => {
+            console.log("teachers?difficulty="+difficulty+"&instrument="+instrument+"&city="+ville+"&frequence="+rythm);
+            await getAPI("teachers?difficulty="+difficulty+"&instrument="+instrument+"&city="+ville+"&frequence="+rythm, setTeachers);
+        };
+        fetchData();
+    }
+
+    //Geolocalisation
+    function getPosition() {
+        if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
         }
-    
-        const filteredResults = teachers.filter((item) => {
-            if (item.city !== null) {
-                return item.city.toLowerCase().includes(searchTerm.toLowerCase());
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(latitude, longitude);
+            reverseGeocode(latitude, longitude);
+        }
+        
+        function reverseGeocode(latitude, longitude) {
+            const apiUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const townName = findTownName(data);
+                    console.log(townName);
+                    let searchInput = document.querySelector('.SearchBar');
+                    searchInput.value = townName;
+                    DisplaySelect();
+                    // handleSearch(townName);
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                });
+        }
+        
+        function findTownName(data) {
+            if(data.address.municipality != undefined){
+                return data.address.municipality;
+            } else if (data.address.suburb != undefined){
+                return data.address.suburb;
+            } 
+            else {
+                return 'Ville non trouvée';
             }
-            return false; 
-        });
-    
-        setFilteredData(filteredResults);
-    };
+        }
+    }
 
+    //affiche les filtres un par un 
+    function DisplaySelect(){
+        let instruments = document.getElementById('instrumentSelect');
+        let town = document.querySelector('.searchBtns');
+        let rythm = document.getElementById('rythmSelect');
+        let input = document.querySelector('.divSearchTeacher > form > input');
+
+        if(instruments.style.display !== "block"){
+            instruments.style.display = "block";
+        }
+        else if(town.style.display !== "flex"){
+            town.style.display = "flex";
+        }
+        else if(rythm.style.display !== "block"){
+            rythm.style.display = "block";
+        }
+        else if(input.style.display !== "block"){
+            input.style.display = "block";
+        }
+
+    }
 
     return (
         <div className='content searchTeacher'>
             <GreyDiv content={
                 <div className="divSearchTeacher">
                     <h2>Trouver un enseignant</h2>
-                    <div className="searchBtns"> 
-                        <Link to="/nextVersion"> 
-                            <button>Autour de moi</button>
-                        </Link>
-                        <SearchBar onSearch={handleSearch}/>
-                    </div>
+                    <form onSubmit={handleSubmit}>
+                        Je recherche un cours
+                        <select id="difficulty" name="difficulty" onChange={DisplaySelect}>
+                           <option value="">...</option> 
+                           <option value="Débutant">Débutant</option>
+                            <option value="Intermédiaire">Intermédiaire</option>
+                            <option value="Avancé">Avancé</option>
+                        </select>
+                        <br/>
+                        <div id="instrumentSelect">
+                            de
+                            <select id="instrument" name="instrument" onChange={DisplaySelect}>
+                                <option value="">...</option>
+                                {instruments.map((instrument, index) => {
+                                    return <option key={index} value={instrument.id}>{instrument.Name}</option>;
+                                })}
+                            </select>
+                        </div>
+                        <div className="searchBtns">
+                            à  
+                            <button type="button" onClick={getPosition}>
+                                <img src="/logo/icons/geoloc.png" alt="geoloc logo"/>
+                            </button>
+                            {/* <SearchBar onSearch={DisplaySelect}/> */}
+                            <input type="text" name="ville" className="SearchBar" placeholder="Rechercher" onChange={DisplaySelect}/>
+                        </div>
+                        <div id="rythmSelect">
+                            à un rythme de 
+                            <select id="rythm" name="rythm" onChange={DisplaySelect}>
+                                <option value="">...</option>
+                                <option value="1">1 fois par semaine</option>
+                                <option value="2">2 fois par semaine</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Voir les cours" />
+                    </form>
                 </div>
             }/>
-            {filteredData.map((teacher, index) => {
+    
+            {teachers.map((teacher, index) => {
+                console.log(teacher);
                 return <GreyDiv key={index} content={<TeachersDesc teacher={teacher} onSendRequest={() => setSelectedTeacher(teacher)} />}/>;
             })}
+            {console.log(formSended, !formSended)}
+            {teachers.length == 0 && formSended ?
+                (<GreyDiv content={<p>Aucun enseignant trouvé</p>} />):
+                null
+            }
+            {!formSended ? 
+                (<img src="/logo/logo_harmonize.png" alt="logo harmonize"/>):
+                null
+            }
 
             {/* Afficher la popup si un professeur est sélectionné */}
             {selectedTeacher.length !=0 && (
                 <SendCourseRequest teacher={selectedTeacher} onClose={() => setSelectedTeacher([])} />
-            )}
-            
+            )}   
         </div>
     )
 }
@@ -102,15 +198,14 @@ function FindTeachersDiv(){
 function SendCourseRequest({teacher, onClose}){
     useEffect(() => {
         document.querySelector(".searchTeacher").scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        
     }, []);
     const[request, setRequest] = useState({});
     const [user, setUser] = useState({});
     const [message, setMessage] = useState({});
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("user", setUser);
-        };
-        fetchData();
+
+        manageCache('user', 300, setUser, 'user');
     }, []);
 
     const sendRequest = async () => {

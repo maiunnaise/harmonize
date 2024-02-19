@@ -1,7 +1,6 @@
 import './emptyInstruments.css';
 
 export default function EmptyInstruments({instrument}) {
-
     function selectInstrument(e){
         e.target.parentElement.classList.toggle('selectedInstrument');
         
@@ -28,7 +27,10 @@ export default function EmptyInstruments({instrument}) {
         .then(data => {
             closePopUp();
         });
+
+
     }
+    
 
     return(
         <div className='overlay'>

@@ -115,7 +115,11 @@ body .TeacherHome{
     background-color: #CC3535;
 }
 
-.TeacherHome > .emptyCourse{
+.emptyCourseTeach{
     top : 15vh;
+    font-weight: bold;
+    width: fit-content;
+    position: relative;
+    margin:0 auto;
 }
 

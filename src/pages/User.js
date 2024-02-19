@@ -5,18 +5,17 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import { Link } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI } from '../components/fetchAPI.js';
+import manageCache from '../components/cache';
+
 
 function UserInfo(){
     CheckLogin();
     const [user, setUser] = useState([]);
     const [instruments, setInstruments] = useState([]);
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('user', setUser);
-            await getAPI('user-instruments', setInstruments);
-        };
-        fetchData();
+
+        manageCache('user', 300, setUser, 'user');
+        manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
 
     }, []);
 

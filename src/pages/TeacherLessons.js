@@ -91,7 +91,7 @@ function Lesson({cours, seance, activities}){
                     </div>
                 }/>
                 <div className="lessonStudentHistoryBtn">
-                    <Link to={`/history/${cours.Student.id}`}>
+                    <Link to={`/history/${cours.id}`}>
                         <button>Historique</button>
                     </Link>
                 </div>
