@@ -1,6 +1,5 @@
 import './addPartition.css';
 import { useState, useEffect } from 'react';
-import { getAPI } from '../components/fetchAPI';
 import { Link } from 'react-router-dom';
 import Partition from '../components/Partition';
 import SimpleHeader from '../components/simpleHeader';

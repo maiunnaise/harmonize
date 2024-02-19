@@ -5,7 +5,7 @@ import SimpleHeader from '../components/simpleHeader.js';
 import InstrumentText from '../components/InstrumentText.js';
 import {useNavigate } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, deleteAPI, putAPI } from '../components/fetchAPI.js';
+import { deleteAPI, putAPI } from '../components/fetchAPI.js';
 import manageCache from '../components/cache';
 
 
@@ -19,12 +19,7 @@ function EditUserForm() {
     const navigate = useNavigate();
     const [isOk, setIsOk] = useState(false);
     useEffect(() => {
-        // const fetchData = async () => {
-        //     await getAPI('user', setUser);
-        //     await getAPI('user-instruments', setInstruments);
-        //     await getAPI('instruments', setAllInstruments);
-        // };
-        // fetchData();
+
 
         manageCache('user', 300, setUser, 'user');
         manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
@@ -56,7 +51,6 @@ function EditUserForm() {
     function popUp(){
         setIsActive(current => !current);
         let close = document.getElementById('close');
-        // getAPI('user-instruments', setInstruments);
         manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
 
         if (!close.hasEventListener) {
@@ -86,7 +80,6 @@ function EditUserForm() {
         })
         .then(data => {
             setIsActive(current => !current);
-            // getAPI('user-instruments', setInstruments);
             manageCache('user-instruments', 604800, setInstruments, 'user-instruments');
         });
 

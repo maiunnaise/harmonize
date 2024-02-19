@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import './CoursSearch.css';
 import GreyDiv from '../components/GreyDiv.js';
 import SearchBar from '../components/SearchBar.js';
-import {getAPI} from '../components/fetchAPI.js';
 import manageCache from '../components/cache';
 
 
@@ -11,11 +10,6 @@ function Search(){
 
     const [data, setData] = useState([]);
     useEffect(() => {
-        // const fetchData = async () => {
-        //     await getAPI('cours-app?offset=5&limit=3', setData);
-        // };
-
-        // fetchData();
         manageCache("cours-app", 604800, setData, `cours-app?offset=5&limit=3`);
 
     }, []);

@@ -5,7 +5,6 @@ import CheckLogin from "../components/checkLogin"
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { getAPI } from "../components/fetchAPI"
-import manageCache from '../components/cache';
 
 
 export default function History(){
@@ -21,7 +20,6 @@ export default function History(){
         };
 
         fetchData();
-        //manageCache(`cours-act`, 600, setActivities, `cours/${idCourse}/activities`);
 
     }, []);
     return(

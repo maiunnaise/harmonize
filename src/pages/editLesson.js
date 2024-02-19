@@ -271,8 +271,7 @@ export default function EditLesson(){
         const fetchData = async () => {
             await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);
             await getAPI("cours/"+coursId, setCours);
-            // await getAPI("cours/"+coursId+"/activities?limit=20", setActivities);
-            // await getAPI("vault-sheets", setPartitions);
+
         };
 
         fetchData();

@@ -18,11 +18,7 @@ export default function PartEditor() {
     const [customSheets, setCustomSheets] = useState([]); 
 
     useEffect(() => {
-        // const fetchData = async () => {
-        //     await getAPI('vault-custom-sheets', setCustomSheets);
-        // };
 
-        // fetchData();
         manageCache('vault-custom-sheets', 300, setCustomSheets, 'vault-custom-sheets');
     }, [])
 

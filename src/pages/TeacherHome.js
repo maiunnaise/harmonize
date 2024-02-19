@@ -207,14 +207,10 @@ function Home({cours, students}){
 
 export default function TeacherHome(){
     const [cours, setCours] = useState([]);
-    //const token = localStorage.getItem('token');
     CheckLogin();
 
     useEffect(() => {
-        // const fetchData = async () => {
-        //     await getAPI('cours', setCours);
-        // };
-        // fetchData();
+
         manageCache('cours', 300, setCours, 'cours');
     }, []);
 
@@ -236,14 +232,11 @@ export default function TeacherHome(){
             await getAPI('user-instruments', setInstrumentUser);
         };
         fetchInst();
-        //manageCache('user-instruments', 604800, setInstrumentUser, 'user-instruments');
 
     }, []);
 
     useEffect(() => {
-        // const fetchInstruments = async () => {
-        //     // await getAPI('instruments', setInstrument);
-        // };
+
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';

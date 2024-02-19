@@ -61,7 +61,9 @@ function Course({course}){
                 <p className='emptyCourse'>Pas d'activité disponible</p>
                 ) }
 
-            
+            <Link to={`/history/${course.id}`}>
+                <p>Voir l'historique</p>
+            </Link>
         </div>
     );
 }
@@ -108,27 +110,20 @@ export default function HomeStudent(){
     
     useEffect(() => {
         const fetchData = async () => {
-            //await getAPI('cours', setCourses);
             await getAPI('user-instruments', setInstrumentUser);
         };
 
 
         fetchData();
         manageCache('cours', 600, setCourses, 'cours');
-        //manageCache('user-instruments', 604800, setInstrumentUser, 'user-instruments');
-
 
 
     }, []);
 
     useEffect(() => {
-        // const fetchInstruments = async () => {
-        //     await getAPI('instruments', setInstrument);
-        // };
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';
-            //fetchInstruments();
             manageCache('instruments', 604800, setInstrument, 'instruments');
         }
         
