@@ -7,13 +7,6 @@ import "./DarkModeToggle.css";
 export const DarkModeToggle = () => {
   const [isDark, setIsDark] = useState(true);
 
-  // const systemPrefersDark = useMediaQuery(
-  //   {
-  //     query: "(prefers-color-scheme: dark)",
-  //   },
-  //   undefined,
-  //   (isSystemDark) => setIsDark(isSystemDark)
-  // );
   let toggle = document.querySelector('.react-toggle');
   
   const lightMode = localStorage.getItem("lightMode");

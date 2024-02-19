@@ -8,7 +8,7 @@
     --fc-event-bg-color: #ab7daa;
     --fc-event-border-color: #ab7daa;
     --fc-event-selected-overlay-color: #ab7daa;
-    --fc-today-bg-color: rgba(255, 255, 255, 0.25);
+    --fc-today-bg-color: rgba(222, 203, 224, 0.25);
 }
 
 /* .Calendar .fc-timegrid-slot-lane {
@@ -37,6 +37,14 @@
 
 .Calendar .fc-today-button, .Calendar .fc-button-group {
     margin-top: 0.5e;
+}
+
+.Calendar .fc-today-button, .Calendar .fc-button-group button span {
+    color: white;
+}
+
+.Calendar .fc-col-header-cell a{
+    color: white
 }
 
 .Calendar .fc-timegrid-slot-label {

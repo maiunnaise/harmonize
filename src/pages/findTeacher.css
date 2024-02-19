@@ -1,5 +1,5 @@
 .divSearchTeacher input {
-  color: rgb(255, 255, 255);
+  color: var(--text-color);
   background-color: var(--div-background);
   padding: 8px;
   border-radius: 30px;
@@ -58,7 +58,7 @@
 }
 
 .searchTeacher select {
-  background-color: #3D3D3D;
+  background-color: --div-background;
   border: 0;
   border-bottom: solid 0.5px;
   -webkit-appearance: none;
@@ -88,6 +88,7 @@
   margin-top: 0.5em;
   margin-inline: auto;
   font-weight: bold;
+  color: white;
 }
 
 .searchTeacher > img {

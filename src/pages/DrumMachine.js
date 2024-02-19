@@ -19,6 +19,19 @@ const DrumMachinePage = () => {
     };
     var [tempo, setTempo] = useState(130);
 
+    var [drumColor, pressedColor, rowColor] = useState("#845583");
+
+    if(localStorage.getItem('lightMode') == 'light'){
+      drumColor = "white";
+      pressedColor = "#efefef";
+      rowColor = "#efefef";
+    }
+    else {
+      drumColor = "#845583";
+      pressedColor = "#474747";
+      rowColor = "#474747";
+    }
+
     function tempoToMs(tempo){
       return 60000/tempo;
     }
@@ -28,7 +41,7 @@ const DrumMachinePage = () => {
       newPattern[row][col] = !newPattern[row][col];
       setPattern(newPattern);
     };
-  
+    console.log(drumColor);
     const playStep = (step) => {
       pattern.forEach((row, index) => {
         let s = document.getElementById(`${index}-${step}`);
@@ -91,11 +104,11 @@ const DrumMachinePage = () => {
       if (newMutedRows[rowIndex]) {
         muteBtn.style.backgroundColor = "#4C4C4C";
         muteBtn.style.filter = "drop-shadow(0 0 0.2rem #4C4C4C)";
-        row.style.backgroundColor = "#303030";
+        row.style.backgroundColor = pressedColor;
       } else {
         muteBtn.style.backgroundColor = "#97e622";
         muteBtn.style.filter = "drop-shadow(0 0 0.2rem #97e622)";
-        row.style.backgroundColor = "#393939";
+        row.style.backgroundColor = rowColor;
       }
     };
   
@@ -119,7 +132,7 @@ const DrumMachinePage = () => {
         }
         return { backgroundColor: '#845583' }; 
       }
-      return {backgroundColor: '#2d2d2d'};
+      return {backgroundColor: drumColor};
     };
   
     return (

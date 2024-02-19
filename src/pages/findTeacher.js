@@ -183,8 +183,11 @@ function FindTeachersDiv(){
                 null
             }
             {!formSended ? 
-                (<img src="/logo/logo_harmonize.png" alt="logo harmonize"/>):
-                null
+                (localStorage.getItem('lightmode') === 'light' ? 
+                    <img src="/logo/logo_harmonize.png" alt="logo harmonize"/> : 
+                    <img src="/logo/fav_harmonize.png" alt="logo harmonize"/>
+                )
+                : null
             }
 
             {/* Afficher la popup si un professeur est sélectionné */}

@@ -2,7 +2,7 @@
     position: relative;
     width: 70%;
     height: fit-content;
-    background-color: #474747;
+    background-color: var(--color-background);
     border-radius: 15px;
     padding: 1.5em;
     display: flex;
@@ -51,6 +51,7 @@
     border-radius: 25px;
     font-weight: bold;
     margin-top: 1em;
+    color: white;
 }
 
 #popupPart .createNewPart{
@@ -72,6 +73,7 @@
 #popupPart input[type="text"]{
     color : black;
 }
+
 
 .savePart{
     width: fit-content;

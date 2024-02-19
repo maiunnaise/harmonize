@@ -27,7 +27,7 @@
 
 .DrumMachine .grid div > div:first-child {
     border: #6f6f6f 1px solid;
-    background-color: #393939;
+    background-color: var(--div-background);
     width: 5em;
     margin: 2px;
 }
@@ -36,6 +36,7 @@
     margin-right: 2em;
     width: 4em;
     margin-top: 0.5em;
+    color: var(--text-color);
 }
 
 .DrumMachine .grid div .muteBtn {
@@ -58,6 +59,7 @@
     margin-inline: auto;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    color: white;
 }
 
 .DrumMachine .controls {
@@ -76,14 +78,14 @@
     border: #6f6f6f 1px solid;
     padding: 0.5em;
     border-radius: 10px;
-    background-color: #393939;
+    background-color: var(--div-background);
     text-align: center;
     width: 25%;
 }
 
 .DrumMachine .controls div input[type="number"] {
     border: 0;
-    background-color: #393939;
+    background-color: var(--div-background);
     margin-top: 0.2em;
     width: 80%;
     font-size: 1.75em;
