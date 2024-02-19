@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 
 function Login() {
+  sessionStorage.clear();
   const navigate = useNavigate();
   const [isLoggedIn, setisLoggedIn] = useState(false);
 
@@ -92,11 +93,17 @@ function Login() {
           <input type="password" name="password" />
         </label>
         <p className='errorLogin'>Adresse mail ou mot de passe erroné</p>
-        {/* <p>Mot de passe oublié ?</p> */}
+        <div>
+          <Link to="/forgot-password">
+            <p className='register'>Mot de passe oublié ?</p>
+          </Link>
+        </div>
         <button value="Connexion" onClick={getToken} className='loginBtn'>Connexion</button>
-        <Link to="/register">
-          <p className='register'>Créer un compte</p>
-        </Link>
+        <div>
+          <Link to="/register">
+            <p className='register'>Créer un compte</p>
+          </Link>
+        </div>
       </div>
     </div>
   );

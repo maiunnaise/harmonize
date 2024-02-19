@@ -20,6 +20,7 @@ export default function History(){
         };
 
         fetchData();
+
     }, []);
     return(
         <div className="History simpleContent">

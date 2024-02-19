@@ -6,6 +6,7 @@ import SearchBar from '../components/SearchBar.js';
 import { getAPI} from '../components/fetchAPI.js';
 import CheckLogin from '../components/checkLogin.js';
 import EmptyInstruments from '../components/emptyInstruments'
+import manageCache from '../components/cache.js';
 
 function Home({cours, students}){
     // Attendre que les cours soient chargés    
@@ -206,15 +207,12 @@ function Home({cours, students}){
 
 export default function TeacherHome(){
     const [cours, setCours] = useState([]);
-    const token = localStorage.getItem('token');
     CheckLogin();
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('cours', setCours);
-        };
-        fetchData();
-    }, [token]);
+
+        manageCache('cours', 300, setCours, 'cours');
+    }, []);
 
     const students = [];
     if (cours.length > 0){
@@ -238,13 +236,11 @@ export default function TeacherHome(){
     }, []);
 
     useEffect(() => {
-        const fetchInstruments = async () => {
-            await getAPI('instruments', setInstrument);
-        };
+
         if(instrumentUser.length == 0){
             let overlay = document.querySelector('.overlay');
             overlay.style.display = 'block';
-            fetchInstruments();
+            manageCache('instruments', 604800, setInstrument, 'instruments');
         }
         
     }, [instrumentUser]);

@@ -33,6 +33,9 @@ import Accordeur from './pages/Accordeur.js';
 import DrumMachine from './pages/DrumMachine.js'
 import PartEditor from './pages/partEditor.js';
 import Calendar from './pages/Calendar.js';
+import ForgotPassword from './pages/ForgotPassword.js';
+import ForgotPasswordVerif from './pages/ForgotPasswordVerif.js';
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -49,7 +52,6 @@ root.render(
           <Route path="teacher/home" element={<TeacherHome />}/>
           <Route path="student/home" element={<HomeStudent/>}/>
           <Route path="library" element={<Library/>}/>
-          {/* <Route path="addPartition" element={<AddPartition/>}/> */}
           <Route path="home" element={<Layout />}/>
         </Route>
         <Route path="/user" element={<User />}/>
@@ -74,6 +76,9 @@ root.render(
         <Route path="/nextVersion" element={<NextVersion/>} />
         <Route path='/partEditor' element={<PartEditor/>} />
         <Route path='/calendrier' element={<Calendar/>} />
+
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/forgot-password/:forgotPasswordToken" element={<ForgotPasswordVerif />} />
 
         {/* /!\ à laisser en dernier /!\*/}
         <Route path="*" element={<NotFound />} />

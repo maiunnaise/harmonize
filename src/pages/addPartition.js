@@ -1,10 +1,10 @@
 import './addPartition.css';
 import { useState, useEffect } from 'react';
-import { getAPI } from '../components/fetchAPI';
 import { Link } from 'react-router-dom';
 import Partition from '../components/Partition';
 import SimpleHeader from '../components/simpleHeader';
 import CheckLogin from '../components/checkLogin';
+import manageCache from '../components/cache';
 
 export function Addform({partitions}){
     useEffect(() => {
@@ -146,11 +146,7 @@ export default function AddPartition() {
     CheckLogin();
     const [partitions, setPartitions] = useState([]);
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('sheets', setPartitions);
-        };
-
-        fetchData();
+        manageCache('sheets', 604800, setPartitions, 'sheets');
     }, []);
     return(
         <div className="simpleContent">

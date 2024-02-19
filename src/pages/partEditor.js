@@ -5,6 +5,8 @@ import { getAPI, postAPI} from '../components/fetchAPI';
 import { useEffect, useState} from 'react';
 import Embed from 'flat-embed';
 import { useNavigate } from 'react-router-dom';
+import manageCache from '../components/cache';
+
 
 export default function PartEditor() {
     CheckLogin();
@@ -16,11 +18,8 @@ export default function PartEditor() {
     const [customSheets, setCustomSheets] = useState([]); 
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('vault-custom-sheets', setCustomSheets);
-        };
 
-        fetchData();
+        manageCache('vault-custom-sheets', 300, setCustomSheets, 'vault-custom-sheets');
     }, [])
 
     useEffect(() => {
@@ -256,6 +255,7 @@ function CreateNewPart({isCreated, setData, customSheets}){
             let inst = instrument.value[0].toUpperCase() + instrument.value.slice(1);
             style.value = style.value[0].toUpperCase() + style.value.slice(1);
             await postAPI('custom-sheets',setNewPart,{title: data.title , scoreKey: data.id, instrument:inst, style: style.value, difficulty: difficulty.value, author: data.author.id});
+            sessionStorage.removeItem('vault-custom-sheets');
         };
 
         

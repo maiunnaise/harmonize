@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import GreyDiv from '../components/GreyDiv';
 import { getAPI } from '../components/fetchAPI';
 import { useState } from 'react';
+import manageCache from '../components/cache';
 
 
 export function Libform({partitions, customSheets}){
@@ -219,14 +220,12 @@ export function Library() {
 
     const [partitions, setPartitions] = useState([]);
     const [customSheets, setCustomSheets] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            await getAPI('vault-sheets', setPartitions);
-            await getAPI('vault-custom-sheets', setCustomSheets);
-        };
 
-        fetchData();
+    useEffect(() => {
+        manageCache('vault-sheets', 30, setPartitions, 'vault-sheets');
+        manageCache('vault-custom-sheets', 30, setCustomSheets, 'vault-custom-sheets');
     }, []);
+
 
     return (
     <div className="content">
