@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './CoursPage.css';
-import GreyDiv from '../components/GreyDiv.js';
 import SimpleHeader from '../components/simpleHeader.js';
-import { useSearchParams, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import CheckLogin from '../components/checkLogin.js';
-import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import { getAPI} from '../components/fetchAPI.js';
 
 function Cours(){
     CheckLogin();
 
-    const [queryParameters] = useSearchParams()
     const {coursId} = useParams();
     const [cours, setCours] = useState([]);
 

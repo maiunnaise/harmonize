@@ -102,7 +102,7 @@ export default function AddLesson(){
         const fetchData = async () => {
             await getAPI("cours/"+coursId, setCours);
         };
-
+        sessionStorage.removeItem('cours');
         fetchData();
     }, []); 
     const data = {cours};

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 
 function Login() {
+  sessionStorage.clear();
   const navigate = useNavigate();
   const [isLoggedIn, setisLoggedIn] = useState(false);
 

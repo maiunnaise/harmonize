@@ -59,10 +59,12 @@ function PartitionCustom({partition}){
     
     const putData = async (idSheet, body) => {
         await putAPI(`vault-custom-sheets/${idSheet}`,body);
+        sessionStorage.removeItem("vault-custom-sheets");
     };
 
     const deleteData = async (idSheet) => {
         await deleteAPI(`vault-custom-sheets/${idSheet}`);
+        sessionStorage.removeItem("vault-custom-sheets");
     };
 
 

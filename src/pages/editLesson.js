@@ -6,6 +6,7 @@ import InstrumentText from '../components/InstrumentText.js';
 import { Link, useParams } from 'react-router-dom';
 import CheckLogin from '../components/checkLogin.js';
 import { getAPI, postAPI, deleteAPI, putAPI} from '../components/fetchAPI.js';
+import manageCache from '../components/cache';
 
 
 
@@ -30,6 +31,7 @@ function Lesson({data}){
 
         const fetchData = async () => {
             await putAPI("cours/"+coursId+"/seances/"+seanceId, obj);
+
         };
 
         fetchData();
@@ -67,6 +69,8 @@ function Lesson({data}){
 
         const fetchData = async () => {
             await postAPI("cours/"+coursId+"/activities",setActivities, obj);
+            sessionStorage.removeItem("cours-acts");
+            sessionStorage.removeItem("cours");
         };
         fetchData();
         
@@ -102,6 +106,8 @@ function Lesson({data}){
         event.preventDefault();
         const fetchData = async () => {
             await deleteAPI("cours/"+coursId+"/activities/"+id);
+            sessionStorage.removeItem("cours-acts");
+            sessionStorage.removeItem("cours");
         };
 
         fetchData();
@@ -114,6 +120,8 @@ function Lesson({data}){
         event.preventDefault();
         const fetchData = async () => {
             await deleteAPI("cours/"+coursId+"/seances/"+seanceId);
+            sessionStorage.removeItem("cours");
+
         };
 
         fetchData();
@@ -182,7 +190,7 @@ function Lesson({data}){
                                                 <p>{exercice.title}</p>
                                             </div>
                                             <div>
-                                                <Link to={`../exercices/${exercice.id}`} ><button type="button" className={`${exercice.status}Btn`}>Voir</button></Link>
+                                                <Link to={`../activity/${exercice.Cours.id}/${exercice.id}`} ><button type="button" className={`${exercice.status}Btn`}>Voir</button></Link>
                                                 <button type="button" onClick={(event) => RemoveExercice(event, exercice.id)}>x</button>
                                             </div>
                                         </div>
@@ -263,11 +271,13 @@ export default function EditLesson(){
         const fetchData = async () => {
             await getAPI("cours/"+coursId+"/seances/"+seanceId, setSeance);
             await getAPI("cours/"+coursId, setCours);
-            await getAPI("cours/"+coursId+"/activities?limit=20", setActivities);
-            await getAPI("vault-sheets", setPartitions);
+
         };
 
         fetchData();
+        manageCache("cours-acts", 600, setActivities, `cours/${coursId}/activities?limit=20`);
+        manageCache("vault-sheets", 600, setPartitions, `vault-sheets`);
+
     }, []);
 
     //Les activités de la séance

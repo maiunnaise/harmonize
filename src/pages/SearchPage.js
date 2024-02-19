@@ -45,7 +45,7 @@ function Search(){
                     </div>
                 }/>
             </Link>
-            <Link to="/nextVersion">
+            {/* <Link to="/nextVersion">
                 <GreyDiv content={
                     <div id="SearchPageExercices">
                         <h2>Exercices</h2>
@@ -55,7 +55,7 @@ function Search(){
                         <img src="/img/exercices-image.jpg" alt="exercices illustration" />
                     </div>
                 }/>
-            </Link>
+            </Link> */}
         </div>
     )
 }

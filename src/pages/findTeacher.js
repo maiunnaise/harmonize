@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './findTeacher.css';
 import GreyDiv from '../components/GreyDiv.js';
-import SearchBar from '../components/SearchBar.js';
 import { getAPI, postAPI } from '../components/fetchAPI.js';
-import { Link } from 'react-router-dom';
+import manageCache from '../components/cache';
 
 function TeachersDesc({teacher, onSendRequest}){
     const [user, setUser] = useState({});
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("user", setUser);
-        };
-        fetchData();
+
+        manageCache('user', 300, setUser, 'user');
     }, []);
     return (
         <div id={teacher.User.id}>
@@ -42,22 +39,13 @@ let formSended = false;
 function FindTeachersDiv(){
     const [teachers, setTeachers] = useState([]);
     const [instruments, setInstruments] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
     const [selectedTeacher, setSelectedTeacher] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("instruments", setInstruments);
-        };
-        fetchData();
+        manageCache('instruments', 604800, setInstruments, 'instruments');
 
     }, []);
 
-    // useEffect(() => {
-    //     if (teachers.length > 0){
-    //         setFilteredData(teachers);
-    //     }
-    // }, [teachers])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -216,10 +204,8 @@ function SendCourseRequest({teacher, onClose}){
     const [user, setUser] = useState({});
     const [message, setMessage] = useState({});
     useEffect(() => {
-        const fetchData = async () => {
-            await getAPI("user", setUser);
-        };
-        fetchData();
+
+        manageCache('user', 300, setUser, 'user');
     }, []);
 
     const sendRequest = async () => {
