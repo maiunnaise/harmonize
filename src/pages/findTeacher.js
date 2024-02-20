@@ -213,8 +213,9 @@ function SendCourseRequest({teacher, onClose}){
 
     const sendRequest = async () => {
         let body ={}
-        let values = document.querySelectorAll('select');
+        let values = document.querySelectorAll('.request');
         values.forEach((value) => {
+            console.log(value.value);
             if(value.value == ""){
                 document.querySelector('.errorTeacher').style.display = "block";
             }
@@ -256,7 +257,7 @@ function SendCourseRequest({teacher, onClose}){
                     <div className="overlayParams">
                         <label>
                             <p>Instrument</p>
-                            <select name='idInstrument'>
+                            <select name='idInstrument' className='request'>
                                 <option value="">Instrument</option> 
                                 {teacher.User.userInstruments.map((instrument, index) => {
                                     return <option key={index} value={instrument.Instrument.id}>{instrument.Instrument.Name}</option>;
@@ -266,7 +267,7 @@ function SendCourseRequest({teacher, onClose}){
 
                         <label>
                             <p>Difficulté</p>
-                            <select name='difficulty'>
+                            <select name='difficulty' className='request'>
                                 <option value="">Difficulté</option>
                                 <option value="Débutant">Débutant</option>
                                 <option value="Intermédiaire">Intermédiaire</option>

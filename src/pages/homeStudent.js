@@ -61,7 +61,7 @@ function Course({course}){
                 <p className='emptyCourse'>Pas d'activité disponible</p>
                 ) }
 
-            <Link to={`/history/${course.id}`}>
+            <Link to={`/history/${course.id}`} className='historyLink'>
                 <p>Voir l'historique</p>
             </Link>
         </div>

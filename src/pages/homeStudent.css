@@ -83,3 +83,9 @@
     position: relative;
     margin:0 auto;
 }
+
+.historyLink p{
+    padding-top: 1em;
+    padding-left: 1em;
+    text-decoration: underline;
+}
