@@ -41,7 +41,7 @@ export default function Partition({partition}){
             <p>{partition.author}</p>
             <div className='libIcons'>
                 {isInVault ? (
-                    <img src="/logo/icons/check.png" alt="inVault"/>) 
+                    <img src="/logo/icons/check.png" alt="inVault" className="colored"/>) 
                     : (
                     <img src="/logo/icons/add.png" alt="add" onClick={addLib}/>)
                 }

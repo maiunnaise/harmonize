@@ -17,11 +17,13 @@ function Partition({partition, style}){
         if(e.target.src.includes("colored")){
             e.target.src = "/logo/icons/star.png";
             e.target.parentElement.classList.toggle("fav");
+            e.target.classList.remove("colored");
             putData(e.target.parentElement.parentElement.id, {isFavorite: false});
         }
         else{
             e.target.src = "/logo/icons/star_colored.png";
             e.target.parentElement.classList.toggle("fav");
+            e.target.classList.add("colored");
             putData(e.target.parentElement.parentElement.id, {isFavorite: true});
         }
 
@@ -45,10 +47,10 @@ function Partition({partition, style}){
                 {style == "fav" && !partition.isFavorite ? (
                     <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
                     : style == "fav" && partition.isFavorite? (
-                        <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
+                        <img src="/logo/icons/star_colored.png" className="colored" alt="star" onClick={addFav}/>)
                     : null
                 }
-                <img src="/logo/icons/trash-bin.png" alt="delete" onClick={deleteLib}/>
+                <img src="/logo/icons/trash-bin.png" alt="delete" className="colored" onClick={deleteLib}/>
             </div>
             
         </div>
@@ -72,11 +74,13 @@ function PartitionCustom({partition}){
         if(e.target.src.includes("colored")){
             e.target.src = "/logo/icons/star.png";
             e.target.parentElement.classList.toggle("fav");
+            e.target.classList.remove("colored");
             putData(e.target.parentElement.parentElement.id, {isFavorite: false});
         }
         else{
             e.target.src = "/logo/icons/star_colored.png";
             e.target.parentElement.classList.toggle("fav");
+            e.target.classList.add("colored");
             putData(e.target.parentElement.parentElement.id, {isFavorite: true});
         }
 
@@ -100,10 +104,10 @@ function PartitionCustom({partition}){
                 { !partition.isFavorite ? (
                     <img src="/logo/icons/star.png" alt="star" onClick={addFav}/>) 
                     : partition.isFavorite? (
-                        <img src="/logo/icons/star_colored.png" alt="star" onClick={addFav}/>)
+                        <img src="/logo/icons/star_colored.png" className="colored" alt="star" onClick={addFav}/>)
                     : null
                 }
-                <img src="/logo/icons/trash-bin.png" alt="delete" onClick={deleteLib}/>
+                <img src="/logo/icons/trash-bin.png" alt="delete" className="colored" onClick={deleteLib}/>
             </div>
         </div>
     )

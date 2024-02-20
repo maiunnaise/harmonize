@@ -79,12 +79,12 @@ select option{
   --text-color-2: #707070;
 }
 
-.light header img, .light nav .Menu img, .light #popup #close, .light .header img{
+.light header img, .light nav .Menu img, .light #popup #close, .light .header img, .light .libIcons img{
   filter: invert(1);
   
 }
 
-.light nav .Menu #colored {
+.light nav .Menu #colored, .light .libIcons .colored {
   filter: invert(0);
 }
 
