@@ -11,14 +11,6 @@
     --fc-today-bg-color: rgba(222, 203, 224, 0.25);
 }
 
-/* .Calendar .fc-timegrid-slot-lane {
-    background-color: red;
-} */
-
-/* .Calendar .fc-day-today {
-    background: rgb(255, 255, 255 ,0.5) !important;
-}  */
-
 .Calendar > div:first-of-type {
     margin-top: 5em;
     margin-inline: 1em;
@@ -67,6 +59,10 @@
 
 .Calendar .fc-event {
     font-size: 0.7em;
+}
+
+.Calendar .fc-event-title, .Calendar .fc-event-time {
+    color: white;
 }
 
 @media screen and (max-width:408px) {
