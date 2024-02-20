@@ -27,7 +27,7 @@ const DrumMachinePage = () => {
       rowColor = "#efefef";
     }
     else {
-      drumColor = "#845583";
+      drumColor = "#474747";
       pressedColor = "#474747";
       rowColor = "#474747";
     }
