@@ -88,24 +88,4 @@ select option{
   filter: invert(0);
 }
 
-@media (prefers-color-scheme: light){
-  body {
-    --color-background: #fcfcfc;
-    --text-color: #2e2e2e;
-    --header-border: #ececec;
-    --div-background: #efefef;
-    --div-background-2: #e8e8e8;
-    --text-color-2: #707070;
-  }
-
-  body header img, body nav .Menu img, body #popup #close, body .header img{
-    filter: invert(1);
-    
-  }
-
-  body nav .Menu #colored {
-    filter: invert(0);
-  }
-
-}
 
