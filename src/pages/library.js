@@ -232,7 +232,7 @@ export function Library() {
         <h1>Ma bibliothèque</h1>
         <Libform partitions={partitions} customSheets={customSheets}/>
         <div className='libraryPart'>
-        {partitions.length === 0 || customSheets.length === 0 ? (
+        {partitions.length === 0 && customSheets.length === 0 ? (
             <p className="noPart">Vous n'avez pas encore de partitions dans votre bibliothèque</p>
             ) : 
             (
