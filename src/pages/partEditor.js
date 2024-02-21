@@ -16,9 +16,10 @@ export default function PartEditor() {
     const [changeContent, setChangeContent] = useState(false);
 
     const [customSheets, setCustomSheets] = useState([]); 
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
-
+        manageCache('user', 300, setUser, 'user')
         manageCache('vault-custom-sheets', 300, setCustomSheets, 'vault-custom-sheets');
     }, [])
 
@@ -35,7 +36,7 @@ export default function PartEditor() {
         <div className='simpleContent' id='partEdit'>
             <SimpleHeader />
             <h1>Éditeur de partition</h1>
-            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData} customSheets={customSheets}/> : <ChoosePart isCreated={setIsCreated} setData={setPartData} changeContent={setChangeContent} customSheets={customSheets}/>} />
+            <PopUpPart content={changeContent ? <CreateNewPart isCreated={setIsCreated} setData={setPartData} customSheets={customSheets} user={user}/> : <ChoosePart isCreated={setIsCreated} setData={setPartData} changeContent={setChangeContent} customSheets={customSheets}/>} />
             {isCreated && partData.length!=0 ? <EmbedEditor data={partData}/> :null}
         </div>
 
@@ -157,7 +158,7 @@ function EmbedEditor({data}){
 
 
 
-function CreateNewPart({isCreated, setData, customSheets}){
+function CreateNewPart({isCreated, setData, customSheets, user}){
 
     const [instruments, setInstruments] = useState([]);
 
@@ -242,7 +243,7 @@ function CreateNewPart({isCreated, setData, customSheets}){
                 return; 
             })
             .then(data => {
-                data.author = customSheets[0].User;
+                data.author = user;
                 setData(data);
                 isCreated(true);
                 addCustomPart(data);
